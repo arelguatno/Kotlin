@@ -13,7 +13,6 @@ import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.roomapp.R
-import com.example.roomapp.databinding.FragmentUpdateBinding
 import com.example.roomapp.model.User
 import com.example.roomapp.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_update.*
@@ -22,37 +21,30 @@ import kotlinx.android.synthetic.main.fragment_update.view.*
 class UpdateFragment : Fragment() {
 
     private val args by navArgs<UpdateFragmentArgs>() // set javasersion 1.8 see gradle
-    fun getData() {
-        Log.d(
-            "Test",
-            args.currentUser.firstName
-        ) // currentUser is the name of the argument in the nav controller
-    }
 
     private lateinit var mUserViewModel: UserViewModel
-    private lateinit var binding: FragmentUpdateBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentUpdateBinding.inflate(layoutInflater)
+        val view = inflater.inflate(R.layout.fragment_update, container, false)
 
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-        binding.updateFirstNameEt.setText(args.currentUser.firstName)
-        binding.updateLastNameEt.setText(args.currentUser.lastName)
-        binding.updateAgeEt.setText(args.currentUser.age.toString())
+        view.updateFirstName_et.setText(args.currentUser.firstName)
+        view.updateLastName_et.setText(args.currentUser.lastName)
+        view.updateAge_et.setText(args.currentUser.age.toString())
 
-        binding.updateBtn.setOnClickListener {
+        view.update_btn.setOnClickListener {
             updateItem()
         }
 
         // Add menu
         setHasOptionsMenu(true)
 
-        return binding.root
+        return view
     }
 
     private fun updateItem() {
@@ -62,9 +54,7 @@ class UpdateFragment : Fragment() {
 
         if (inputCheck(firstName, lastName, updateAge_et.text)) {
             // Create User Object
-            val updatedUser = User(
-                args.currentUser.id, firstName, lastName, age
-            )
+            val updatedUser = User(args.currentUser.id, firstName, lastName, age)
             // Update Current User
             mUserViewModel.updateUser(updatedUser)
             Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
@@ -95,17 +85,15 @@ class UpdateFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
             mUserViewModel.deleteUser(args.currentUser)
-            Toast.makeText(requireContext(),
-                "Deleted ${args.currentUser.firstName} ${args.currentUser.lastName}",
+            Toast.makeText(
+                requireContext(),
+                "Successfully removed: ${args.currentUser.firstName}",
                 Toast.LENGTH_SHORT).show()
-
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
         }
         builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Delete ${args.currentUser.firstName}")
-        builder.setMessage("Are you sure want to delete current ${args.currentUser.firstName}")
-        builder.show()
-
+        builder.setTitle("Delete ${args.currentUser.firstName}?")
+        builder.setMessage("Are you sure you want to delete ${args.currentUser.firstName}?")
+        builder.create().show()
     }
-
 }

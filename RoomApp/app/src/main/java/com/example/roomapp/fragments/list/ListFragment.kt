@@ -40,6 +40,7 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
 
+        // Add menu
         setHasOptionsMenu(true)
 
         return view
@@ -50,26 +51,24 @@ class ListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_delete) {
-            deleteUser()
+        if(item.itemId == R.id.menu_delete){
+            deleteAllUsers()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun deleteUser() {
+    private fun deleteAllUsers() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
-            mUserViewModel.deleteAllUser()
-            Toast.makeText(requireContext(),
-                "Users deleted",
+            mUserViewModel.deleteAllUsers()
+            Toast.makeText(
+                requireContext(),
+                "Successfully removed everything",
                 Toast.LENGTH_SHORT).show()
-
         }
         builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Delete all records")
-        builder.setMessage("Are you sure want to delete all users?")
-        builder.show()
-
+        builder.setTitle("Delete everything?")
+        builder.setMessage("Are you sure you want to delete everything?")
+        builder.create().show()
     }
-
 }

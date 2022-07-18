@@ -7,4 +7,5 @@
         android:icon="@drawable/ic_baseline_delete_24"
         android:iconTint="@android:color/white"
         app:showAsAction="ifRoom"/>
+
 </menu>
