@@ -39,8 +39,7 @@ class AddFragment : Fragment() {
     private fun insertDataToDatabase() {
         val firstName = addFirstName_et.text.toString()
         val lastName = addLastName_et.text.toString()
-        val age = addAge_et.text
-
+        val age = addAge_et.text //2
         if (inputCheck(firstName, lastName, age)) {
             // Embedded
             // Create User Object
