@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/inputName">
+    <fragment
+        android:id="@+id/inputName"
+        android:name="com.example.quizapp.InputName"
+        android:label="fragment_input_name2"
+        tools:layout="@layout/fragment_input_name" >
+        <action
+            android:id="@+id/action_inputName_to_gameBoardFragment"
+            app:destination="@id/gameBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameBoardFragment"
+        android:name="com.example.quizapp.fragments.GameBoardFragment"
+        android:label="fragment_game_board"
+        tools:layout="@layout/fragment_game_board" />
+</navigation>
