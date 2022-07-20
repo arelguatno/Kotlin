@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.android.material.timepicker.TimeFormat
 import java.util.*
 
-@Entity(tableName = "transaction_table")
+@Entity(tableName = "transactions_table")
 data class TransactionsTable(
     var amount: Double,
     var cateogry: String,

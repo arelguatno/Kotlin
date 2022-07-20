@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.room_aye.databinding.ActivityMainBinding
 import com.example.room_aye.a_home_screen.HomeFragmentViewModel
+import com.example.room_aye.room.TransactionsTable
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         setupBottomNav()
 
         //Insert Record
-//        val tran = Transactions(5.50, "Work", "Somenote", "")
-//        viewModel.insertProfileRecord(tran)
+        val tran = TransactionsTable(5.50, "Work", "Somenote", "")
+        viewModel.insertProfileRecord(tran)
 
     }
 

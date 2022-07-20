@@ -14,6 +14,18 @@ import com.example.room_aye.room.TransactionsTable
 
 class HomeFragmentAdapter : ListAdapter<TransactionsTable, WordViewHolder>(WORDS_COMPARATOR) {
 
+    companion object {
+        private val WORDS_COMPARATOR = object : DiffUtil.ItemCallback<TransactionsTable>() {
+            override fun areItemsTheSame(oldItem: TransactionsTable, newItem: TransactionsTable): Boolean {
+                return oldItem === newItem
+            }
+
+            override fun areContentsTheSame(oldItem: TransactionsTable, newItem: TransactionsTable): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
+    }
+
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val txtCategory: TextView = itemView.findViewById(R.id.txtCategory)
         private val txtCostPrice: TextView = itemView.findViewById(R.id.txtCostPrice)
@@ -34,18 +46,6 @@ class HomeFragmentAdapter : ListAdapter<TransactionsTable, WordViewHolder>(WORDS
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.transactions_custom_row, parent, false)
                 return WordViewHolder(view)
-            }
-        }
-    }
-
-    companion object {
-        private val WORDS_COMPARATOR = object : DiffUtil.ItemCallback<TransactionsTable>() {
-            override fun areItemsTheSame(oldItem: TransactionsTable, newItem: TransactionsTable): Boolean {
-                return oldItem === newItem
-            }
-
-            override fun areContentsTheSame(oldItem: TransactionsTable, newItem: TransactionsTable): Boolean {
-                return oldItem.id == newItem.id
             }
         }
     }
