@@ -11,6 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RoomAye">
         <activity
+            android:name=".screens.add_new_entry.AddNewTransactionActivity"
+            android:exported="false"
+            android:label="@string/add_new_entry"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
