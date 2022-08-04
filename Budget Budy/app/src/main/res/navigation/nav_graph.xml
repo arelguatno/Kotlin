@@ -7,35 +7,22 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.room_aye.screens.home_screen.HomeFragment"
+        android:name="com.example.budgetbuddy.screens.home_screen.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_addNewEntryFragment2"
-            app:destination="@id/addNewEntryFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.room_aye.screens.profile_screen.ProfileFragment"
+        android:name="com.example.budgetbuddy.screens.profile_screen.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="com.example.room_aye.screens.transactions_screen.TransactionFragment"
+        android:name="com.example.budgetbuddy.screens.transactions_screen.TransactionFragment"
         android:label="fragment_transaction"
         tools:layout="@layout/fragment_transaction" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.room_aye.screens.settings_screen.SettingsFragment"
+        android:name="com.example.budgetbuddy.screens.settings_screen.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
-    <fragment
-        android:id="@+id/addNewEntryFragment"
-        android:name="com.example.room_aye.screens.add_new_entry.AddNewEntryFragment"
-        android:label="fragment_add_new_entry2"
-        tools:layout="@layout/fragment_add_new_entry2" >
-        <action
-            android:id="@+id/action_addNewEntryFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
 </navigation>

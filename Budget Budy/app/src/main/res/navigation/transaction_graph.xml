@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/transaction_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/transaction_graph"
+    app:startDestination="@id/addNewEntryTransactionFragment">
 
+    <fragment
+        android:id="@+id/addNewEntryTransactionFragment"
+        android:name="com.example.budgetbuddy.screens.add_new_entry.AddNewEntryTransactionFragment"
+        android:label="Add Transaction"
+        tools:layout="@layout/fragment_add_new_entry_transaction" >
+        <action
+            android:id="@+id/action_addNewEntryTransactionFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_addNewEntryTransactionFragment_to_dateFragment"
+            app:destination="@id/dateFragment" />
+        <action
+            android:id="@+id/action_addNewEntryTransactionFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_addNewEntryTransactionFragment_to_currencyFragment"
+            app:destination="@id/currencyFragment" />
+        <argument
+            android:name="selectedCategory"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.budgetbuddy.fragments.category.CategoryFragment"
+        android:label="Select Category"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_addNewEntryTransactionFragment"
+            app:destination="@id/addNewEntryTransactionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.example.budgetbuddy.fragments.NoteFragment"
+        android:label="Note"
+        tools:layout="@layout/fragment_note" >
+        <action
+            android:id="@+id/action_noteFragment_to_addNewEntryTransactionFragment"
+            app:destination="@id/addNewEntryTransactionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dateFragment"
+        android:name="com.example.budgetbuddy.fragments.DateFragment"
+        android:label="Date"
+        tools:layout="@layout/fragment_date" />
+    <fragment
+        android:id="@+id/currencyFragment"
+        android:name="com.example.budgetbuddy.fragments.currency.CurrencyFragment"
+        android:label="Currency"
+        tools:layout="@layout/fragment_currency" >
+        <action
+            android:id="@+id/action_currencyFragment_to_addNewEntryTransactionFragment"
+            app:destination="@id/addNewEntryTransactionFragment" />
+    </fragment>
 </navigation>

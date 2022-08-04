@@ -23,6 +23,7 @@ class InputName : MainFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bing.btnStart.setOnClickListener {
+
             if (bing.etName.text.isNullOrEmpty()) {
                 showToastMessageShort("Please enter your name")
             } else {
