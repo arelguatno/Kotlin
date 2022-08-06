@@ -8,30 +8,45 @@
     <fragment
         android:id="@+id/addNewEntryTransactionFragment"
         android:name="com.example.budgetbuddy.screens.add_new_entry.AddNewEntryTransactionFragment"
-        android:label="Add Transaction"
-        tools:layout="@layout/fragment_add_new_entry_transaction" >
+        android:label="Add Transaction">
         <action
             android:id="@+id/action_addNewEntryTransactionFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            app:destination="@id/noteFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_addNewEntryTransactionFragment_to_dateFragment"
-            app:destination="@id/dateFragment" />
+            app:destination="@id/dateFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_addNewEntryTransactionFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_addNewEntryTransactionFragment_to_currencyFragment"
-            app:destination="@id/currencyFragment" />
+            app:destination="@id/currencyFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <argument
             android:name="selectedCategory"
-            app:argType="integer"
-            android:defaultValue="1" />
+            android:defaultValue="1"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.budgetbuddy.fragments.category.CategoryFragment"
         android:label="Select Category"
-        tools:layout="@layout/fragment_category" >
+        tools:layout="@layout/fragment_category">
         <action
             android:id="@+id/action_categoryFragment_to_addNewEntryTransactionFragment"
             app:destination="@id/addNewEntryTransactionFragment" />
@@ -40,7 +55,7 @@
         android:id="@+id/noteFragment"
         android:name="com.example.budgetbuddy.fragments.NoteFragment"
         android:label="Note"
-        tools:layout="@layout/fragment_note" >
+        tools:layout="@layout/fragment_note">
         <action
             android:id="@+id/action_noteFragment_to_addNewEntryTransactionFragment"
             app:destination="@id/addNewEntryTransactionFragment" />
@@ -54,7 +69,7 @@
         android:id="@+id/currencyFragment"
         android:name="com.example.budgetbuddy.fragments.currency.CurrencyFragment"
         android:label="Currency"
-        tools:layout="@layout/fragment_currency" >
+        tools:layout="@layout/fragment_currency">
         <action
             android:id="@+id/action_currencyFragment_to_addNewEntryTransactionFragment"
             app:destination="@id/addNewEntryTransactionFragment" />

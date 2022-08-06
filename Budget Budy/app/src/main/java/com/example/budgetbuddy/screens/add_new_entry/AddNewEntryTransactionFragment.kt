@@ -24,6 +24,7 @@ import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.utils.dateToNice
 import com.example.budgetbuddy.utils.dateYyyyMmDd
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.io.Serializable
 import java.util.*
 
 
@@ -31,10 +32,13 @@ class AddNewEntryTransactionFragment : MainFragment() {
     private lateinit var binding: NewtransactionfragmentBinding
     private val viewModel: AddNewTransactionActivityViewModel by viewModels()
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    lateinit var activityMain: AddNewTransactionActivity
 
 
     companion object {
         const val ADD_NEW_ENTRY = "com.example.room_aye.screens.add_new_entry"
+        const val EDIT_EXISTING_ENTRY = "com.example.room_aye.screens.EDIT_EXISTING_ENTRY"
+        var userClickedEditButton = false
         private lateinit var menuitem: MenuItem
     }
 
@@ -48,6 +52,12 @@ class AddNewEntryTransactionFragment : MainFragment() {
         return binding.root
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activityMain =
+            context as AddNewTransactionActivity // so we can read intent data from activity
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -55,7 +65,27 @@ class AddNewEntryTransactionFragment : MainFragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.setDate(Calendar.getInstance().time) //set current date
+        setUpScreen()
+    }
+
+    private fun setUpScreen() {
+        val editTransaction =
+            activityMain.intent.getSerializableExtra(AddNewTransactionActivity.EDIT_INTENT)
+        if (editTransaction == null) { // user wants to input new transaction
+            userClickedEditButton = false
+            if (viewModel.getDate().value == null) {
+                viewModel.setDate(Calendar.getInstance().time) //set current date
+            }
+
+        } else { // user wants to edit transaction
+            val transaction = editTransaction as TransactionsTable
+            userClickedEditButton = true
+            viewModel.setNote(transaction.note)
+            viewModel.setDate(transaction.date)
+            viewModel.setCurrency(transaction.currency.uniqueID)
+            viewModel.setCategory(transaction.category)
+            viewModel.setPrice(transaction.amount.toString())
+        }
 
         setOnClickListener()
         setUpFragmentNavResultListener()
@@ -113,12 +143,15 @@ class AddNewEntryTransactionFragment : MainFragment() {
         viewModel.getNote().observe(viewLifecycleOwner, Observer {
             binding.txtNote.text = it
             binding.txtNote.setTextColor(Color.WHITE)
+            binding.imgNote.setColorFilter(Color.WHITE)
         })
 
         viewModel.getCategory().observe(viewLifecycleOwner, Observer {
             binding.txtCategory.text = it.rowValue
             binding.imgCategory.setImageResource(it.imageID)
+
             binding.txtCategory.setTextColor(Color.WHITE)
+            binding.imgCategory.setColorFilter(Color.WHITE)
         })
 
         viewModel.getCurrency().observe(viewLifecycleOwner, Observer {
@@ -128,10 +161,15 @@ class AddNewEntryTransactionFragment : MainFragment() {
         viewModel.getDate().observe(viewLifecycleOwner, Observer {
             binding.txtDate.text = dateToNice(it)
         })
+
+        viewModel.getPrice().observe(viewLifecycleOwner, Observer {
+            binding.txtAmount.setText(it.toString())
+        })
     }
 
     private fun showBottomSheetDialog() {
         val b = DateBottomSheetDialogBinding.inflate(layoutInflater)
+
         b.btnToday.setOnClickListener {
             val calendar = Calendar.getInstance()
             viewModel.setDate(calendar.time)
@@ -164,7 +202,9 @@ class AddNewEntryTransactionFragment : MainFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.saveMenu -> insertRecord()
+            R.id.saveMenu -> {
+                insertRecord()
+            }
             android.R.id.home -> {
                 activity?.finish()
             }
@@ -173,37 +213,51 @@ class AddNewEntryTransactionFragment : MainFragment() {
     }
 
     private fun insertRecord() {
-        var data = Intent()
-        val timestamp = Date()
-
-        var amount: Double = 0.0
         if (binding.txtAmount.text.toString().isNotEmpty()) {
-            amount = binding.txtAmount.text.toString().toDouble()
+            viewModel.setPrice(binding.txtAmount.text.toString())
         }
-
+        val amount = viewModel.getPrice().value?.toDouble() ?: 0.0
         val currency = viewModel.getCurrency().value
         val category = viewModel.getCategory().value
         val note = viewModel.getNote().value ?: ""
         val ddMMdyYYY = dateYyyyMmDd(viewModel.getDate().value!!)
+
         if (category != null && amount > 0) {
 
-            var transaction = TransactionsTable(
-                amount = amount,
-                currencyID = currency!!.uniqueID,
-                currencyValue = currency.rowValue,
-                categoryID = category.uniqueID,
-                categoryValue = category.rowValue,
-                note = note,
-                date = ddMMdyYYY,
-                timeStamp = timestamp,
-            )
-            data.putExtra(ADD_NEW_ENTRY, transaction)
+            val data = Intent()
+            val timestamp = Date()
+
+            if (!userClickedEditButton) {   // New transaction
+
+                var transaction = TransactionsTable(
+                    amount = amount,
+                    currency = currency!!,
+                    category = category,
+                    note = note,
+                    date = Date(ddMMdyYYY),
+                    timeStamp = timestamp,
+                )
+                data.putExtra(ADD_NEW_ENTRY, transaction)
+
+            } else {  // Edit transaction
+
+                val updateTransaction =
+                    activityMain.intent.getSerializableExtra(AddNewTransactionActivity.EDIT_INTENT) as TransactionsTable
+
+                updateTransaction.category = category
+                updateTransaction.amount = amount
+                updateTransaction.currency = currency!!
+                updateTransaction.note = note
+                updateTransaction.date = Date(ddMMdyYYY)
+
+                data.putExtra(EDIT_EXISTING_ENTRY, updateTransaction)
+            }
+
             activity?.setResult(Activity.RESULT_OK, data)
             activity?.finish()
 
         } else {
             showShortToastMessage("Please input an Amount and select Category")
         }
-
     }
 }

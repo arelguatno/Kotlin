@@ -2,8 +2,9 @@ package com.example.budgetbuddy.fragments.category
 
 import java.io.Serializable
 
-class SimpleListObject(
+data class SimpleListObject(
     val imageID: Int,
     val rowValue: String,
-    val uniqueID: Int
+    val uniqueID: Int,
+    val textIcon: String,
 ):Serializable

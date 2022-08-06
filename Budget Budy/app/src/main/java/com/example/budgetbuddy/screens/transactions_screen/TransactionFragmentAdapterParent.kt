@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbuddy.databinding.TransactionsParentBinding
 import com.example.budgetbuddy.room.tables.TransactionList
+import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.utils.intDayToString
 import com.example.budgetbuddy.utils.intMonthToString
 import com.example.budgetbuddy.utils.transformSingleDigitToTwoDigit
@@ -51,17 +52,14 @@ class TransactionFragmentAdapterParent :
         val current = getItem(position)
 
         val cal = Calendar.getInstance()
-        cal.time = Date(current.header)
+        cal.time = current.header
 
-        holder.binding.dayOfMonth.text = transformSingleDigitToTwoDigit(cal.get(Calendar.DAY_OF_MONTH))
+        holder.binding.dayOfMonth.text =
+            transformSingleDigitToTwoDigit(cal.get(Calendar.DAY_OF_MONTH))
         holder.binding.dayOfWeek.text = intDayToString(cal.get(Calendar.DAY_OF_WEEK))
-        holder.binding.monthAndYear.text = "${intMonthToString(cal.get(Calendar.MONTH))} ${cal.get(Calendar.YEAR)}"
-
-        var total = 0.0
-        for (i in current.child) {
-            total += i.amount
-        }
-        holder.binding.total.text = String.format("-$ %.2f", total)
+        holder.binding.monthAndYear.text =
+            "${intMonthToString(cal.get(Calendar.MONTH))} ${cal.get(Calendar.YEAR)}"
+        holder.binding.total.text = String.format("-%.2f", computeChildTotalCost(current.child))
 
         val child = TransactionFragmentAdapterChild(current.child)
         holder.binding.rvChild.layoutManager = LinearLayoutManager(
@@ -70,6 +68,14 @@ class TransactionFragmentAdapterParent :
             false
         )
         holder.binding.rvChild.adapter = child
+    }
+
+    private fun computeChildTotalCost(child: List<TransactionsTable>): Double {
+        var total = 0.0
+        for (i in child) {
+            total += i.amount
+        }
+        return total
     }
 }
 

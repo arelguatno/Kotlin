@@ -9,12 +9,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/black"
             android:focusable="true"
             android:gravity="top"
@@ -22,6 +22,8 @@
             android:lines="5"
             android:singleLine="true"
             android:imeOptions="actionDone"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:maxLength="100" />
     </com.google.android.material.textfield.TextInputLayout>
 </FrameLayout>

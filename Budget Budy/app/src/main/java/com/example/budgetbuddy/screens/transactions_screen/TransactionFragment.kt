@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
@@ -28,9 +29,9 @@ class TransactionFragment : MainFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentTransactionBinding.inflate(layoutInflater)
+        (activity as AppCompatActivity?)?.supportActionBar?.title = "Transactions"
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

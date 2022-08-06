@@ -14,5 +14,4 @@ import com.example.budgetbuddy.room.type_converter.DateConverter
 abstract class AppRoomDatabase : RoomDatabase() {
 
     abstract fun profileDao(): TransactionsDao
-
 }

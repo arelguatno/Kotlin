@@ -7,7 +7,7 @@ import com.example.budgetbuddy.room.tables.TransactionList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.sql.SQLException
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,6 +18,18 @@ class TransactionViewModel @Inject constructor(
     val fetchTransactionsGroupByDate = repository.fetchTransactionsGroupByDate().asLiveData()
 
     val fetchTransactions = repository.fetchTransactions().asLiveData()
+
+    fun deleteTransaction(tran: TransactionsTable){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.deleteTransaction(tran)
+        }
+    }
+
+    fun updateTransaction(tran: TransactionsTable){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.updateTransaction(tran)
+        }
+    }
 
     fun insertProfileRecord(transactionsTable: TransactionsTable) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -30,7 +42,7 @@ class TransactionViewModel @Inject constructor(
     }
 
     fun transactionListToWithHeaderAndChild(param: List<TransactionsTable>): List<TransactionList> {
-        var tempDate = ""
+        var tempDate = Calendar.getInstance().time
         var newFormattedList = mutableListOf<TransactionList>()
 
         for (i in param) { // Loop through all data

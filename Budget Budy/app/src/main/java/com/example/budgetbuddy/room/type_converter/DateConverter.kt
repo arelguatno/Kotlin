@@ -11,6 +11,9 @@ class DateConverter {
 
     @TypeConverter
     fun dateToTimestamp(date: Date?): Long? {
+        val ff = Calendar.getInstance()
+        ff.time = date
+        println(ff.time.toString())
         return date?.time
     }
 }

@@ -1,5 +1,6 @@
 package com.example.budgetbuddy.utils
 
+import com.example.budgetbuddy.fragments.currency.CurrencyList
 import java.util.*
 
 fun dateToNice(v: Date): String {

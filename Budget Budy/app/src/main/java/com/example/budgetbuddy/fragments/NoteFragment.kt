@@ -43,6 +43,10 @@ class NoteFragment : MainFragment() {
         setHasOptionsMenu(true)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     private fun setTextView() {
         binding.textView.requestFocus()
         val inputMethodManager =
@@ -53,7 +57,7 @@ class NoteFragment : MainFragment() {
         binding.textView.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                setFragmentResult(RESULT_KEY, bundleOf(RESULT_KEY to v.text.toString()))
+                setFragmentResult(RESULT_KEY, bundleOf(RESULT_KEY to v.text.toString().capitalize()))
                 findNavController().navigateUp()
             }
             handled

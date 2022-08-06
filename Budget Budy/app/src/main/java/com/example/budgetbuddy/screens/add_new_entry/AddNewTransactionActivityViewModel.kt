@@ -18,6 +18,7 @@ class AddNewTransactionActivityViewModel @Inject constructor() : ViewModel() {
     internal val note = MutableLiveData<String>()
     internal val currency = MutableLiveData<SimpleListObject>()
     internal val date = MutableLiveData<Date>()
+    internal val price = MutableLiveData<String>()
 
     fun setNote(v: String) {
         note.value = v
@@ -35,6 +36,22 @@ class AddNewTransactionActivityViewModel @Inject constructor() : ViewModel() {
         category.value = v
     }
 
+    fun setDate(v: Date) {
+        date.value = v
+    }
+
+    fun getDate(): LiveData<Date> {
+        return date
+    }
+
+    fun setPrice(v: String) {
+        price.value = v
+    }
+
+    fun getPrice(): LiveData<String> {
+        return price
+    }
+
     fun getCurrency(): LiveData<SimpleListObject> {
         return currency
     }
@@ -49,14 +66,4 @@ class AddNewTransactionActivityViewModel @Inject constructor() : ViewModel() {
         }
         return currency
     }
-
-    fun setDate(v: Date) {
-        date.value = v
-    }
-
-    fun getDate(): LiveData<Date> {
-        return date
-    }
-
-
 }

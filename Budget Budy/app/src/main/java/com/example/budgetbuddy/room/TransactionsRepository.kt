@@ -18,4 +18,12 @@ class TransactionsRepository @Inject constructor(
     suspend fun insertProfileRecord(transactionsTable: TransactionsTable) {
         transactionsDao.insertProfileRecord(transactionsTable)
     }
+
+    suspend fun deleteTransaction(transactionsTable: TransactionsTable){
+        transactionsDao.deleteTransaction(transactionsTable)
+    }
+
+    suspend fun updateTransaction(transactionsTable: TransactionsTable){
+        transactionsDao.updateTransaction(transactionsTable)
+    }
 }
