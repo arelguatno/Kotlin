@@ -13,6 +13,9 @@ interface TransactionsDao {
     @Query("SELECT * FROM transactions_table ORDER BY date DESC")
     fun fetchTransactionsGroupByDate(): Flow<List<TransactionsTable>>
 
+    @Query("SELECT * FROM transactions_table ORDER BY categoryrowValue")
+    fun fetchTransactionsGroupByCategory(): Flow<List<TransactionsTable>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProfileRecord(transactionsTable: TransactionsTable)
 

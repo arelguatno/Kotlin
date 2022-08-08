@@ -17,7 +17,7 @@ class CategoryFragment : MainFragment() {
     private lateinit var binding: FragmentCategoryBinding
 
     companion object {
-        const val RESULT_KEY = "category_id"
+        const val RESULT_KEY = "com.example.budgetbuddy.fragments.category.category_id"
     }
 
     override fun onCreateView(

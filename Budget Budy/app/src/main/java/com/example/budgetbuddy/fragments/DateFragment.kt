@@ -22,7 +22,7 @@ class DateFragment : MainFragment() {
     private lateinit var binding: FragmentDateBinding
 
     companion object {
-        const val RESULT_KEY = "DATE_ID"
+        const val RESULT_KEY = "com.example.budgetbuddy.fragments.DATE_ID"
     }
 
 
@@ -36,7 +36,7 @@ class DateFragment : MainFragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.O) //TODO check this
     override fun onStart() {
         super.onStart()
 

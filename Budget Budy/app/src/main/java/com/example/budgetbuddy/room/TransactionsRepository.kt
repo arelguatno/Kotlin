@@ -11,6 +11,10 @@ class TransactionsRepository @Inject constructor(
         return transactionsDao.fetchTransactionsGroupByDate()
     }
 
+    fun fetchTransactionsGroupByCategory(): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchTransactionsGroupByCategory()
+    }
+
     fun fetchTransactions(): Flow<List<TransactionsTable>> {
         return transactionsDao.fetchTransactions()
     }

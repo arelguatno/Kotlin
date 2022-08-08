@@ -18,7 +18,7 @@ import com.example.budgetbuddy.databinding.FragmentNoteBinding
 class NoteFragment : MainFragment() {
 
     companion object {
-        const val RESULT_KEY = "NOTE_ID"
+        const val RESULT_KEY = "com.example.budgetbuddy.fragments.NOTE_KEY"
     }
 
     private lateinit var binding: FragmentNoteBinding
@@ -43,10 +43,6 @@ class NoteFragment : MainFragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     private fun setTextView() {
         binding.textView.requestFocus()
         val inputMethodManager =
@@ -54,10 +50,10 @@ class NoteFragment : MainFragment() {
         inputMethodManager.showSoftInput(binding.textView, InputMethodManager.SHOW_FORCED)
 
 
-        binding.textView.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        binding.textView.setOnEditorActionListener(OnEditorActionListener { v, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                setFragmentResult(RESULT_KEY, bundleOf(RESULT_KEY to v.text.toString().capitalize()))
+                setFragmentResult(RESULT_KEY, bundleOf(RESULT_KEY to v.text.toString()))
                 findNavController().navigateUp()
             }
             handled
@@ -76,6 +72,7 @@ class NoteFragment : MainFragment() {
                     context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
                 findNavController().navigateUp()
+
             }
         }
         return super.onOptionsItemSelected(item)

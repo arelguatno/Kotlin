@@ -14,7 +14,6 @@ object CurrencyList {
         list[2] = SimpleListObject(R.drawable.ic_baseline_currency_pound_24, "GBP",2,"£")
         list[3] = SimpleListObject(R.drawable.ic_baseline_currency_yuan_24, "YEN",3,"¥")
         list[4] = SimpleListObject(R.drawable.ic_baseline_currency_ruble_24, "PHP",4,"₱")
-
         return list.toList()
     }
 

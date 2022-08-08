@@ -1,13 +1,13 @@
 package com.example.budgetbuddy.screens.transactions_screen
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.view.*
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
+import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentTransactionBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,8 +29,39 @@ class TransactionFragment : MainFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentTransactionBinding.inflate(layoutInflater)
-        (activity as AppCompatActivity?)?.supportActionBar?.title = "Transactions"
+        inflateMenu()
         return binding.root
+    }
+
+    private fun inflateMenu() {
+        binding.appBar.inflateMenu(R.menu.home_transactions_menu)
+        binding.appBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.group_by_date -> {
+                    groupByDate()
+                }
+                R.id.group_by_cat -> {
+                    groupByCat()
+                }
+            }
+            true
+        }
+    }
+
+    private fun groupByCat() {
+//        viewModel.fetchTransactionsGroupByCategory.observe(viewLifecycleOwner) { list ->
+//            list.let {
+//                myAdapterParent.submitList(viewModel.transactionListToWithHeaderAndChild2(list))
+//            }
+//        }
+    }
+
+    private fun groupByDate() {
+        viewModel.fetchTransactionsGroupByDate.observe(viewLifecycleOwner) { list ->
+            list.let {
+                myAdapterParent.submitList(viewModel.transactionListToWithHeaderAndChild(list))
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,10 +71,6 @@ class TransactionFragment : MainFragment() {
         binding.homeFragmentRecyclerViewParent.adapter = myAdapterParent
         binding.homeFragmentRecyclerViewParent.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.fetchTransactionsGroupByDate.observe(viewLifecycleOwner) { list ->
-            list.let {
-                myAdapterParent.submitList(viewModel.transactionListToWithHeaderAndChild(list))
-            }
-        }
+        groupByDate()
     }
 }

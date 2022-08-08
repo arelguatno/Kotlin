@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.budgetbuddy.fragments.category.CategoryList
 import com.example.budgetbuddy.fragments.category.SimpleListObject
 import com.example.budgetbuddy.fragments.currency.CurrencyList
+import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
@@ -14,17 +15,22 @@ import javax.inject.Inject
 @HiltViewModel
 class AddNewTransactionActivityViewModel @Inject constructor() : ViewModel() {
 
-    internal val category = MutableLiveData<SimpleListObject>()
-    internal val note = MutableLiveData<String>()
-    internal val currency = MutableLiveData<SimpleListObject>()
-    internal val date = MutableLiveData<Date>()
-    internal val price = MutableLiveData<String>()
+    private val category = MutableLiveData<SimpleListObject>()
+    private val note = MutableLiveData<String>()
+    private val currency = MutableLiveData<SimpleListObject>()
+    private val date = MutableLiveData<Date>()
+    private val price = MutableLiveData<String>()
+    private val table = MutableLiveData<TransactionsTable>()
 
     fun setNote(v: String) {
         note.value = v
     }
 
     fun getNote(): LiveData<String> {
+        if(!note.value.isNullOrEmpty()) {
+            note.value = note.value.toString()
+                .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+        }
         return note
     }
 
@@ -65,5 +71,13 @@ class AddNewTransactionActivityViewModel @Inject constructor() : ViewModel() {
             currency.value = currentC!!
         }
         return currency
+    }
+
+    fun setTable(v: TransactionsTable) {
+        table.value = v
+    }
+
+    fun getTable(): LiveData<TransactionsTable> {
+        return table
     }
 }

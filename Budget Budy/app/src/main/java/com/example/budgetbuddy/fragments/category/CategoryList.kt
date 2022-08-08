@@ -16,8 +16,9 @@ object CategoryList {
         list[6] = SimpleListObject(R.drawable.ic_baseline_subscriptions_24, "Subscription", 6,"")
         list[7] = SimpleListObject(R.drawable.ic_baseline_sports_esports_24, "Entertainment", 7,"")
         list[8] = SimpleListObject(R.drawable.ic_baseline_apps_24, "Apps", 8,"")
-        list[9] = SimpleListObject(R.drawable.ic_baseline_assignment_24, "Other Expenses", 8,"")
-        list[9] = SimpleListObject(R.drawable.ic_baseline_microwave_24, "HouseWare", 9,"")
+        list[9] = SimpleListObject(R.drawable.ic_baseline_handyman_24, "HouseWare", 9,"")
+        list[10] = SimpleListObject(R.drawable.ic_baseline_medication_24, "Health", 10,"")
+        list[11] = SimpleListObject(R.drawable.ic_baseline_circle_24, "Other Expenses", 11,"")
 
         return list.toList()
     }

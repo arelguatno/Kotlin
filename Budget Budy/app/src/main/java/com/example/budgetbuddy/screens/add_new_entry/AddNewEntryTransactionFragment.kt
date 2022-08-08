@@ -7,11 +7,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.DateBottomSheetDialogBinding
@@ -20,20 +21,19 @@ import com.example.budgetbuddy.fragments.DateFragment
 import com.example.budgetbuddy.fragments.NoteFragment
 import com.example.budgetbuddy.fragments.category.CategoryFragment
 import com.example.budgetbuddy.fragments.category.SimpleListObject
+import com.example.budgetbuddy.fragments.transaction_detail_fragment.TransactionDetailsFragmentArgs
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.utils.dateToNice
 import com.example.budgetbuddy.utils.dateYyyyMmDd
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import java.io.Serializable
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-
 
 class AddNewEntryTransactionFragment : MainFragment() {
     private lateinit var binding: NewtransactionfragmentBinding
-    private val viewModel: AddNewTransactionActivityViewModel by viewModels()
+    private val viewModel: AddNewTransactionActivityViewModel by activityViewModels()
     private lateinit var bottomSheetDialog: BottomSheetDialog
-    lateinit var activityMain: AddNewTransactionActivity
-
+    private lateinit var activityMain: AddNewTransactionActivity
 
     companion object {
         const val ADD_NEW_ENTRY = "com.example.room_aye.screens.add_new_entry"
@@ -45,7 +45,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = NewtransactionfragmentBinding.inflate(layoutInflater)
         bottomSheetDialog = BottomSheetDialog(requireContext())
         (activity as AppCompatActivity?)?.supportActionBar?.title = "Add new entry"
@@ -140,31 +140,32 @@ class AddNewEntryTransactionFragment : MainFragment() {
     }
 
     private fun setUpViewModelsListener() {
-        viewModel.getNote().observe(viewLifecycleOwner, Observer {
+        viewModel.getNote().observe(viewLifecycleOwner) {
             binding.txtNote.text = it
             binding.txtNote.setTextColor(Color.WHITE)
             binding.imgNote.setColorFilter(Color.WHITE)
-        })
+            binding.test.isFocusable = false
+        }
 
-        viewModel.getCategory().observe(viewLifecycleOwner, Observer {
+        viewModel.getCategory().observe(viewLifecycleOwner) {
             binding.txtCategory.text = it.rowValue
             binding.imgCategory.setImageResource(it.imageID)
 
             binding.txtCategory.setTextColor(Color.WHITE)
             binding.imgCategory.setColorFilter(Color.WHITE)
-        })
+        }
 
-        viewModel.getCurrency().observe(viewLifecycleOwner, Observer {
+        viewModel.getCurrency().observe(viewLifecycleOwner) {
             binding.imgCurrency.setImageResource(it.imageID)
-        })
+        }
 
-        viewModel.getDate().observe(viewLifecycleOwner, Observer {
+        viewModel.getDate().observe(viewLifecycleOwner) {
             binding.txtDate.text = dateToNice(it)
-        })
+        }
 
-        viewModel.getPrice().observe(viewLifecycleOwner, Observer {
+        viewModel.getPrice().observe(viewLifecycleOwner) {
             binding.txtAmount.setText(it.toString())
-        })
+        }
     }
 
     private fun showBottomSheetDialog() {

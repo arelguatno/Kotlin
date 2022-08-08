@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity(), Serializable {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navController = findNavController(R.id.nav_host_fragment)
@@ -43,19 +45,14 @@ class MainActivity : AppCompatActivity(), Serializable {
                     )
                 }
             }
+
         binding.floatingActionButton.setOnClickListener {
             startForResult.launch(Intent(this, AddNewTransactionActivity::class.java))
         }
 
-        loadHomeFragment()
-
         //Load Category and Currency
         CategoryList.geItems()
         CurrencyList.geItems()
-    }
-
-    private fun loadHomeFragment() {
-        navController.navigate(R.id.nav_homeFragment)
     }
 
     override fun onSupportNavigateUp(): Boolean {

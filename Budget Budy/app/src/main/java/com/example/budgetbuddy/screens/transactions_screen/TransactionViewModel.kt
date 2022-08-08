@@ -17,19 +17,7 @@ class TransactionViewModel @Inject constructor(
 
     val fetchTransactionsGroupByDate = repository.fetchTransactionsGroupByDate().asLiveData()
 
-    val fetchTransactions = repository.fetchTransactions().asLiveData()
-
-    fun deleteTransaction(tran: TransactionsTable){
-        viewModelScope.launch(Dispatchers.IO){
-            repository.deleteTransaction(tran)
-        }
-    }
-
-    fun updateTransaction(tran: TransactionsTable){
-        viewModelScope.launch(Dispatchers.IO){
-            repository.updateTransaction(tran)
-        }
-    }
+    val fetchTransactionsGroupByCategory = repository.fetchTransactionsGroupByCategory().asLiveData()
 
     fun insertProfileRecord(transactionsTable: TransactionsTable) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -66,4 +54,30 @@ class TransactionViewModel @Inject constructor(
         }
         return newFormattedList
     }
+
+//    fun transactionListToWithHeaderAndChild2(param: List<TransactionsTable>): List<TransactionList> {
+//        var tempDate = ""
+//        var newFormattedList = mutableListOf<TransactionList>()
+//
+//        for (i in param) { // Loop through all data
+//            if (tempDate != i.category.rowValue) { // found a unique date
+//                val childList = mutableListOf<TransactionsTable>()
+//
+//                for (y in param) {   // loop again and find transaction with the same date
+//                    if (i.category.rowValue == y.category.rowValue) {
+//                        childList.add(y)
+//                    }
+//                }
+//
+//                val row = TransactionList(header = i.category.rowValue, child = childList)
+//                newFormattedList.add(row)
+//
+//                //output is an array of header and transactiontable
+//                // 6/23/2022, {transaction1, transaction2, transaction3}
+//                // 6/24/2022, {transaction2, transaction2, transaction3}
+//            }
+//            tempDate = i.category.rowValue
+//        }
+//        return newFormattedList
+//    }
 }
