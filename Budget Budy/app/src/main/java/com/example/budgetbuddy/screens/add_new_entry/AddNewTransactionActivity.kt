@@ -9,12 +9,16 @@ import androidx.navigation.findNavController
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.ActivityAddNewTransactionBinding
 import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.screens.profile_screen.ViewPagerAdapter
+import com.example.budgetbuddy.screens.settings_screen.SettingsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
+import java.util.ResourceBundle.getBundle
 
 @AndroidEntryPoint
 class AddNewTransactionActivity : AppCompatActivity(), Serializable {
     private lateinit var binding: ActivityAddNewTransactionBinding
+    val fragment = AddNewEntryTransactionFragment()
 
     companion object {
         const val EDIT_INTENT = "com.example.budgetbuddy.screens.add_new_entry.edit"
@@ -27,14 +31,16 @@ class AddNewTransactionActivity : AppCompatActivity(), Serializable {
         binding = ActivityAddNewTransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+       // getBundle()
     }
 
-    override fun onStart() {
-        super.onStart()
-
+    private fun getBundle() {
         val tran = intent.getSerializableExtra(EDIT_INTENT)
         if (tran != null) {
-            viewModel.setTable(tran as TransactionsTable)
+            fragment.arguments = Bundle().apply {
+                putSerializable("arelguatno", tran as TransactionsTable)
+            }
         }
     }
 

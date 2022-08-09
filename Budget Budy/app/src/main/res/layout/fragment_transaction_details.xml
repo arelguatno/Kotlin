@@ -30,6 +30,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="10dp"
+        android:background="@color/purple_700"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -103,9 +104,12 @@
         android:id="@+id/btnDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:backgroundTint="@color/white"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="#FF3131"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/purple_700"
         android:text="Delete" />
 
 

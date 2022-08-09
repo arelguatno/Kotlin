@@ -30,8 +30,4 @@ class HomeFragment : MainFragment() {
         (activity as AppCompatActivity?)?.supportActionBar?.title = "Budget Buddy"
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

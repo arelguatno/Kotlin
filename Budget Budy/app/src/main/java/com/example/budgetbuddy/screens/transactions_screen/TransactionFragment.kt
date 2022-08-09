@@ -2,20 +2,20 @@ package com.example.budgetbuddy.screens.transactions_screen
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ahmadhamwi.tabsync.TabbedListMediator
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentTransactionBinding
+import com.example.budgetbuddy.room.tables.TransactionList
+import com.example.budgetbuddy.utils.dateYyyyMmDd
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TransactionFragment : MainFragment() {
 
     companion object {
-
     }
 
     private lateinit var binding: FragmentTransactionBinding
@@ -59,8 +59,28 @@ class TransactionFragment : MainFragment() {
     private fun groupByDate() {
         viewModel.fetchTransactionsGroupByDate.observe(viewLifecycleOwner) { list ->
             list.let {
-                myAdapterParent.submitList(viewModel.transactionListToWithHeaderAndChild(list))
+                val list = viewModel.transactionListToWithHeaderAndChild(list)
+                initTabLayout(list)
+                initMediator(list)
+                myAdapterParent.submitList(list)
             }
+        }
+    }
+
+    private fun initMediator(list: List<TransactionList>) {
+        TabbedListMediator(
+            binding.homeFragmentRecyclerViewParent,
+            binding.tabLayout,
+            list.indices.toList()
+        ).attach()
+    }
+
+
+    private fun initTabLayout(list: List<TransactionList>) {
+        val tabLayout = binding.tabLayout
+        tabLayout.removeAllTabs()
+        for (v in list) {
+            tabLayout.addTab(tabLayout.newTab().setText(dateYyyyMmDd(v.header)))
         }
     }
 

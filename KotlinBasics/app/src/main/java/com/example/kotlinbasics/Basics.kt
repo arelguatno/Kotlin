@@ -37,7 +37,7 @@ fun main() {
     println(cal.get(Calendar.MONTH) +1)
 
 
-    println("This me test".replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
+    println("This me test".capitalize())
 
 }
 
