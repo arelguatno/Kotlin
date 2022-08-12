@@ -9,10 +9,8 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.DateBottomSheetDialogBinding
@@ -21,12 +19,12 @@ import com.example.budgetbuddy.fragments.DateFragment
 import com.example.budgetbuddy.fragments.NoteFragment
 import com.example.budgetbuddy.fragments.category.CategoryFragment
 import com.example.budgetbuddy.fragments.category.SimpleListObject
-import com.example.budgetbuddy.fragments.transaction_detail_fragment.TransactionDetailsFragmentArgs
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.utils.dateToNice
 import com.example.budgetbuddy.utils.dateYyyyMmDd
+import com.example.budgetbuddy.utils.getDateMonth
+import com.example.budgetbuddy.utils.getDateYear
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 class AddNewEntryTransactionFragment : MainFragment() {
@@ -237,6 +235,8 @@ class AddNewEntryTransactionFragment : MainFragment() {
                     note = note,
                     date = Date(ddMMdyYYY),
                     timeStamp = timestamp,
+                    month = getDateMonth(ddMMdyYYY),
+                    year = getDateYear(ddMMdyYYY),
                 )
                 data.putExtra(ADD_NEW_ENTRY, transaction)
 
@@ -250,6 +250,8 @@ class AddNewEntryTransactionFragment : MainFragment() {
                 updateTransaction.currency = currency!!
                 updateTransaction.note = note
                 updateTransaction.date = Date(ddMMdyYYY)
+                updateTransaction.month = getDateMonth(ddMMdyYYY)
+                updateTransaction.year  = getDateYear(ddMMdyYYY)
 
                 data.putExtra(EDIT_EXISTING_ENTRY, updateTransaction)
             }

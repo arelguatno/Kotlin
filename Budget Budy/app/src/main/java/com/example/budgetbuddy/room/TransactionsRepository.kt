@@ -1,7 +1,9 @@
 package com.example.budgetbuddy.room
 
+import com.example.budgetbuddy.room.tables.DateMonth
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import kotlinx.coroutines.flow.Flow
+import java.util.*
 import javax.inject.Inject
 
 class TransactionsRepository @Inject constructor(
@@ -9,6 +11,10 @@ class TransactionsRepository @Inject constructor(
 ) {
     fun fetchTransactionsGroupByDate(): Flow<List<TransactionsTable>> {
         return transactionsDao.fetchTransactionsGroupByDate()
+    }
+
+    fun fetchRecordByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchRecordByMonthAndYear(month, year)
     }
 
     fun fetchTransactionsGroupByCategory(): Flow<List<TransactionsTable>> {

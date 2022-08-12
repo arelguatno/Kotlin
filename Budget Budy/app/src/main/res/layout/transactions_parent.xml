@@ -44,9 +44,9 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:text="Friday"
-                    android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="11.5dp" />
+                    android:textSize="11.5dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/monthAndYear"

@@ -5,14 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.activityViewModels
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentSettingsBinding
-import com.example.budgetbuddy.screens.profile_screen.ProfileFragment
-import com.example.budgetbuddy.screens.profile_screen.ViewPagerAdapter
+import com.example.budgetbuddy.screens.transactions_screen.TransactionFragmentAdapterHeader
+import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,15 +30,4 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        arguments?.takeIf { it.containsKey("object") }?.apply {
-           // println(getInt("object").toString())
-            binding.textView.text = getInt("object").toString()
-        }
-    }
-
-    companion object {
-
-    }
 }

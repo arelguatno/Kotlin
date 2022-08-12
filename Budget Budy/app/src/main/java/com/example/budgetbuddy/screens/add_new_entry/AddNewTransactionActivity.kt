@@ -1,19 +1,14 @@
 package com.example.budgetbuddy.screens.add_new_entry
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.ActivityAddNewTransactionBinding
 import com.example.budgetbuddy.room.tables.TransactionsTable
-import com.example.budgetbuddy.screens.profile_screen.ViewPagerAdapter
-import com.example.budgetbuddy.screens.settings_screen.SettingsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
-import java.util.ResourceBundle.getBundle
 
 @AndroidEntryPoint
 class AddNewTransactionActivity : AppCompatActivity(), Serializable {

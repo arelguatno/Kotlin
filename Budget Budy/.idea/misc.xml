@@ -11,9 +11,12 @@
         <entry key="app/src/main/res/drawable/ic_baseline_9k_24.xml" value="0.154" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_24.xml" value="0.154" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_balance_24.xml" value="0.154" />
+        <entry key="app/src/main/res/drawable/ic_baseline_align_vertical_center_24.xml" value="0.245" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.245" />
         <entry key="app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.387" />
         <entry key="app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.2885" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2745" />
+        <entry key="app/src/main/res/drawable/ic_baseline_wallet_24.xml" value="0.245" />
         <entry key="app/src/main/res/drawable/ic_category_food.xml" value="0.2265" />
         <entry key="app/src/main/res/drawable/ic_category_personal.xml" value="0.234" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.154" />
@@ -21,6 +24,7 @@
         <entry key="app/src/main/res/layout/activity_add_new_transaction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27808988764044945" />
         <entry key="app/src/main/res/layout/activity_note_fragment2.xml" value="0.30867892261650276" />
+        <entry key="app/src/main/res/layout/blank_layout.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/checkroom-48px.xml" value="0.35784523300555793" />
         <entry key="app/src/main/res/layout/date_bottom_sheet_dialog.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry.xml" value="0.37604166666666666" />
@@ -33,8 +37,8 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2736625514403292" />
         <entry key="app/src/main/res/layout/fragment_note.xml" value="0.30854700854700856" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.51875" />
-        <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.42165242165242167" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.47815333882934874" />
+        <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_transaction_details.xml" value="0.335" />
         <entry key="app/src/main/res/layout/haha.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout.xml" value="0.45" />

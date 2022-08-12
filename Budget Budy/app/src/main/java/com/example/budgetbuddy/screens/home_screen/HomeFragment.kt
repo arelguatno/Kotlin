@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
 import com.example.budgetbuddy.MainFragment
-import com.example.budgetbuddy.screens.transactions_screen.TransactionFragmentAdapterParent
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +17,7 @@ class HomeFragment : MainFragment() {
     private lateinit var binding: FragmentHomeBinding
 
     private val viewModel: TransactionViewModel by viewModels()
-    private val myAdapterParent: TransactionFragmentAdapterParent by lazy { TransactionFragmentAdapterParent() }
+   // private val myAdapterHeader: TransactionFragmentAdapterHeader by lazy { TransactionFragmentAdapterHeader() }
 
     override fun onCreateView(
         inflater: LayoutInflater,

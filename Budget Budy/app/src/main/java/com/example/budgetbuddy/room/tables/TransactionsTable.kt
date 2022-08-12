@@ -17,6 +17,8 @@ data class TransactionsTable(
     var currency: SimpleListObject,
     @Embedded(prefix = "category")
     var category: SimpleListObject,
+    var month: Int,
+    var year: Int,
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

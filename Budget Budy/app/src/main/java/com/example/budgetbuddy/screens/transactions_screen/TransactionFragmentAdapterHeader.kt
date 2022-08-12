@@ -10,12 +10,12 @@ import com.example.budgetbuddy.databinding.TransactionsParentBinding
 import com.example.budgetbuddy.room.tables.TransactionList
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.utils.intDayToString
-import com.example.budgetbuddy.utils.intMonthToString
+import com.example.budgetbuddy.utils.intMonthLongToString
 import com.example.budgetbuddy.utils.transformSingleDigitToTwoDigit
 import java.util.*
 
-class TransactionFragmentAdapterParent :
-    ListAdapter<TransactionList, TransactionFragmentAdapterParent.MyViewHolder>(WORDS_COMPARATOR) {
+class TransactionFragmentAdapterHeader :
+    ListAdapter<TransactionList, TransactionFragmentAdapterHeader.MyViewHolder>(WORDS_COMPARATOR) {
 
     class MyViewHolder(val binding: TransactionsParentBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -34,6 +34,7 @@ class TransactionFragmentAdapterParent :
                 newItem: TransactionList
             ): Boolean {
                 return oldItem.header == newItem.header
+                return oldItem.child == newItem.child
             }
         }
     }
@@ -49,19 +50,19 @@ class TransactionFragmentAdapterParent :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val current = getItem(position)
+        val item = getItem(position)
 
         val cal = Calendar.getInstance()
-        cal.time = current.header
+        cal.time = item.header
 
         holder.binding.dayOfMonth.text =
             transformSingleDigitToTwoDigit(cal.get(Calendar.DAY_OF_MONTH))
         holder.binding.dayOfWeek.text = intDayToString(cal.get(Calendar.DAY_OF_WEEK))
         holder.binding.monthAndYear.text =
-            "${intMonthToString(cal.get(Calendar.MONTH))} ${cal.get(Calendar.YEAR)}"
-        holder.binding.total.text = String.format("-%.2f", computeChildTotalCost(current.child))
+            "${intMonthLongToString(cal.get(Calendar.MONTH))} ${cal.get(Calendar.YEAR)}"
+        holder.binding.total.text = String.format("-%.2f", computeChildTotalCost(item.child))
 
-        val child = TransactionFragmentAdapterChild(current.child)
+        val child = TransactionFragmentAdapterChild(item.child)
         holder.binding.rvChild.layoutManager = LinearLayoutManager(
             holder.binding.rvChild.context,
             LinearLayoutManager.VERTICAL,

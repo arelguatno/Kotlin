@@ -1,27 +1,30 @@
 package com.example.budgetbuddy.screens.transactions_screen
 
+import android.content.Context
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.viewModels
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ahmadhamwi.tabsync.TabbedListMediator
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentTransactionBinding
-import com.example.budgetbuddy.room.tables.TransactionList
-import com.example.budgetbuddy.utils.dateYyyyMmDd
+import com.example.budgetbuddy.room.tables.DateMonth
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class TransactionFragment : MainFragment() {
 
     companion object {
+        val cal: Calendar = Calendar.getInstance()
     }
 
     private lateinit var binding: FragmentTransactionBinding
 
-    private val viewModel: TransactionViewModel by viewModels()
-    private val myAdapterParent: TransactionFragmentAdapterParent by lazy { TransactionFragmentAdapterParent() }
+    private val viewModel: TransactionViewModel by activityViewModels()
+    private val myAdapterHeader: TransactionFragmentAdapterHeader by lazy { TransactionFragmentAdapterHeader() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,68 +32,62 @@ class TransactionFragment : MainFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentTransactionBinding.inflate(layoutInflater)
-        inflateMenu()
         return binding.root
     }
 
-    private fun inflateMenu() {
-        binding.appBar.inflateMenu(R.menu.home_transactions_menu)
-        binding.appBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.group_by_date -> {
-                    groupByDate()
-                }
-                R.id.group_by_cat -> {
-                    groupByCat()
-                }
-            }
-            true
-        }
+    override fun onStart() {
+        super.onStart()
+
+        initOnCLick()
+        initViewModel()
+        initTransactionData()
     }
 
-    private fun groupByCat() {
-//        viewModel.fetchTransactionsGroupByCategory.observe(viewLifecycleOwner) { list ->
-//            list.let {
-//                myAdapterParent.submitList(viewModel.transactionListToWithHeaderAndChild2(list))
-//            }
-//        }
-    }
-
-    private fun groupByDate() {
-        viewModel.fetchTransactionsGroupByDate.observe(viewLifecycleOwner) { list ->
-            list.let {
-                val list = viewModel.transactionListToWithHeaderAndChild(list)
-                initTabLayout(list)
-                initMediator(list)
-                myAdapterParent.submitList(list)
-            }
-        }
-    }
-
-    private fun initMediator(list: List<TransactionList>) {
-        TabbedListMediator(
-            binding.homeFragmentRecyclerViewParent,
-            binding.tabLayout,
-            list.indices.toList()
-        ).attach()
-    }
-
-
-    private fun initTabLayout(list: List<TransactionList>) {
-        val tabLayout = binding.tabLayout
-        tabLayout.removeAllTabs()
-        for (v in list) {
-            tabLayout.addTab(tabLayout.newTab().setText(dateYyyyMmDd(v.header)))
-        }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun initTransactionData() {
         binding.homeFragmentRecyclerViewParent.itemAnimator = null
-        binding.homeFragmentRecyclerViewParent.adapter = myAdapterParent
+        binding.homeFragmentRecyclerViewParent.adapter = myAdapterHeader
         binding.homeFragmentRecyclerViewParent.layoutManager = LinearLayoutManager(requireContext())
 
-        groupByDate()
+        val gaga = viewModel.getDate().value
+        cal.time = gaga
+        val month = cal.get(Calendar.MONTH)
+        val year = cal.get(Calendar.YEAR)
+        queryData(month, year)
     }
+
+    private fun initViewModel() {
+        viewModel.getDate().observe(viewLifecycleOwner) {
+            cal.time = it
+            val month = cal.get(Calendar.MONTH)
+            val year = cal.get(Calendar.YEAR)
+            val ff = viewModel.transformTextLayout(month, year)
+            binding.txtDate.text = ff
+            queryData(month, year)
+        }
+    }
+
+    private fun initOnCLick() {
+        binding.leftImage.setOnClickListener {
+            cal.time = viewModel.getDate().value
+            cal.add(Calendar.MONTH, -1)
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+            viewModel.setDate(cal.time)
+        }
+
+        binding.rightImage.setOnClickListener {
+            cal.time = viewModel.getDate().value
+            cal.add(Calendar.MONTH, +1)
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+            viewModel.setDate(cal.time)
+        }
+    }
+
+
+    private fun queryData(month: Int, year: Int) {
+        viewModel.fetchRecordByMonthAndYear(month, year).observe(viewLifecycleOwner) {
+            val list = viewModel.transactionListToWithHeaderAndChild(it)
+            myAdapterHeader.submitList(list)
+        }
+    }
+
 }

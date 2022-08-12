@@ -55,6 +55,7 @@ class TransactionDetailsFragment : MainFragment() {
             it.findNavController().navigateUp()
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewInit()

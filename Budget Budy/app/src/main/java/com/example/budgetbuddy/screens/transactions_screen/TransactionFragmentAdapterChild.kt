@@ -33,24 +33,18 @@ class TransactionFragmentAdapterChild(private val children: List<TransactionsTab
         val item = children[position]
 
         holder.binding.txtCategory.text = item.category.rowValue
-        holder.binding.txtCostPrice.text = String.format("-${item.currency.textIcon} %.2f", item.amount)
+        holder.binding.txtCostPrice.text =
+            String.format("-${item.currency.textIcon} %.2f", item.amount)
         //holder.binding.imageView.setImageResource(CategoryList.getImageSrc(item.categoryID))
         holder.binding.imageView.setImageResource(item.category.imageID)
         holder.binding.txtNote.text = item.note
 
-        holder.itemView.setOnClickListener{
-            val action = TransactionFragmentDirections.actionTransactionFragmentToTransactionDetailsFragment(item)
+        holder.itemView.setOnClickListener {
+            val action =
+                TransactionFragmentDirections.actionTransactionFragmentToTransactionDetailsFragment(
+                    item
+                )
             it.findNavController().navigate(action)
         }
-    }
-
-    private lateinit var mListener: onItemClickListener
-
-    interface onItemClickListener {
-        fun onItemClick(obj: TransactionsTable)
-    }
-
-    fun setItemOnClickListener(listener: onItemClickListener) {
-        mListener = listener
     }
 }

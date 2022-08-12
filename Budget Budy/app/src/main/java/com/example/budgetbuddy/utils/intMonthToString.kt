@@ -2,7 +2,7 @@ package com.example.budgetbuddy.utils
 
 import java.util.*
 
-fun intMonthToString(param: Int): String {
+fun intMonthLongToString(param: Int): String {
     return when (param) {
         Calendar.JANUARY -> "January"
         Calendar.FEBRUARY -> "February"
@@ -16,6 +16,24 @@ fun intMonthToString(param: Int): String {
         Calendar.OCTOBER -> "October"
         Calendar.NOVEMBER -> "November"
         Calendar.DECEMBER -> "December"
+        else -> "Sunday"
+    }
+}
+
+fun intMonthShortToString(param: Int): String {
+    return when (param) {
+        Calendar.JANUARY -> "Jan"
+        Calendar.FEBRUARY -> "Feb"
+        Calendar.MARCH-> "Mar"
+        Calendar.APRIL-> "Apr"
+        Calendar.MAY -> "May"
+        Calendar.JUNE -> "Jun"
+        Calendar.JULY -> "Jul"
+        Calendar.AUGUST -> "Aug"
+        Calendar.SEPTEMBER -> "Sep"
+        Calendar.OCTOBER -> "Oct"
+        Calendar.NOVEMBER -> "Nov"
+        Calendar.DECEMBER -> "Dec"
         else -> "Sunday"
     }
 }
