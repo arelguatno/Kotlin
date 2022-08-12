@@ -2,6 +2,7 @@ package com.example.budgetbuddy.screens.transactions_screen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.marginTop
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -17,8 +18,7 @@ import java.util.*
 class TransactionFragmentAdapterHeader :
     ListAdapter<TransactionList, TransactionFragmentAdapterHeader.MyViewHolder>(WORDS_COMPARATOR) {
 
-    class MyViewHolder(val binding: TransactionsParentBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    class MyViewHolder(val binding: TransactionsParentBinding) : RecyclerView.ViewHolder(binding.root)
 
     companion object {
         private val WORDS_COMPARATOR = object : DiffUtil.ItemCallback<TransactionList>() {
@@ -55,6 +55,15 @@ class TransactionFragmentAdapterHeader :
         val cal = Calendar.getInstance()
         cal.time = item.header
 
+//        if(position == 0){
+////            val param = holder.binding.cardView as ViewGroup.MarginLayoutParams
+////            param.setMargins(0,0,0,0)
+//            val param = (holder.binding.cardView.layoutParams as ViewGroup.MarginLayoutParams).apply {
+//                setMargins(0,0,0,0)
+//            }
+//            holder.binding.cardView.layoutParams = param
+//        }
+
         holder.binding.dayOfMonth.text =
             transformSingleDigitToTwoDigit(cal.get(Calendar.DAY_OF_MONTH))
         holder.binding.dayOfWeek.text = intDayToString(cal.get(Calendar.DAY_OF_WEEK))
@@ -79,4 +88,5 @@ class TransactionFragmentAdapterHeader :
         return total
     }
 }
+
 

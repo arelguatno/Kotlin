@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import java.util.*
 
 abstract class MainFragment : Fragment() {
 
     companion object {
         const val TAG = "MainFragment"
         internal lateinit var sharedPref: SharedPreferences
+        val cal: Calendar = Calendar.getInstance()
     }
 
     fun <B> LogStr(param: B) {

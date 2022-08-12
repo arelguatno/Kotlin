@@ -10,7 +10,7 @@ object CategoryList {
         // 1 is the constant and unique value for Category items and so on
         list[1] = SimpleListObject(R.drawable.ic_category_personal, "Personal", 1,"")
         list[2] = SimpleListObject(R.drawable.ic_baseline_directions_bus_24, "Transportation", 2,"")
-        list[3] = SimpleListObject(R.drawable.ic_baseline_local_dining_24, "Food & Beverages", 3,"")
+        list[3] = SimpleListObject(R.drawable.ic_baseline_food, "Food & Beverages", 3,"")
         list[4] = SimpleListObject(R.drawable.ic_baseline_home_24, "Bills", 4,"")
         list[5] = SimpleListObject(R.drawable.ic_fashion, "Clothing", 5,"")
         list[6] = SimpleListObject(R.drawable.ic_baseline_subscriptions_24, "Subscription", 6,"")

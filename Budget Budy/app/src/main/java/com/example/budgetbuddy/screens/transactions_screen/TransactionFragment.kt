@@ -1,6 +1,5 @@
 package com.example.budgetbuddy.screens.transactions_screen
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,20 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
-import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentTransactionBinding
-import com.example.budgetbuddy.room.tables.DateMonth
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+
 @AndroidEntryPoint
 class TransactionFragment : MainFragment() {
+    private lateinit var binding: FragmentTransactionBinding
 
     companion object {
-        val cal: Calendar = Calendar.getInstance()
-    }
 
-    private lateinit var binding: FragmentTransactionBinding
+    }
 
     private val viewModel: TransactionViewModel by activityViewModels()
     private val myAdapterHeader: TransactionFragmentAdapterHeader by lazy { TransactionFragmentAdapterHeader() }
@@ -30,7 +29,6 @@ class TransactionFragment : MainFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentTransactionBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -48,8 +46,8 @@ class TransactionFragment : MainFragment() {
         binding.homeFragmentRecyclerViewParent.adapter = myAdapterHeader
         binding.homeFragmentRecyclerViewParent.layoutManager = LinearLayoutManager(requireContext())
 
-        val gaga = viewModel.getDate().value
-        cal.time = gaga
+        val date = viewModel.getDate().value
+        cal.time = date
         val month = cal.get(Calendar.MONTH)
         val year = cal.get(Calendar.YEAR)
         queryData(month, year)
@@ -81,7 +79,6 @@ class TransactionFragment : MainFragment() {
             viewModel.setDate(cal.time)
         }
     }
-
 
     private fun queryData(month: Int, year: Int) {
         viewModel.fetchRecordByMonthAndYear(month, year).observe(viewLifecycleOwner) {
