@@ -37,7 +37,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
         const val ADD_NEW_ENTRY = "com.example.room_aye.screens.add_new_entry"
         const val EDIT_EXISTING_ENTRY = "com.example.room_aye.screens.EDIT_EXISTING_ENTRY"
         var userClickedEditButton = false
-        private lateinit var menuitem: MenuItem
+        private lateinit var menuItem: MenuItem
     }
 
     override fun onCreateView(
@@ -196,7 +196,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.add_transaction, menu)
-        menuitem = menu.findItem(R.id.saveMenu)
+        menuItem = menu.findItem(R.id.saveMenu)
         super.onCreateOptionsMenu(menu, inflater);
     }
 

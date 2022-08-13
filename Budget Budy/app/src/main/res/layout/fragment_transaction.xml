@@ -24,40 +24,13 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <include
+        android:id="@+id/calendar_select"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginBottom="20dp"
-        android:orientation="horizontal"
-        android:visibility="visible">
+        android:layout_height="wrap_content"
+        layout="@layout/date_selector" />
 
-        <ImageView
-            android:id="@+id/leftImage"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
-            app:tint="@color/white" />
-
-        <TextView
-            android:id="@+id/txtDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:gravity="center"
-            android:text="Aug 2022"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-        <ImageView
-            android:id="@+id/rightImage"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-            app:tint="@color/white" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -133,6 +106,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/txtViewReport"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"

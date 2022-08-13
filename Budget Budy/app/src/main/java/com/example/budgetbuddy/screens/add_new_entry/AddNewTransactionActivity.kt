@@ -19,8 +19,6 @@ class AddNewTransactionActivity : AppCompatActivity(), Serializable {
         const val EDIT_INTENT = "com.example.budgetbuddy.screens.add_new_entry.edit"
     }
 
-    private val viewModel: AddNewTransactionActivityViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddNewTransactionBinding.inflate(layoutInflater)
@@ -28,15 +26,6 @@ class AddNewTransactionActivity : AppCompatActivity(), Serializable {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
        // getBundle()
-    }
-
-    private fun getBundle() {
-        val tran = intent.getSerializableExtra(EDIT_INTENT)
-        if (tran != null) {
-            fragment.arguments = Bundle().apply {
-                putSerializable("arelguatno", tran as TransactionsTable)
-            }
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

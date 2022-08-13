@@ -25,9 +25,12 @@
         <entry key="app/src/main/res/layout/activity_add_new_transaction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27808988764044945" />
         <entry key="app/src/main/res/layout/activity_note_fragment2.xml" value="0.30867892261650276" />
+        <entry key="app/src/main/res/layout/activity_reporting_period.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/blank_layout.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/checkroom-48px.xml" value="0.35784523300555793" />
         <entry key="app/src/main/res/layout/date_bottom_sheet_dialog.xml" value="0.30867892261650276" />
+        <entry key="app/src/main/res/layout/date_range_bottom_sheet_dialog.xml" value="0.37025641025641026" />
+        <entry key="app/src/main/res/layout/date_selector.xml" value="0.37025641025641026" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry2.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry_transaction.xml" value="0.23875432525951557" />
@@ -38,6 +41,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2736625514403292" />
         <entry key="app/src/main/res/layout/fragment_note.xml" value="0.30854700854700856" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_reportin_period.xml" value="0.37025641025641026" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.47815333882934874" />
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_transaction_details.xml" value="0.335" />
@@ -54,6 +58,7 @@
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.4430769230769231" />
         <entry key="app/src/main/res/menu/edit_transaction.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/menu/home_transactions_menu.xml" value="0.4625908507909363" />
+        <entry key="app/src/main/res/menu/reporting_menu.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/search.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.154" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.154" />

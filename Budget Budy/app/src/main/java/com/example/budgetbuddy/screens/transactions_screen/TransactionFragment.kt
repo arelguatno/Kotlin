@@ -1,5 +1,8 @@
 package com.example.budgetbuddy.screens.transactions_screen
 
+import android.app.Activity
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.databinding.FragmentTransactionBinding
+import com.example.budgetbuddy.screens.reportingperiod.ReportingPeriodActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -57,7 +61,7 @@ class TransactionFragment : MainFragment() {
             val month = cal.get(Calendar.MONTH)
             val year = cal.get(Calendar.YEAR)
             val ff = viewModel.transformTextLayout(month, year)
-            binding.txtDate.text = ff
+            binding.calendarSelect.txtDate.text = ff
             queryData(month, year)
         }
 
@@ -71,18 +75,25 @@ class TransactionFragment : MainFragment() {
     }
 
     private fun initOnCLick() {
-        binding.leftImage.setOnClickListener {
+        binding.calendarSelect.leftImage.setOnClickListener {
             cal.time = viewModel.getDate().value
             cal.add(Calendar.MONTH, -1)
             cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
             viewModel.setDate(cal.time)
         }
 
-        binding.rightImage.setOnClickListener {
+        binding.calendarSelect.rightImage.setOnClickListener {
             cal.time = viewModel.getDate().value
             cal.add(Calendar.MONTH, +1)
             cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
             viewModel.setDate(cal.time)
+        }
+
+        binding.txtViewReport.setOnClickListener {
+            val intent = Intent(requireContext(), ReportingPeriodActivity::class.java).apply {
+                putExtra("haha", "haha")
+            }
+            startActivity(intent)
         }
     }
 

@@ -58,7 +58,6 @@ class TransactionViewModel @Inject constructor(
         return date
     }
 
-
     fun transactionListToWithHeaderAndChild(param: List<TransactionsTable>): List<TransactionList> {
         var tempDate = Calendar.getInstance().time
         var newFormattedList = mutableListOf<TransactionList>()
