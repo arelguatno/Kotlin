@@ -8,11 +8,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.databinding.FragmentTransactionBinding
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-
 
 @AndroidEntryPoint
 class TransactionFragment : MainFragment() {
@@ -61,6 +58,14 @@ class TransactionFragment : MainFragment() {
             val ff = viewModel.transformTextLayout(month, year)
             binding.txtDate.text = ff
             queryData(month, year)
+        }
+
+        viewModel.getTotalExpenses().observe(viewLifecycleOwner) {
+            binding.txtTotalExpenses.text = String.format("-$ %.2f", it)
+        }
+
+        viewModel.getSumAmount().observe(viewLifecycleOwner){
+            binding.txtSum.text = String.format("-$ %.2f", it)
         }
     }
 

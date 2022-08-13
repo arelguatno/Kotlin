@@ -2,6 +2,7 @@ package com.example.budgetbuddy.screens.transactions_screen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.view.marginTop
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,14 +56,9 @@ class TransactionFragmentAdapterHeader :
         val cal = Calendar.getInstance()
         cal.time = item.header
 
-//        if(position == 0){
-////            val param = holder.binding.cardView as ViewGroup.MarginLayoutParams
-////            param.setMargins(0,0,0,0)
-//            val param = (holder.binding.cardView.layoutParams as ViewGroup.MarginLayoutParams).apply {
-//                setMargins(0,0,0,0)
-//            }
-//            holder.binding.cardView.layoutParams = param
-//        }
+        if(position != 0){
+            //holder.binding.haha.isVisible = false
+        }
 
         holder.binding.dayOfMonth.text =
             transformSingleDigitToTwoDigit(cal.get(Calendar.DAY_OF_MONTH))

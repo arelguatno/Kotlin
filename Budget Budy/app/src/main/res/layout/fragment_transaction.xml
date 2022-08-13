@@ -17,117 +17,124 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/app_bar"
-            style="@style/Theme.MaterialComponents"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
+            android:layout_height="wrap_content"
             app:menu="@menu/home_transactions_menu"
             app:title="Transactions" />
+    </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/leftImage"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="6"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="visible">
+            android:text="Aug 2022"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/leftImage"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
-                app:tint="@color/white" />
+        <ImageView
+            android:id="@+id/rightImage"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            app:tint="@color/white" />
 
-            <TextView
-                android:id="@+id/txtDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:gravity="center"
-                android:text="Aug 2022"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+    </LinearLayout>
 
-            <ImageView
-                android:id="@+id/rightImage"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                app:tint="@color/white" />
-
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Inflow"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/totalInflow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$0.00"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Expenses"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/txtTotalExpenses"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$0.00"
-                    android:textColor="@color/white" />
-            </LinearLayout>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/txtSum"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:layout_weight="2"
+                android:text="Inflow"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/totalInflow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="$0.00"
                 android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="View report this period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Expenses"
                 android:textColor="@color/white" />
 
+            <TextView
+                android:id="@+id/txtTotalExpenses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$0.00"
+                android:textColor="@color/white" />
         </LinearLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+
+        <View
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/dark" />
+
+        <TextView
+            android:id="@+id/txtSum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="$0.00"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="View report this period"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
     <!--    <com.google.android.material.tabs.TabLayout-->
     <!--        android:id="@+id/tabLayout"-->
     <!--        android:layout_width="match_parent"-->
@@ -141,6 +148,7 @@
     <!--        app:tabIndicatorAnimationMode="linear"-->
     <!--        app:tabMode="scrollable" />-->
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homeFragmentRecyclerView_parent"
         android:layout_width="match_parent"
@@ -149,7 +157,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </LinearLayout>

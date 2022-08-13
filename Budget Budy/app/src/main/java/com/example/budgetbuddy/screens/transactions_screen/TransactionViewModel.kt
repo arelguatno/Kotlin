@@ -27,6 +27,9 @@ class TransactionViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val date = MutableLiveData(Date())
+    private var totalExpenses = MutableLiveData(0.00)
+    private var sumAmount = MutableLiveData(0.00)
+    private var inflowAmount = MutableLiveData(0.00)
 
     val fetchTransactionsGroupByDate = repository.fetchTransactionsGroupByDate().asLiveData()
 
@@ -55,7 +58,73 @@ class TransactionViewModel @Inject constructor(
         return date
     }
 
-//    private fun transactionListToWithHeaderAndChild(
+
+    fun transactionListToWithHeaderAndChild(param: List<TransactionsTable>): List<TransactionList> {
+        var tempDate = Calendar.getInstance().time
+        var newFormattedList = mutableListOf<TransactionList>()
+        totalExpenses.value = 0.00
+        for (i in param) { // Loop through all data
+
+            if (tempDate != i.date) { // found a unique date
+                val childList = mutableListOf<TransactionsTable>()
+                for (y in param) {   // loop again and find transaction with the same date
+                    if (i.date == y.date) {
+                        childList.add(y)
+                        totalExpenses.value = totalExpenses.value?.plus(y.amount)
+                    }
+                }
+                val row = TransactionList(header = i.date, child = childList)
+                newFormattedList.add(row)
+
+                //output is an array of header and transactiontable
+                // 6/23/2022, {transaction1, transaction2, transaction3}
+                // 6/24/2022, {transaction2, transaction2, transaction3}
+            }
+            tempDate = i.date
+        }
+        sumAmount.value = totalExpenses.value!! - inflowAmount.value!!
+        return newFormattedList
+    }
+
+    fun transformTextLayout(num: Int, year: Int): String {
+        return "${intMonthLongToString(num)} $year"
+    }
+
+    fun getTotalExpenses(): MutableLiveData<Double> {
+        return totalExpenses
+    }
+
+    fun getSumAmount(): MutableLiveData<Double> {
+        return sumAmount
+    }
+
+    //    fun transactionListToWithHeaderAndChild2(param: List<TransactionsTable>): List<TransactionList> {
+//        var tempDate = ""
+//        var newFormattedList = mutableListOf<TransactionList>()
+//
+//        for (i in param) { // Loop through all data
+//            if (tempDate != i.category.rowValue) { // found a unique date
+//                val childList = mutableListOf<TransactionsTable>()
+//
+//                for (y in param) {   // loop again and find transaction with the same date
+//                    if (i.category.rowValue == y.category.rowValue) {
+//                        childList.add(y)
+//                    }
+//                }
+//
+//                val row = TransactionList(header = i.category.rowValue, child = childList)
+//                newFormattedList.add(row)
+//
+//                //output is an array of header and transactiontable
+//                // 6/23/2022, {transaction1, transaction2, transaction3}
+//                // 6/24/2022, {transaction2, transaction2, transaction3}
+//            }
+//            tempDate = i.category.rowValue
+//        }
+//        return newFormattedList
+//    }
+
+    //    private fun transactionListToWithHeaderAndChild(
 //        param: List<TransactionsTable>,
 //        month: Int
 //    ): List<TransactionList> {
@@ -96,71 +165,4 @@ class TransactionViewModel @Inject constructor(
 //        }
 //        return newFormattedList
 //    }
-
-
-    fun transactionListToWithHeaderAndChild(param: List<TransactionsTable>): List<TransactionList> {
-        var tempDate = Calendar.getInstance().time
-        var newFormattedList = mutableListOf<TransactionList>()
-
-        for (i in param) { // Loop through all data
-
-            if (tempDate != i.date) { // found a unique date
-                val childList = mutableListOf<TransactionsTable>()
-                for (y in param) {   // loop again and find transaction with the same date
-
-                    if (i.date == y.date) {
-                        childList.add(y)
-                    }
-                }
-                val row = TransactionList(header = i.date, child = childList)
-                newFormattedList.add(row)
-            }
-            tempDate = i.date
-
-        }
-        return newFormattedList
-    }
-
-//    fun transactionListToWithHeaderAndChild2(param: List<TransactionsTable>): List<TransactionList> {
-//        var tempDate = ""
-//        var newFormattedList = mutableListOf<TransactionList>()
-//
-//        for (i in param) { // Loop through all data
-//            if (tempDate != i.category.rowValue) { // found a unique date
-//                val childList = mutableListOf<TransactionsTable>()
-//
-//                for (y in param) {   // loop again and find transaction with the same date
-//                    if (i.category.rowValue == y.category.rowValue) {
-//                        childList.add(y)
-//                    }
-//                }
-//
-//                val row = TransactionList(header = i.category.rowValue, child = childList)
-//                newFormattedList.add(row)
-//
-//                //output is an array of header and transactiontable
-//                // 6/23/2022, {transaction1, transaction2, transaction3}
-//                // 6/24/2022, {transaction2, transaction2, transaction3}
-//            }
-//            tempDate = i.category.rowValue
-//        }
-//        return newFormattedList
-//    }
-
-    fun transformTextLayout(num: Int, year: Int): String {
-        val kk = Calendar.getInstance()
-        val prev = kk.get(Calendar.MONTH) - 1
-        println()
-        return when {
-            (kk.get(Calendar.MONTH) == num && kk.get(Calendar.YEAR) == year) -> {
-                "This Month"
-            }
-            (prev == num && kk.get(Calendar.YEAR) == year) -> {
-                "Last Month"
-            }
-            else -> {
-                "${intMonthLongToString(num)} $year"
-            }
-        }
-    }
 }

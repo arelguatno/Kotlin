@@ -6,8 +6,8 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="30dp"
     card_view:cardBackgroundColor="@color/purple_700"
-    android:layout_marginTop="30dp"
     card_view:cardElevation="10dp">
 
     <RelativeLayout
@@ -78,8 +78,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="55dp"
-            android:orientation="vertical"
             android:layout_marginBottom="4dp"
+            android:orientation="vertical"
             tools:layout_editor_absoluteX="74dp" />
 
     </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.budgetbuddy.fragments.category
 
 import com.example.budgetbuddy.R
+import com.example.budgetbuddy.fragments.currency.CurrencyList
 
 object CategoryList {
 
@@ -21,5 +22,9 @@ object CategoryList {
         list[11] = SimpleListObject(R.drawable.ic_baseline_circle_24, "Other Expenses", 11,"")
 
         return list.toList()
+    }
+
+    fun getImageID(v: Int): Int?{
+        return CategoryList.list[v]?.imageID
     }
 }
