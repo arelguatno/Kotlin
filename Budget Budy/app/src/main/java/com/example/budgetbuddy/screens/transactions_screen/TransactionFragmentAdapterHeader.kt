@@ -65,7 +65,7 @@ class TransactionFragmentAdapterHeader :
         holder.binding.dayOfWeek.text = intDayToString(cal.get(Calendar.DAY_OF_WEEK))
         holder.binding.monthAndYear.text =
             "${intMonthLongToString(cal.get(Calendar.MONTH))} ${cal.get(Calendar.YEAR)}"
-        holder.binding.total.text = String.format("-%.2f", computeChildTotalCost(item.child))
+        holder.binding.total.text = String.format("-$ %.2f", computeChildTotalCost(item.child))
 
         val child = TransactionFragmentAdapterChild(item.child)
         holder.binding.rvChild.layoutManager = LinearLayoutManager(

@@ -162,7 +162,8 @@ class AddNewEntryTransactionFragment : MainFragment() {
         }
 
         viewModel.getPrice().observe(viewLifecycleOwner) {
-            binding.txtAmount.setText(it.toString())
+            //binding.txtAmount.setText(String.format("%.2f", it.toDouble()))
+            binding.txtAmount.setText(it)
         }
     }
 
@@ -251,7 +252,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
                 updateTransaction.note = note
                 updateTransaction.date = Date(ddMMdyYYY)
                 updateTransaction.month = getDateMonth(ddMMdyYYY)
-                updateTransaction.year  = getDateYear(ddMMdyYYY)
+                updateTransaction.year = getDateYear(ddMMdyYYY)
 
                 data.putExtra(EDIT_EXISTING_ENTRY, updateTransaction)
             }

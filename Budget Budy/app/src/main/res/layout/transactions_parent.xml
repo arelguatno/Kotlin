@@ -6,15 +6,16 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="30dp"
+    android:layout_marginTop="30dp"
     card_view:cardBackgroundColor="@color/purple_700"
     card_view:cardElevation="10dp">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -44,7 +45,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:text="Friday"
-                    android:textColor="@color/white"
                     android:textSize="11.5dp"
                     android:textStyle="bold" />
 
@@ -54,7 +54,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:text="June 2022"
-                    android:textColor="@color/white"
                     android:textSize="11.5dp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -67,6 +66,7 @@
                 android:paddingTop="10dp"
                 android:text="$0"
                 android:textColor="@color/white"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

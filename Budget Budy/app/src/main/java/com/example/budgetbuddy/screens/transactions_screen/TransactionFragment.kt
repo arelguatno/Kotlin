@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
@@ -64,7 +65,7 @@ class TransactionFragment : MainFragment() {
             binding.txtTotalExpenses.text = String.format("-$ %.2f", it)
         }
 
-        viewModel.getSumAmount().observe(viewLifecycleOwner){
+        viewModel.getSumAmount().observe(viewLifecycleOwner) {
             binding.txtSum.text = String.format("-$ %.2f", it)
         }
     }
@@ -88,7 +89,14 @@ class TransactionFragment : MainFragment() {
     private fun queryData(month: Int, year: Int) {
         viewModel.fetchRecordByMonthAndYear(month, year).observe(viewLifecycleOwner) {
             val list = viewModel.transactionListToWithHeaderAndChild(it)
-            myAdapterHeader.submitList(list)
+            if (list.isNotEmpty()) {
+                myAdapterHeader.submitList(list)
+                binding.txtNoRecordsFound.isVisible = false
+                binding.homeFragmentRecyclerViewParent.isVisible = true
+            } else {
+                binding.txtNoRecordsFound.isVisible = true
+                binding.homeFragmentRecyclerViewParent.isVisible = false
+            }
         }
     }
 
