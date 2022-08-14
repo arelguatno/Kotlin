@@ -14,6 +14,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -84,5 +85,6 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
 
-    implementation 'io.github.ahmad-hamwi:tabsync:1.0.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
