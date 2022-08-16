@@ -19,11 +19,9 @@ import com.example.budgetbuddy.fragments.DateFragment
 import com.example.budgetbuddy.fragments.NoteFragment
 import com.example.budgetbuddy.fragments.category.CategoryFragment
 import com.example.budgetbuddy.fragments.category.SimpleListObject
+import com.example.budgetbuddy.room.tables.DateRange
 import com.example.budgetbuddy.room.tables.TransactionsTable
-import com.example.budgetbuddy.utils.dateToNice
-import com.example.budgetbuddy.utils.dateYyyyMmDd
-import com.example.budgetbuddy.utils.getDateMonth
-import com.example.budgetbuddy.utils.getDateYear
+import com.example.budgetbuddy.utils.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
 
@@ -227,8 +225,16 @@ class AddNewEntryTransactionFragment : MainFragment() {
             val data = Intent()
             val timestamp = Date()
 
-            if (!userClickedEditButton) {   // New transaction
+            val timeRange = DateRange(
+                day = getDateDay(ddMMdyYYY),
+                week = getDateWeek(ddMMdyYYY),
+                month = getDateMonth(ddMMdyYYY),
+                quarter = getDateQuarter(ddMMdyYYY),
+                year = getDateYear(ddMMdyYYY)
+            )
 
+            if (!userClickedEditButton) {
+                // New transaction
                 var transaction = TransactionsTable(
                     amount = amount,
                     currency = currency!!,
@@ -236,13 +242,11 @@ class AddNewEntryTransactionFragment : MainFragment() {
                     note = note,
                     date = Date(ddMMdyYYY),
                     timeStamp = timestamp,
-                    month = getDateMonth(ddMMdyYYY),
-                    year = getDateYear(ddMMdyYYY),
+                    time_range = timeRange
                 )
                 data.putExtra(ADD_NEW_ENTRY, transaction)
-
-            } else {  // Edit transaction
-
+            } else {
+                // Edit transaction
                 val updateTransaction =
                     activityMain.intent.getSerializableExtra(AddNewTransactionActivity.EDIT_INTENT) as TransactionsTable
 
@@ -251,9 +255,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
                 updateTransaction.currency = currency!!
                 updateTransaction.note = note
                 updateTransaction.date = Date(ddMMdyYYY)
-                updateTransaction.month = getDateMonth(ddMMdyYYY)
-                updateTransaction.year = getDateYear(ddMMdyYYY)
-
+                updateTransaction.time_range = timeRange
                 data.putExtra(EDIT_EXISTING_ENTRY, updateTransaction)
             }
 

@@ -1,7 +1,5 @@
 package com.example.budgetbuddy.screens.transactions_screen
 
-import android.app.Activity
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class TransactionFragment : MainFragment() {
+class TransactionFragment() : MainFragment() {
     private lateinit var binding: FragmentTransactionBinding
 
     companion object {
@@ -91,7 +89,7 @@ class TransactionFragment : MainFragment() {
 
         binding.txtViewReport.setOnClickListener {
             val intent = Intent(requireContext(), ReportingPeriodActivity::class.java).apply {
-                putExtra("haha", "haha")
+                putExtra(ReportingPeriodActivity.DATE_DATA, viewModel.getDate().value)
             }
             startActivity(intent)
         }
@@ -103,10 +101,10 @@ class TransactionFragment : MainFragment() {
             if (list.isNotEmpty()) {
                 myAdapterHeader.submitList(list)
                 binding.txtNoRecordsFound.isVisible = false
-                binding.homeFragmentRecyclerViewParent.isVisible = true
+                binding.nestedView.isVisible = true
             } else {
                 binding.txtNoRecordsFound.isVisible = true
-                binding.homeFragmentRecyclerViewParent.isVisible = false
+                binding.nestedView.isVisible = false
             }
         }
     }

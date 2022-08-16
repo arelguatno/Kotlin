@@ -11,6 +11,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class ReportingPeriodActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReportingPeriodBinding
 
+    companion object{
+        const val DATE_DATA = "com.example.budgetbuddy.screens.reportingperiod.date_data"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReportingPeriodBinding.inflate(layoutInflater)

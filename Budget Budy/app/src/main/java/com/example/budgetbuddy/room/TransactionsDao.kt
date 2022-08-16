@@ -11,9 +11,6 @@ interface TransactionsDao {
     @Query("SELECT * FROM transactions_table ORDER BY id")
     fun fetchTransactions(): Flow<List<TransactionsTable>>
 
-    @Query("SELECT * FROM transactions_table ORDER BY date DESC")
-    fun fetchTransactionsGroupByDate(): Flow<List<TransactionsTable>>
-
     @Query("SELECT * FROM transactions_table ORDER BY categoryrowValue")
     fun fetchTransactionsGroupByCategory(): Flow<List<TransactionsTable>>
 
@@ -26,6 +23,15 @@ interface TransactionsDao {
     @Update
     suspend fun updateTransaction(tran: TransactionsTable)
 
-    @Query("SELECT * FROM transactions_table WHERE month = :month AND year = :year ORDER BY date DESC")
+    @Query("SELECT * FROM transactions_table WHERE time_range_month = :month AND time_range_year = :year ORDER BY date DESC")
     fun fetchRecordByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>>
+
+    // Month, Year
+    @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_month=:month and time_range_year =:year) as percentage FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year GROUP BY categoryrowValue ORDER BY sum(amount) DESC")
+    fun fetchReportingByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>>
+
+    // Month, Year, Day
+    @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_month=:month and time_range_year =:year and time_range_day=:day) as percentage FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year AND time_range_day=:day GROUP BY categoryrowValue ORDER BY sum(amount) DESC")
+    fun fetchReportingByMonthAndYearAndDay(month: Int, year: Int, day: Int): Flow<List<TransactionsTable>>
+
 }

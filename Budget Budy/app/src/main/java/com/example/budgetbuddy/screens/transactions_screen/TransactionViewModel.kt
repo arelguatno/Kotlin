@@ -1,6 +1,7 @@
 package com.example.budgetbuddy.screens.transactions_screen
 
 import androidx.lifecycle.*
+import com.example.budgetbuddy.enums.TimeRange
 import com.example.budgetbuddy.room.TransactionsRepository
 import com.example.budgetbuddy.room.tables.MonthlyData
 import com.example.budgetbuddy.room.tables.TransactionList
@@ -31,10 +32,25 @@ class TransactionViewModel @Inject constructor(
     private var sumAmount = MutableLiveData(0.00)
     private var inflowAmount = MutableLiveData(0.00)
 
-    val fetchTransactionsGroupByDate = repository.fetchTransactionsGroupByDate().asLiveData()
-
     fun fetchRecordByMonthAndYear(month: Int, year: Int): LiveData<List<TransactionsTable>> {
         return repository.fetchRecordByMonthAndYear(month, year).asLiveData()
+    }
+
+    // Fetch Reporting
+    fun fetchReporting(
+        month: Int,
+        year: Int,
+        day: Int,
+        week: Int,
+        quarter: Int,
+        all: Int, time_range: TimeRange
+    ): LiveData<List<TransactionsTable>> {
+        return when (time_range) {
+            TimeRange.MONTH -> repository.fetchReportingByMonthAndYear(month, year).asLiveData()
+            TimeRange.DAY -> repository.fetchReportingByMonthAndYearAndDay(month, year, day)
+                .asLiveData()
+            else -> repository.fetchReportingByMonthAndYear(month, year).asLiveData()
+        }
     }
 
     val fetchTransactionsGroupByCategory =

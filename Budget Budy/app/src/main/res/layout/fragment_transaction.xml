@@ -26,120 +26,120 @@
 
     <include
         android:id="@+id/calendar_select"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="20dp"
-        android:layout_height="wrap_content"
-        layout="@layout/date_selector" />
-
-
-    <LinearLayout
+        layout="@layout/date_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:paddingTop="10dp"
-        android:background="@color/purple_700"
-        android:orientation="vertical"
-        android:visibility="visible">
+        android:layout_marginBottom="20dp" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedView"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Inflow"
-                android:textSize="15sp" />
+                android:background="@color/purple_700"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:visibility="visible">
 
-            <TextView
-                android:id="@+id/totalInflow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$0.00"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Inflow"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/totalInflow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$0.00"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Expenses"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/txtTotalExpenses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$0.00"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="80dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/dark" />
+
+                <TextView
+                    android:id="@+id/txtSum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="$0.00"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtViewReport"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="View report this period"
+                    android:textColor="@android:color/holo_blue_light"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/homeFragmentRecyclerView_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Expenses"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/txtTotalExpenses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$0.00"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="80dp"
-            android:layout_height="1dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="5dp"
-            android:background="@color/dark" />
-
-        <TextView
-            android:id="@+id/txtSum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="$0.00"
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtViewReport"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_marginBottom="10dp"
-            android:text="View report this period"
-            android:textColor="@android:color/holo_blue_light"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-    <!--    <com.google.android.material.tabs.TabLayout-->
-    <!--        android:id="@+id/tabLayout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="@color/black"-->
-    <!--        android:elevation="8dp"-->
-    <!--        android:layoutDirection="rtl"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:tabIndicatorAnimationMode="linear"-->
-    <!--        app:tabMode="scrollable" />-->
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homeFragmentRecyclerView_parent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/txtNoRecordsFound"

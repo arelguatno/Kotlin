@@ -1,7 +1,6 @@
 package com.example.budgetbuddy.utils
 
-import java.text.DateFormat
-import java.time.LocalDate
+import java.text.SimpleDateFormat
 import java.util.*
 
 fun dateToNice(v: Date): String {
@@ -19,7 +18,6 @@ fun dateToNice(v: Date): String {
 fun dateYyyyMmDd(v: Date): String {
     var cal: Calendar = Calendar.getInstance()
     cal.time = v
-
     return "${cal.get(Calendar.YEAR)}/${cal.get(Calendar.MONTH) + 1}/${cal.get(Calendar.DAY_OF_MONTH)}"
 }
 
@@ -33,4 +31,28 @@ fun getDateYear(v: String): Int{
     var cal: Calendar = Calendar.getInstance()
     cal.time = Date(v)
     return cal.get(Calendar.YEAR)
+}
+
+fun getDateWeek(v: String): Int{
+    var cal: Calendar = Calendar.getInstance()
+    cal.time = Date(v)
+    return cal.get(Calendar.WEEK_OF_YEAR)
+}
+
+fun getDateDay(v: String): Int{
+    var cal: Calendar = Calendar.getInstance()
+    cal.time = Date(v)
+    return cal.get(Calendar.DAY_OF_MONTH)
+}
+
+fun getDateQuarter(v: String): Int{
+    var cal: Calendar = Calendar.getInstance()
+    cal.time = Date(v)
+    return when(cal.get(Calendar.MONTH)){
+        in 1..3 -> 1
+        in 4..6 -> 2
+        in 7..9 -> 3
+        in 10..12 ->4
+        else -> {1}
+    }
 }
