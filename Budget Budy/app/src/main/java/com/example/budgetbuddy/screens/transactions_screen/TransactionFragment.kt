@@ -58,7 +58,7 @@ class TransactionFragment() : MainFragment() {
             cal.time = it
             val month = cal.get(Calendar.MONTH)
             val year = cal.get(Calendar.YEAR)
-            val ff = viewModel.transformTextLayout(month, year)
+            val ff = viewModel.transformDateToMonthAndYear(month, year)
             binding.calendarSelect.txtDate.text = ff
             queryData(month, year)
         }

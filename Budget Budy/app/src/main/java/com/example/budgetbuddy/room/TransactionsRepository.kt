@@ -12,6 +12,14 @@ class TransactionsRepository @Inject constructor(
         return transactionsDao.fetchRecordByMonthAndYear(month, year)
     }
 
+    fun fetchReportingByWeekAndYear(week: Int, year: Int): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchReportingByWeekAndYear(week, year)
+    }
+
+    fun fetchReportingByQuarterAndYear(quarter: Int, year: Int): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchReportingByQuarterAndYear(quarter, year)
+    }
+
     fun fetchReportingByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>> {
         return transactionsDao.fetchReportingByMonthAndYear(month, year)
     }
@@ -19,6 +27,15 @@ class TransactionsRepository @Inject constructor(
     fun fetchReportingByMonthAndYearAndDay(month: Int, year: Int, day: Int): Flow<List<TransactionsTable>> {
         return transactionsDao.fetchReportingByMonthAndYearAndDay(month, year, day)
     }
+
+    fun fetchReportingByYear(year: Int): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchReportingByYear(year)
+    }
+
+    fun fetchReportingAll(): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchReportingAll()
+    }
+
     fun fetchTransactionsGroupByCategory(): Flow<List<TransactionsTable>> {
         return transactionsDao.fetchTransactionsGroupByCategory()
     }

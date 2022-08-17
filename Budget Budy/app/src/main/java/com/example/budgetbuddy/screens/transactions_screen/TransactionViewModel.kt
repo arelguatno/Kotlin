@@ -1,24 +1,17 @@
 package com.example.budgetbuddy.screens.transactions_screen
 
 import androidx.lifecycle.*
+import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.enums.TimeRange
 import com.example.budgetbuddy.room.TransactionsRepository
-import com.example.budgetbuddy.room.tables.MonthlyData
 import com.example.budgetbuddy.room.tables.TransactionList
 import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.utils.getDateQuarter
 import com.example.budgetbuddy.utils.intMonthLongToString
-import com.example.budgetbuddy.utils.intMonthShortToString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.sql.Time
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 
@@ -31,6 +24,9 @@ class TransactionViewModel @Inject constructor(
     private var totalExpenses = MutableLiveData(0.00)
     private var sumAmount = MutableLiveData(0.00)
     private var inflowAmount = MutableLiveData(0.00)
+    private var dateAndTimeRange = MutableLiveData<DateAndTimeRange>()
+    private var increaseOrDecrease = MutableLiveData<Date>()
+    private var operator = MutableLiveData<Boolean>()
 
     fun fetchRecordByMonthAndYear(month: Int, year: Int): LiveData<List<TransactionsTable>> {
         return repository.fetchRecordByMonthAndYear(month, year).asLiveData()
@@ -43,12 +39,17 @@ class TransactionViewModel @Inject constructor(
         day: Int,
         week: Int,
         quarter: Int,
-        all: Int, time_range: TimeRange
+        time_range: TimeRange
     ): LiveData<List<TransactionsTable>> {
         return when (time_range) {
             TimeRange.MONTH -> repository.fetchReportingByMonthAndYear(month, year).asLiveData()
             TimeRange.DAY -> repository.fetchReportingByMonthAndYearAndDay(month, year, day)
                 .asLiveData()
+            TimeRange.YEAR -> repository.fetchReportingByYear(year).asLiveData()
+            TimeRange.WEEK -> repository.fetchReportingByWeekAndYear(week, year).asLiveData()
+            TimeRange.QUARTER -> repository.fetchReportingByQuarterAndYear(quarter, year)
+                .asLiveData()
+            TimeRange.ALL -> repository.fetchReportingAll().asLiveData()
             else -> repository.fetchReportingByMonthAndYear(month, year).asLiveData()
         }
     }
@@ -72,6 +73,39 @@ class TransactionViewModel @Inject constructor(
 
     fun getDate(): MutableLiveData<Date> {
         return date
+    }
+
+    fun setDateAndTimeRange(v: DateAndTimeRange) {
+        dateAndTimeRange.value = v
+    }
+
+    fun getDateAndTimeRange(): MutableLiveData<DateAndTimeRange> {
+        return dateAndTimeRange
+    }
+
+    fun getDateLabel(v: TimeRange, d: Date): MutableLiveData<String> {
+        val cal: Calendar = Calendar.getInstance()
+        cal.time = d
+
+        val month = cal.get(Calendar.MONTH)
+        val year = cal.get(Calendar.YEAR)
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+        val week = cal.get(Calendar.WEEK_OF_YEAR)
+
+        return when (v) {
+            TimeRange.DAY -> MutableLiveData(transformDateToMonthAndYearDay(month, year, day))
+            TimeRange.WEEK -> MutableLiveData(transformDateToWeek(week))
+            TimeRange.MONTH -> MutableLiveData(transformDateToMonthAndYear(month, year))
+            TimeRange.QUARTER -> MutableLiveData(
+                labelQuarterAndYear(
+                    getDateQuarter(cal.time.toString()),
+                    year
+                )
+            )
+            TimeRange.YEAR -> MutableLiveData(labelYear(year))
+            TimeRange.ALL -> MutableLiveData("All")
+            else -> MutableLiveData(transformDateToMonthAndYear(month, year))
+        }
     }
 
     fun transactionListToWithHeaderAndChild(param: List<TransactionsTable>): List<TransactionList> {
@@ -101,8 +135,85 @@ class TransactionViewModel @Inject constructor(
         return newFormattedList
     }
 
-    fun transformTextLayout(num: Int, year: Int): String {
+    fun setIncreaseOrDecrease(op: Boolean) {
+        //increaseOrDecrease.value = v
+        operator.value = op
+    }
+
+    fun getIncreaseOrDecrease(op: Boolean, d: Date, range: TimeRange): Date {
+        val cal: Calendar = Calendar.getInstance()
+        cal.time = d
+        return when (range) {
+            TimeRange.DAY -> {
+                if (op) {
+                    cal.add(Calendar.DAY_OF_MONTH, +1)
+                } else {
+                    cal.add(Calendar.DAY_OF_MONTH, -1)
+                }
+                cal.time
+            }
+            TimeRange.WEEK -> {
+                if (op) {
+                    cal.add(Calendar.WEEK_OF_YEAR, +1)
+                } else {
+                    cal.add(Calendar.WEEK_OF_YEAR, -1)
+                }
+                cal.time
+            }
+            TimeRange.MONTH -> {
+                if (op) {
+                    cal.add(Calendar.MONTH, +1)
+                } else {
+                    cal.add(Calendar.MONTH, -1)
+                }
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
+                cal.time
+            }
+            TimeRange.QUARTER -> {
+                if (op) {
+                    cal.add(Calendar.MONTH, +3)
+                } else {
+                    cal.add(Calendar.MONTH, -3)
+                }
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
+                cal.time
+            }
+            TimeRange.YEAR -> {
+                if (op) {
+                    cal.add(Calendar.YEAR, +1)
+                } else {
+                    cal.add(Calendar.YEAR, -1)
+                }
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
+                cal.time
+            }
+            TimeRange.ALL -> {
+                cal.time
+            }
+            else -> {
+                cal.time
+            }
+        }
+    }
+
+    fun transformDateToMonthAndYear(num: Int, year: Int): String {
         return "${intMonthLongToString(num)} $year"
+    }
+
+    private fun transformDateToMonthAndYearDay(num: Int, year: Int, day: Int): String {
+        return "${intMonthLongToString(num)} $day, $year"
+    }
+
+    private fun transformDateToWeek(week: Int): String {
+        return "Week $week"
+    }
+
+    private fun labelQuarterAndYear(quarter: Int, year: Int): String {
+        return "Q$quarter $year"
+    }
+
+    private fun labelYear(year: Int): String {
+        return "$year"
     }
 
     fun getTotalExpenses(): MutableLiveData<Double> {
@@ -180,4 +291,5 @@ class TransactionViewModel @Inject constructor(
 //        }
 //        return newFormattedList
 //    }
+
 }

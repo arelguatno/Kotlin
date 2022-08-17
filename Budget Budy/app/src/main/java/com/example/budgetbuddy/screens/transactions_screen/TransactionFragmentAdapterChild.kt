@@ -33,7 +33,6 @@ class TransactionFragmentAdapterChild(private val children: List<TransactionsTab
         val item = children[position]
 
         holder.binding.txtCategory.text = item.category.rowValue
-        println(item.catAmount)
         if (item.catAmount > 0.0) {
             holder.binding.txtCostPrice.text =
                 String.format("-${item.currency.textIcon} %.2f", item.catAmount)
