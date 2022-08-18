@@ -39,7 +39,6 @@ class ReportingPeriodFragment : MainFragment() {
     private val viewModel: TransactionViewModel by activityViewModels()
     private lateinit var activity: ReportingPeriodActivity
 
-
     companion object {
         private lateinit var bottomSheetDialog: BottomSheetDialog
     }
@@ -50,7 +49,6 @@ class ReportingPeriodFragment : MainFragment() {
     ): View? {
         binding = FragmentReportinPeriodBinding.inflate(layoutInflater)
         bottomSheetDialog = BottomSheetDialog(requireContext())
-
         return binding.root
     }
 
@@ -65,28 +63,22 @@ class ReportingPeriodFragment : MainFragment() {
         inflateMenu()
         initViewModel()
         initOnCLick()
-
         initDefaultData()
     }
 
     private fun initDefaultData() {
-        // val date = viewModel.getDate().value
         val date = activity.intent.getSerializableExtra(ReportingPeriodActivity.DATE_DATA)
-        if (date == null) {
-            cal.time = Date()
-        } else {
-            cal.time = date as Date
-            viewModel.setDate(date)
+        if (date != null) {
+            if (viewModel.getDateAndTimeRange().value == null) {
+                val item = DateAndTimeRange(date as Date, TimeRange.MONTH) // default Month view
+                viewModel.setDateAndTimeRange(item)
+            }
         }
-        val month = cal.get(Calendar.MONTH)
-        val year = cal.get(Calendar.YEAR)
-        //queryData(month = month, year = year, timeRange = TimeRange.MONTH)
     }
 
     private fun initViewModel() {
         viewModel.getDateAndTimeRange().observe(viewLifecycleOwner) {
             cal.time = it.date
-            //println(it.date.toString() + " " + it.timeRange)
             query(it.timeRange, cal)
             viewModel.getDateLabel(it.timeRange, it.date).observe(viewLifecycleOwner) { s ->
                 binding.calendarSelect.txtDate.text = s
@@ -95,19 +87,26 @@ class ReportingPeriodFragment : MainFragment() {
     }
 
     private fun initOnCLick() {
+        //Left Image (-)
         binding.calendarSelect.leftImage.setOnClickListener {
-            val d = viewModel.getDateAndTimeRange().value?.date
-            val b = viewModel.getDateAndTimeRange().value?.timeRange
-            val dd = viewModel.getIncreaseOrDecrease(false, d!!, b!!).toString()
-            val item = DateAndTimeRange(Date(dd), b)
+            val newDate = viewModel.getIncreaseOrDecrease(
+                false,
+                viewModel.getDateAndTimeRange().value?.date!!,
+                viewModel.getDateAndTimeRange().value?.timeRange!!
+            )
+            val item =
+                DateAndTimeRange(newDate, viewModel.getDateAndTimeRange().value?.timeRange!!)
             viewModel.setDateAndTimeRange(item)
         }
-
+        //Right Image (+)
         binding.calendarSelect.rightImage.setOnClickListener {
-            val d = viewModel.getDateAndTimeRange().value?.date
-            val b = viewModel.getDateAndTimeRange().value?.timeRange
-            val dd = viewModel.getIncreaseOrDecrease(true, d!!, b!!).toString()
-            val item = DateAndTimeRange(Date(dd), b)
+            val newDate = viewModel.getIncreaseOrDecrease(
+                true,
+                viewModel.getDateAndTimeRange().value?.date!!,
+                viewModel.getDateAndTimeRange().value?.timeRange!!
+            )
+            val item =
+                DateAndTimeRange(newDate, viewModel.getDateAndTimeRange().value?.timeRange!!)
             viewModel.setDateAndTimeRange(item)
         }
     }
@@ -119,40 +118,37 @@ class ReportingPeriodFragment : MainFragment() {
         week: Int = 0,
         quarter: Int = 0,
         timeRange: TimeRange
-    ) {
-        viewModel.fetchReporting(
+    ) { viewModel.fetchReporting(
             month,
             year,
             day,
             week,
             quarter,
             timeRange
-        )
-            .observe(viewLifecycleOwner) {
-                if (it.isNotEmpty()) {
-                    val child = TransactionFragmentAdapterChild(it)
-                    binding.recycler.layoutManager = LinearLayoutManager(
-                        binding.recycler.context,
-                        LinearLayoutManager.VERTICAL,
-                        false
-                    )
+        ).observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                val child = TransactionFragmentAdapterChild(it)
+                binding.recycler.layoutManager = LinearLayoutManager(
+                    binding.recycler.context,
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
 
-                    val pieChart = binding.pieChart
-                    initPieChart(pieChart)
-                    setDataToPieChart(pieChart, it)
+                val pieChart = binding.pieChart
+                initPieChart(pieChart)
+                setDataToPieChart(pieChart, it)
 
-                    binding.recycler.adapter = child
-                    binding.txtNoRecordsFound.isVisible = false
-                    binding.nestedView.isVisible = true
-                } else {
-                    binding.txtNoRecordsFound.isVisible = true
-                    binding.nestedView.isVisible = false
-                }
+                binding.recycler.adapter = child
+                binding.txtNoRecordsFound.isVisible = false
+                binding.nestedView.isVisible = true
+            } else {
+                binding.txtNoRecordsFound.isVisible = true
+                binding.nestedView.isVisible = false
             }
+        }
     }
 
     private fun inflateMenu() {
-        binding.appBar.inflateMenu(R.menu.reporting_menu)
         binding.appBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_calendar -> selectTimeRange()
@@ -260,6 +256,17 @@ class ReportingPeriodFragment : MainFragment() {
         data.setValueTextSize(0f)
     }
 
+    private fun query(v: TimeRange, cal: Calendar) {
+        queryData(
+            day = cal.get(Calendar.DAY_OF_MONTH),
+            week = cal.get(Calendar.WEEK_OF_YEAR),
+            month = cal.get(Calendar.MONTH),
+            quarter = getDateQuarter(cal.time.toString()),
+            year = cal.get(Calendar.YEAR),
+            timeRange = v
+        )
+    }
+
     private fun initPieChart(pieChart: com.github.mikephil.charting.charts.PieChart) {
         pieChart.setUsePercentValues(true)
         pieChart.description.text = ""
@@ -285,17 +292,5 @@ class ReportingPeriodFragment : MainFragment() {
         pieChart.isDrawHoleEnabled = true
         pieChart.setHoleColor(Color.WHITE)
         pieChart.setUsePercentValues(true)
-    }
-
-    private fun query(v: TimeRange, cal: Calendar) {
-        println(getDateQuarter(cal.time.toString()))
-        queryData(
-            day = cal.get(Calendar.DAY_OF_MONTH),
-            week = cal.get(Calendar.WEEK_OF_YEAR),
-            month = cal.get(Calendar.MONTH),
-            quarter = getDateQuarter(cal.time.toString()),
-            year = cal.get(Calendar.YEAR),
-            timeRange = v
-        )
     }
 }

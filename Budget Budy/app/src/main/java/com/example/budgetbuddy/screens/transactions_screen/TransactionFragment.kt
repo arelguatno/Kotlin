@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.databinding.FragmentTransactionBinding
+import com.example.budgetbuddy.enums.TimeRange
 import com.example.budgetbuddy.screens.reportingperiod.ReportingPeriodActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -48,9 +49,7 @@ class TransactionFragment() : MainFragment() {
 
         val date = viewModel.getDate().value
         cal.time = date
-        val month = cal.get(Calendar.MONTH)
-        val year = cal.get(Calendar.YEAR)
-        queryData(month, year)
+        queryData(cal.get(Calendar.MONTH), cal.get(Calendar.YEAR))
     }
 
     private fun initViewModel() {
@@ -76,14 +75,12 @@ class TransactionFragment() : MainFragment() {
         binding.calendarSelect.leftImage.setOnClickListener {
             cal.time = viewModel.getDate().value
             cal.add(Calendar.MONTH, -1)
-            cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
             viewModel.setDate(cal.time)
         }
 
         binding.calendarSelect.rightImage.setOnClickListener {
             cal.time = viewModel.getDate().value
             cal.add(Calendar.MONTH, +1)
-            cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
             viewModel.setDate(cal.time)
         }
 
@@ -96,17 +93,18 @@ class TransactionFragment() : MainFragment() {
     }
 
     private fun queryData(month: Int, year: Int) {
-        viewModel.fetchRecordByMonthAndYear(month, year).observe(viewLifecycleOwner) {
-            val list = viewModel.transactionListToWithHeaderAndChild(it)
-            if (list.isNotEmpty()) {
-                myAdapterHeader.submitList(list)
-                binding.txtNoRecordsFound.isVisible = false
-                binding.nestedView.isVisible = true
-            } else {
-                binding.txtNoRecordsFound.isVisible = true
-                binding.nestedView.isVisible = false
+        viewModel.fetchReporting(month = month, year = year, time_range = TimeRange.OTHERS)
+            .observe(viewLifecycleOwner) {
+                val list = viewModel.transactionListToWithHeaderAndChild(it)
+                if (list.isNotEmpty()) {
+                    myAdapterHeader.submitList(list)
+                    binding.txtNoRecordsFound.isVisible = false
+                    binding.nestedView.isVisible = true
+                } else {
+                    binding.txtNoRecordsFound.isVisible = true
+                    binding.nestedView.isVisible = false
+                }
             }
-        }
     }
 
 }

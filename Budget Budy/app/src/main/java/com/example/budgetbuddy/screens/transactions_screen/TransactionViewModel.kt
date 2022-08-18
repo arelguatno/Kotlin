@@ -25,20 +25,15 @@ class TransactionViewModel @Inject constructor(
     private var sumAmount = MutableLiveData(0.00)
     private var inflowAmount = MutableLiveData(0.00)
     private var dateAndTimeRange = MutableLiveData<DateAndTimeRange>()
-    private var increaseOrDecrease = MutableLiveData<Date>()
     private var operator = MutableLiveData<Boolean>()
 
-    fun fetchRecordByMonthAndYear(month: Int, year: Int): LiveData<List<TransactionsTable>> {
-        return repository.fetchRecordByMonthAndYear(month, year).asLiveData()
-    }
-
-    // Fetch Reporting
+    // Fetch Data
     fun fetchReporting(
-        month: Int,
-        year: Int,
-        day: Int,
-        week: Int,
-        quarter: Int,
+        month: Int = 0,
+        year: Int = 0,
+        day: Int = 0,
+        week: Int = 0,
+        quarter: Int = 0,
         time_range: TimeRange
     ): LiveData<List<TransactionsTable>> {
         return when (time_range) {
@@ -50,7 +45,7 @@ class TransactionViewModel @Inject constructor(
             TimeRange.QUARTER -> repository.fetchReportingByQuarterAndYear(quarter, year)
                 .asLiveData()
             TimeRange.ALL -> repository.fetchReportingAll().asLiveData()
-            else -> repository.fetchReportingByMonthAndYear(month, year).asLiveData()
+            else -> repository.fetchRecordByMonthAndYear(month, year).asLiveData()
         }
     }
 
@@ -75,7 +70,7 @@ class TransactionViewModel @Inject constructor(
         return date
     }
 
-    fun setDateAndTimeRange(v: DateAndTimeRange) {
+    fun setDateAndTimeRange(v: DateAndTimeRange = DateAndTimeRange(Date(), TimeRange.MONTH)) {
         dateAndTimeRange.value = v
     }
 
@@ -135,17 +130,12 @@ class TransactionViewModel @Inject constructor(
         return newFormattedList
     }
 
-    fun setIncreaseOrDecrease(op: Boolean) {
-        //increaseOrDecrease.value = v
-        operator.value = op
-    }
-
-    fun getIncreaseOrDecrease(op: Boolean, d: Date, range: TimeRange): Date {
+    fun getIncreaseOrDecrease(increment: Boolean, d: Date, range: TimeRange): Date {
         val cal: Calendar = Calendar.getInstance()
         cal.time = d
         return when (range) {
             TimeRange.DAY -> {
-                if (op) {
+                if (increment) {
                     cal.add(Calendar.DAY_OF_MONTH, +1)
                 } else {
                     cal.add(Calendar.DAY_OF_MONTH, -1)
@@ -153,7 +143,7 @@ class TransactionViewModel @Inject constructor(
                 cal.time
             }
             TimeRange.WEEK -> {
-                if (op) {
+                if (increment) {
                     cal.add(Calendar.WEEK_OF_YEAR, +1)
                 } else {
                     cal.add(Calendar.WEEK_OF_YEAR, -1)
@@ -161,30 +151,27 @@ class TransactionViewModel @Inject constructor(
                 cal.time
             }
             TimeRange.MONTH -> {
-                if (op) {
+                if (increment) {
                     cal.add(Calendar.MONTH, +1)
                 } else {
                     cal.add(Calendar.MONTH, -1)
                 }
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
                 cal.time
             }
             TimeRange.QUARTER -> {
-                if (op) {
+                if (increment) {
                     cal.add(Calendar.MONTH, +3)
                 } else {
                     cal.add(Calendar.MONTH, -3)
                 }
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
                 cal.time
             }
             TimeRange.YEAR -> {
-                if (op) {
+                if (increment) {
                     cal.add(Calendar.YEAR, +1)
                 } else {
                     cal.add(Calendar.YEAR, -1)
                 }
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
                 cal.time
             }
             TimeRange.ALL -> {
@@ -223,73 +210,4 @@ class TransactionViewModel @Inject constructor(
     fun getSumAmount(): MutableLiveData<Double> {
         return sumAmount
     }
-
-    //    fun transactionListToWithHeaderAndChild2(param: List<TransactionsTable>): List<TransactionList> {
-//        var tempDate = ""
-//        var newFormattedList = mutableListOf<TransactionList>()
-//
-//        for (i in param) { // Loop through all data
-//            if (tempDate != i.category.rowValue) { // found a unique date
-//                val childList = mutableListOf<TransactionsTable>()
-//
-//                for (y in param) {   // loop again and find transaction with the same date
-//                    if (i.category.rowValue == y.category.rowValue) {
-//                        childList.add(y)
-//                    }
-//                }
-//
-//                val row = TransactionList(header = i.category.rowValue, child = childList)
-//                newFormattedList.add(row)
-//
-//                //output is an array of header and transactiontable
-//                // 6/23/2022, {transaction1, transaction2, transaction3}
-//                // 6/24/2022, {transaction2, transaction2, transaction3}
-//            }
-//            tempDate = i.category.rowValue
-//        }
-//        return newFormattedList
-//    }
-
-    //    private fun transactionListToWithHeaderAndChild(
-//        param: List<TransactionsTable>,
-//        month: Int
-//    ): List<TransactionList> {
-//        var tempDate = Calendar.getInstance().time
-//        var newFormattedList = mutableListOf<TransactionList>()
-//
-//        for (i in param) { // Loop through all data
-//            if (month != i.date.month) continue
-//
-//            if (tempDate != i.date) { // found a unique date
-//                val childList = mutableListOf<TransactionsTable>()
-//
-//                for (y in param) {   // loop again and find transaction with the same date
-//                    if (i.date == y.date) {
-//                        childList.add(y)
-//                    }
-//                }
-//
-//                val row = TransactionList(header = i.date, child = childList)
-//                newFormattedList.add(row)
-//            }
-//            tempDate = i.date
-//        }
-//        return newFormattedList
-//    }
-//
-//    fun monthlyData(param: List<TransactionsTable>): List<MonthlyData> {
-//        var newFormattedList = mutableListOf<MonthlyData>()
-//        var monthlyDate = -1
-//
-//        for (i in param) {
-//            if (monthlyDate != i.month && monthlyDate >= 0) {
-//                val tran = transactionListToWithHeaderAndChild(param, monthlyDate)
-//                val new = MonthlyData(intMonthLongToString(monthlyDate), tran)
-//                newFormattedList.add(new)
-//            }
-//            monthlyDate = i.month
-//        }
-//        return newFormattedList
-//    }
-
 }

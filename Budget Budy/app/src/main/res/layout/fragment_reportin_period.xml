@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:menu="@menu/reporting_menu"
             app:title="Reports" />
 
     </com.google.android.material.appbar.AppBarLayout>

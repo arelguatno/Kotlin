@@ -23,7 +23,7 @@ interface TransactionsDao {
     @Update
     suspend fun updateTransaction(tran: TransactionsTable)
 
-    @Query("SELECT * FROM transactions_table WHERE time_range_month = :month AND time_range_year = :year ORDER BY date DESC")
+    @Query("SELECT * FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year ORDER BY date DESC")
     fun fetchRecordByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>>
 
     // Month, Year
@@ -47,7 +47,7 @@ interface TransactionsDao {
     fun fetchReportingByWeekAndYear(week: Int, year: Int): Flow<List<TransactionsTable>>
 
     // Quarter, Year
-    @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_day=:quarter and time_range_year =:year) as percentage FROM transactions_table WHERE time_range_quarter =:quarter AND time_range_year =:year GROUP BY categoryrowValue ORDER BY sum(amount) DESC")
+    @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_quarter=:quarter and time_range_year =:year) as percentage FROM transactions_table WHERE time_range_quarter =:quarter AND time_range_year =:year GROUP BY categoryrowValue ORDER BY sum(amount) DESC")
     fun fetchReportingByQuarterAndYear(quarter: Int, year: Int): Flow<List<TransactionsTable>>
 
 
