@@ -1,10 +1,12 @@
 package com.example.budgetbuddy.fragments
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.DatePicker.OnDateChangedListener
 import android.widget.Toast
 import android.widget.Toolbar
@@ -36,10 +38,17 @@ class DateFragment : MainFragment() {
         return binding.root
     }
 
+    private fun menu() {
+        binding.appBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O) //TODO check this
     override fun onStart() {
         super.onStart()
 
+        menu()
         binding.datePickerActions.setOnDateChangedListener(OnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
             val calendar = Calendar.getInstance()
             calendar.set(year, monthOfYear, dayOfMonth)

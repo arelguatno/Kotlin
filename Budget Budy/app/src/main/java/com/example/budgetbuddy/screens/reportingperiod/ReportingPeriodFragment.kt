@@ -29,6 +29,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -205,7 +206,7 @@ class ReportingPeriodFragment : MainFragment() {
             viewModel.setDateAndTimeRange(item)
             bottomSheetDialog.dismiss()
         }
-
+        bottomSheetDialog.dismissWithAnimation
         bottomSheetDialog.setCancelable(true)
         bottomSheetDialog.setContentView(b.root)
         bottomSheetDialog.show()

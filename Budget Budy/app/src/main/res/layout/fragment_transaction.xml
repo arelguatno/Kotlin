@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/black"
+    android:background="@color/dark_grey"
     android:orientation="vertical"
     tools:context=".screens.transactions_screen.TransactionFragment">
 
@@ -45,10 +45,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/purple_700"
+                android:background="@color/surface"
                 android:orientation="vertical"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="15dp"
                 android:paddingRight="15dp"
                 android:visibility="visible">
 
@@ -122,7 +122,7 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:text="View report this period"
-                    android:textColor="@android:color/holo_blue_light"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textStyle="bold" />
 
             </LinearLayout>

@@ -25,19 +25,20 @@ class CategoryFragment : MainFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCategoryBinding.inflate(layoutInflater)
-        (activity as AppCompatActivity?)?.supportActionBar?.title = "Select Category"
-
         return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
-        super.onCreate(savedInstanceState)
     }
 
     override fun onStart() {
         super.onStart()
         loadItems()
+
+        menu()
+    }
+
+    private fun menu() {
+        binding.appBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun loadItems() {
@@ -52,19 +53,5 @@ class CategoryFragment : MainFragment() {
                 findNavController().navigateUp()
             }
         })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search, menu)
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                findNavController().navigateUp()
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

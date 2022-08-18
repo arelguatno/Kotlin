@@ -36,20 +36,23 @@ class TransactionFragmentAdapterChild(private val children: List<TransactionsTab
         if (item.catAmount > 0.0) {
             holder.binding.txtCostPrice.text =
                 String.format("-${item.currency.textIcon} %.2f", item.catAmount)
+            holder.binding.txtNote.text = ""
         } else {
             holder.binding.txtCostPrice.text =
                 String.format("-${item.currency.textIcon} %.2f", item.amount)
+
+            holder.itemView.setOnClickListener {
+                val action =
+                    TransactionFragmentDirections.actionTransactionFragmentToTransactionDetailsFragment(
+                        item
+                    )
+                it.findNavController().navigate(action)
+            }
+            holder.binding.txtNote.text = item.note
         }
 
-        holder.itemView.setOnClickListener {
-            val action =
-                TransactionFragmentDirections.actionTransactionFragmentToTransactionDetailsFragment(
-                    item
-                )
-            it.findNavController().navigate(action)
-        }
         holder.binding.imageView.setImageResource(CategoryList.getImageID(item.category.uniqueID)!!)
         //holder.binding.imageView.setImageResource(item.category.imageID)
-        holder.binding.txtNote.text = item.note
+
     }
 }

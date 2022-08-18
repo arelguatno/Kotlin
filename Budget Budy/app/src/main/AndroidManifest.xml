@@ -23,7 +23,7 @@
             android:name=".screens.add_new_entry.AddNewTransactionActivity"
             android:exported="false"
             android:label="@string/add_new_entry"
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

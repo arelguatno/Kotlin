@@ -28,7 +28,6 @@ class NoteFragment : MainFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        (activity as AppCompatActivity?)?.supportActionBar?.title = "Note"
         binding = FragmentNoteBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -36,13 +35,18 @@ class NoteFragment : MainFragment() {
     override fun onStart() {
         super.onStart()
         setTextView()
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
+        menu()
 
+    }
+    private fun menu() {
+        binding.appBar.setNavigationOnClickListener {
+            val inputMethodManager =
+                context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+            findNavController().navigateUp()
+        }
+    }
     private fun setTextView() {
         binding.textView.requestFocus()
         val inputMethodManager =
@@ -58,23 +62,5 @@ class NoteFragment : MainFragment() {
             }
             handled
         })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.blank, menu)
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                val inputMethodManager =
-                    context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
-                findNavController().navigateUp()
-
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

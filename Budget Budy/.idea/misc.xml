@@ -35,7 +35,7 @@
         <entry key="app/src/main/res/layout/fragment_add_new_entry2.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry_transaction.xml" value="0.23875432525951557" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.30867892261650276" />
-        <entry key="app/src/main/res/layout/fragment_category.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_category.xml" value="0.3047699451245251" />
         <entry key="app/src/main/res/layout/fragment_currency.xml" value="0.4008547008547009" />
         <entry key="app/src/main/res/layout/fragment_date.xml" value="0.30854700854700856" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2736625514403292" />
@@ -43,7 +43,7 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_reportin_period.xml" value="0.4566053869174861" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.47815333882934874" />
-        <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.45673279864921906" />
+        <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_transaction_details.xml" value="0.335" />
         <entry key="app/src/main/res/layout/haha.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout.xml" value="0.45" />
@@ -51,9 +51,9 @@
         <entry key="app/src/main/res/layout/newtransactionfragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/qyqy.xml" value="3.8642857142857143" />
         <entry key="app/src/main/res/layout/simplelist_custom_row.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/transactions_custom_row.xml" value="0.30867892261650276" />
-        <entry key="app/src/main/res/layout/transactions_parent.xml" value="0.30464135021097044" />
-        <entry key="app/src/main/res/menu/add_transaction.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/transactions_custom_row.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/transactions_parent.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/add_transaction.xml" value="0.33" />
         <entry key="app/src/main/res/menu/blank.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.4430769230769231" />
         <entry key="app/src/main/res/menu/edit_transaction.xml" value="0.30867892261650276" />

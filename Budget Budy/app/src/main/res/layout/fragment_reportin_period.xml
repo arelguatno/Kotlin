@@ -45,7 +45,7 @@
                 android:id="@+id/expense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/purple_700"
+                android:background="@color/surface"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingTop="15dp"
@@ -73,14 +73,12 @@
                 android:id="@+id/pieChart"
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
-                android:background="@color/purple_700" />
+                android:background="@color/surface" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:visibility="visible" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

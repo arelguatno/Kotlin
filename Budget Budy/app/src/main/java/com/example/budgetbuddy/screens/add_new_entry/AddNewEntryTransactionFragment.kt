@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
@@ -35,7 +37,6 @@ class AddNewEntryTransactionFragment : MainFragment() {
         const val ADD_NEW_ENTRY = "com.example.room_aye.screens.add_new_entry"
         const val EDIT_EXISTING_ENTRY = "com.example.room_aye.screens.EDIT_EXISTING_ENTRY"
         var userClickedEditButton = false
-        private lateinit var menuItem: MenuItem
     }
 
     override fun onCreateView(
@@ -44,7 +45,6 @@ class AddNewEntryTransactionFragment : MainFragment() {
     ): View {
         binding = NewtransactionfragmentBinding.inflate(layoutInflater)
         bottomSheetDialog = BottomSheetDialog(requireContext())
-        (activity as AppCompatActivity?)?.supportActionBar?.title = "Add new entry"
         return binding.root
     }
 
@@ -54,14 +54,22 @@ class AddNewEntryTransactionFragment : MainFragment() {
             context as AddNewTransactionActivity // so we can read intent data from activity
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onStart() {
         super.onStart()
         setUpScreen()
+        inflateMenu()
+    }
+
+    private fun inflateMenu() {
+        binding.appBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.saveMenu -> insertRecord()
+            }
+            true
+        }
+        binding.appBar.setNavigationOnClickListener {
+            activity?.finish()
+        }
     }
 
     private fun setUpScreen() {
@@ -190,24 +198,6 @@ class AddNewEntryTransactionFragment : MainFragment() {
         bottomSheetDialog.setCancelable(true)
         bottomSheetDialog.setContentView(b.root)
         bottomSheetDialog.show()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.add_transaction, menu)
-        menuItem = menu.findItem(R.id.saveMenu)
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.saveMenu -> {
-                insertRecord()
-            }
-            android.R.id.home -> {
-                activity?.finish()
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun insertRecord() {

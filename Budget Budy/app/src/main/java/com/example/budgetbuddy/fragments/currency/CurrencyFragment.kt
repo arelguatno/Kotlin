@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
@@ -25,7 +26,6 @@ class CurrencyFragment : MainFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        (activity as AppCompatActivity?)?.supportActionBar?.title = "Currency"
         binding = FragmentCurrencyBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -33,6 +33,13 @@ class CurrencyFragment : MainFragment() {
     override fun onStart() {
         super.onStart()
         loadItems()
+        menu()
+    }
+
+    private fun menu() {
+        binding.appBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun loadItems() {
