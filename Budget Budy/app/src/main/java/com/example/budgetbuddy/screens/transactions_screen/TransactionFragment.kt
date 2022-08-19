@@ -69,12 +69,7 @@ class TransactionFragment() : MainFragment() {
             } else {
                 val c = Calendar.getInstance()
                 binding.calendarSelect.txtDate.text = getString(R.string.future)
-                queryData(
-                    month = c.get(Calendar.MONTH),
-                    year = c.get(Calendar.YEAR),
-                    future = true,
-                    timeRange = TimeRange.FUTURE
-                )
+                queryData(timeRange = TimeRange.FUTURE)
             }
         }
 
@@ -113,7 +108,6 @@ class TransactionFragment() : MainFragment() {
     private fun queryData(
         month: Int = 0,
         year: Int = 0,
-        future: Boolean = false,
         timeRange: TimeRange
     ) {
         viewModel.fetchReporting(
@@ -122,7 +116,7 @@ class TransactionFragment() : MainFragment() {
             time_range = timeRange
         )
             .observe(viewLifecycleOwner) {
-                val list = viewModel.transactionListToWithHeaderAndChild(it, future)
+                val list = viewModel.transactionListToWithHeaderAndChild(it)
                 if (list.isNotEmpty()) {
                     myAdapterHeader.submitList(list)
                     binding.txtNoRecordsFound.isVisible = false

@@ -9,12 +9,12 @@ class TransactionsRepository @Inject constructor(
     private val transactionsDao: TransactionsDao
 ) {
 
-    fun fetchRecordByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>> {
-        return transactionsDao.fetchRecordByMonthAndYear(month, year)
+    fun fetchRecordByMonthAndYear(month: Int, year: Int, date:Long): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchRecordByMonthAndYear(month, year,date)
     }
 
-    fun fetchRecordByMonthAndYearFuture(month: Int, year: Int): Flow<List<TransactionsTable>> {
-        return transactionsDao.fetchRecordByMonthAndYearFuture(month, year)
+    fun fetchRecordByMonthAndYearFuture(date: Long): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchRecordByMonthAndYearFuture(date)
     }
 
     fun fetchReportingByWeekAndYear(week: Int, year: Int): Flow<List<TransactionsTable>> {
@@ -23,6 +23,14 @@ class TransactionsRepository @Inject constructor(
 
     fun fetchReportingByQuarterAndYear(quarter: Int, year: Int): Flow<List<TransactionsTable>> {
         return transactionsDao.fetchReportingByQuarterAndYear(quarter, year)
+    }
+
+    fun fetchRecentTransaction(): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchRecentTransaction()
+    }
+
+    fun fetchTopSpending(month: Int, year: Int): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchTopSpending(month, year)
     }
 
     fun fetchReportingByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>> {

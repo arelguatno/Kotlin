@@ -25,15 +25,15 @@ interface TransactionsDao {
     suspend fun updateTransaction(tran: TransactionsTable)
 
     //Future
-    @Query("SELECT * FROM transactions_table WHERE time_range_month >=:month AND time_range_year >=:year ORDER BY date ASC")
-    fun fetchRecordByMonthAndYearFuture(month: Int, year: Int): Flow<List<TransactionsTable>>
+    @Query("SELECT * FROM transactions_table WHERE date>:date ORDER BY date ASC")
+    fun fetchRecordByMonthAndYearFuture(date: Long): Flow<List<TransactionsTable>>
 
-    @Query("SELECT * FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year ORDER BY date DESC")
-    fun fetchRecordByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>>
+    @Query("SELECT * FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year and date<=:date ORDER BY date DESC")
+    fun fetchRecordByMonthAndYear(month: Int, year: Int, date:Long): Flow<List<TransactionsTable>>
 
     // Month, Year
-    @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_month=:month and time_range_year =:year) as percentage FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year GROUP BY categoryrowValue ORDER BY sum(amount) DESC")
-    fun fetchReportingByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>>
+    @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_month=:month and time_range_year =:year and date<=:date) as percentage FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year and date<=:date GROUP BY categoryrowValue ORDER BY sum(amount) DESC")
+    fun fetchReportingByMonthAndYear(month: Int, year: Int, date: Long = Date().time): Flow<List<TransactionsTable>>
 
     // Month, Year, Day
     @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_month=:month and time_range_year =:year and time_range_day=:day) as percentage FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year AND time_range_day=:day GROUP BY categoryrowValue ORDER BY sum(amount) DESC")
@@ -47,7 +47,7 @@ interface TransactionsDao {
     @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table) as percentage FROM transactions_table GROUP BY categoryrowValue ORDER BY sum(amount) DESC")
     fun fetchReportingAll(): Flow<List<TransactionsTable>>
 
-    // Month, Year
+    // Week, Year
     @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_week=:week and time_range_year =:year) as percentage FROM transactions_table WHERE time_range_week =:week AND time_range_year =:year GROUP BY categoryrowValue ORDER BY sum(amount) DESC")
     fun fetchReportingByWeekAndYear(week: Int, year: Int): Flow<List<TransactionsTable>>
 
@@ -55,5 +55,9 @@ interface TransactionsDao {
     @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_quarter=:quarter and time_range_year =:year) as percentage FROM transactions_table WHERE time_range_quarter =:quarter AND time_range_year =:year GROUP BY categoryrowValue ORDER BY sum(amount) DESC")
     fun fetchReportingByQuarterAndYear(quarter: Int, year: Int): Flow<List<TransactionsTable>>
 
+    @Query("SELECT * FROM transactions_table WHERE date<=:date ORDER BY date DESC LIMIT 3")
+    fun fetchRecentTransaction(date: Long = Date().time): Flow<List<TransactionsTable>>
 
+    @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_month=:month and time_range_year =:year and date<=:date) as percentage FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year and date<=:date GROUP BY categoryrowValue ORDER BY sum(amount) DESC LIMIT 3")
+    fun fetchTopSpending(month: Int, year: Int, date: Long = Date().time): Flow<List<TransactionsTable>>
 }
