@@ -119,13 +119,14 @@ class ReportingPeriodFragment : MainFragment() {
         week: Int = 0,
         quarter: Int = 0,
         timeRange: TimeRange
-    ) { viewModel.fetchReporting(
+    ) {
+        viewModel.fetchReporting(
             month,
             year,
             day,
             week,
             quarter,
-            timeRange
+            time_range = timeRange
         ).observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 val child = TransactionFragmentAdapterChild(it)

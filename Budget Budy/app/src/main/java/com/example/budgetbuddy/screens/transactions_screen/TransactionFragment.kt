@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
+import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentTransactionBinding
 import com.example.budgetbuddy.enums.TimeRange
 import com.example.budgetbuddy.screens.reportingperiod.ReportingPeriodActivity
@@ -47,19 +48,34 @@ class TransactionFragment() : MainFragment() {
         binding.homeFragmentRecyclerViewParent.adapter = myAdapterHeader
         binding.homeFragmentRecyclerViewParent.layoutManager = LinearLayoutManager(requireContext())
 
+
         val date = viewModel.getDate().value
         cal.time = date
-        queryData(cal.get(Calendar.MONTH), cal.get(Calendar.YEAR))
+        if (date != null) {
+            viewModel.setDate(date)
+        }
     }
 
     private fun initViewModel() {
         viewModel.getDate().observe(viewLifecycleOwner) {
             cal.time = it
-            val month = cal.get(Calendar.MONTH)
+            val currentMonth = cal.get(Calendar.MONTH)
             val year = cal.get(Calendar.YEAR)
-            val ff = viewModel.transformDateToMonthAndYear(month, year)
-            binding.calendarSelect.txtDate.text = ff
-            queryData(month, year)
+            val ff = viewModel.transformDateToMonthAndYear(currentMonth, year)
+
+            if (Date() >= it) {
+                binding.calendarSelect.txtDate.text = ff
+                queryData(currentMonth, year, timeRange = TimeRange.OTHERS)
+            } else {
+                val c = Calendar.getInstance()
+                binding.calendarSelect.txtDate.text = getString(R.string.future)
+                queryData(
+                    month = c.get(Calendar.MONTH),
+                    year = c.get(Calendar.YEAR),
+                    future = true,
+                    timeRange = TimeRange.FUTURE
+                )
+            }
         }
 
         viewModel.getTotalExpenses().observe(viewLifecycleOwner) {
@@ -80,8 +96,10 @@ class TransactionFragment() : MainFragment() {
 
         binding.calendarSelect.rightImage.setOnClickListener {
             cal.time = viewModel.getDate().value
-            cal.add(Calendar.MONTH, +1)
-            viewModel.setDate(cal.time)
+            if (Date() >= cal.time) {
+                cal.add(Calendar.MONTH, +1)
+                viewModel.setDate(cal.time)
+            }
         }
 
         binding.txtViewReport.setOnClickListener {
@@ -92,10 +110,19 @@ class TransactionFragment() : MainFragment() {
         }
     }
 
-    private fun queryData(month: Int, year: Int) {
-        viewModel.fetchReporting(month = month, year = year, time_range = TimeRange.OTHERS)
+    private fun queryData(
+        month: Int = 0,
+        year: Int = 0,
+        future: Boolean = false,
+        timeRange: TimeRange
+    ) {
+        viewModel.fetchReporting(
+            month = month,
+            year = year,
+            time_range = timeRange
+        )
             .observe(viewLifecycleOwner) {
-                val list = viewModel.transactionListToWithHeaderAndChild(it)
+                val list = viewModel.transactionListToWithHeaderAndChild(it, future)
                 if (list.isNotEmpty()) {
                     myAdapterHeader.submitList(list)
                     binding.txtNoRecordsFound.isVisible = false

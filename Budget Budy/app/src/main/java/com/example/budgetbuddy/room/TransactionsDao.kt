@@ -4,6 +4,7 @@ import androidx.room.*
 import com.example.budgetbuddy.room.tables.DateMonth
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import kotlinx.coroutines.flow.Flow
+import java.util.*
 
 @Dao
 interface TransactionsDao {
@@ -22,6 +23,10 @@ interface TransactionsDao {
 
     @Update
     suspend fun updateTransaction(tran: TransactionsTable)
+
+    //Future
+    @Query("SELECT * FROM transactions_table WHERE time_range_month >=:month AND time_range_year >=:year ORDER BY date ASC")
+    fun fetchRecordByMonthAndYearFuture(month: Int, year: Int): Flow<List<TransactionsTable>>
 
     @Query("SELECT * FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year ORDER BY date DESC")
     fun fetchRecordByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>>

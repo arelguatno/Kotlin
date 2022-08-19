@@ -38,13 +38,12 @@ class TransactionViewModel @Inject constructor(
     ): LiveData<List<TransactionsTable>> {
         return when (time_range) {
             TimeRange.MONTH -> repository.fetchReportingByMonthAndYear(month, year).asLiveData()
-            TimeRange.DAY -> repository.fetchReportingByMonthAndYearAndDay(month, year, day)
-                .asLiveData()
+            TimeRange.DAY -> repository.fetchReportingByMonthAndYearAndDay(month, year, day).asLiveData()
             TimeRange.YEAR -> repository.fetchReportingByYear(year).asLiveData()
             TimeRange.WEEK -> repository.fetchReportingByWeekAndYear(week, year).asLiveData()
-            TimeRange.QUARTER -> repository.fetchReportingByQuarterAndYear(quarter, year)
-                .asLiveData()
+            TimeRange.QUARTER -> repository.fetchReportingByQuarterAndYear(quarter, year).asLiveData()
             TimeRange.ALL -> repository.fetchReportingAll().asLiveData()
+            TimeRange.FUTURE -> repository.fetchRecordByMonthAndYearFuture(month, year).asLiveData()
             else -> repository.fetchRecordByMonthAndYear(month, year).asLiveData()
         }
     }
@@ -103,12 +102,20 @@ class TransactionViewModel @Inject constructor(
         }
     }
 
-    fun transactionListToWithHeaderAndChild(param: List<TransactionsTable>): List<TransactionList> {
+    fun transactionListToWithHeaderAndChild(
+        param: List<TransactionsTable>,
+        future: Boolean = false
+    ): List<TransactionList> {
         var tempDate = Calendar.getInstance().time
         var newFormattedList = mutableListOf<TransactionList>()
         totalExpenses.value = 0.00
-        for (i in param) { // Loop through all data
 
+        for (i in param) { // Loop through all data
+            if (!future) {
+                if (i.date > Date()) continue // skip future transactions
+            }else{
+                if (i.date< Date()) continue
+            }
             if (tempDate != i.date) { // found a unique date
                 val childList = mutableListOf<TransactionsTable>()
                 for (y in param) {   // loop again and find transaction with the same date
