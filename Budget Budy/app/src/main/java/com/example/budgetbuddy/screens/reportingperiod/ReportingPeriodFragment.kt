@@ -17,6 +17,7 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.DateRangeBottomSheetDialogBinding
 import com.example.budgetbuddy.databinding.FragmentReportinPeriodBinding
 import com.example.budgetbuddy.enums.TimeRange
+import com.example.budgetbuddy.fragments.category.CategoryList
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.screens.transactions_screen.DateAndTimeRange
 import com.example.budgetbuddy.screens.transactions_screen.TransactionFragmentAdapterChild
@@ -232,8 +233,11 @@ class ReportingPeriodFragment : MainFragment() {
         var sum = 0.00
 
         for (i in list.indices) {
+
             val drawable: Drawable? =
-                ResourcesCompat.getDrawable(resources, list[i].category.imageID, null)
+                ResourcesCompat.getDrawable(
+                    resources, list[i].category.imageID!!, null
+                )
             val percentage = list[i].percentage
 
             if (percentage <= 2.0) {
@@ -283,7 +287,6 @@ class ReportingPeriodFragment : MainFragment() {
         pieChart.setDrawEntryLabels(false)
         pieChart.legend.orientation = Legend.LegendOrientation.VERTICAL
         pieChart.legend.isWordWrapEnabled = true
-
         pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
         pieChart.animateY(500, Easing.EaseInOutQuad)
         pieChart.legend.isEnabled = false  // no legend
