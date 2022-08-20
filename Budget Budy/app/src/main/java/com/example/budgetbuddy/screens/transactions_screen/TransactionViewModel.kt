@@ -10,6 +10,7 @@ import com.example.budgetbuddy.utils.getDateQuarter
 import com.example.budgetbuddy.utils.intMonthLongToString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.sql.Time
 import java.util.*
@@ -19,13 +20,21 @@ import javax.inject.Inject
 class TransactionViewModel @Inject constructor(
     private val repository: TransactionsRepository
 ) : ViewModel() {
-
+    private val cal = Calendar.getInstance()
     private val date = MutableLiveData(Date())
     private var totalExpenses = MutableLiveData(0.00)
     private var sumAmount = MutableLiveData(0.00)
     private var inflowAmount = MutableLiveData(0.00)
     private var dateAndTimeRange = MutableLiveData<DateAndTimeRange>()
-    private var operator = MutableLiveData<Boolean>()
+    private var prevAndCurrentSpending = MutableLiveData<PrevAndCurrent>()
+
+    fun setPrevAndCurrentSpending(v: PrevAndCurrent) {
+        prevAndCurrentSpending.value = v
+    }
+
+    fun getPrevAndCurrentSpending(): MutableLiveData<PrevAndCurrent> {
+        return prevAndCurrentSpending
+    }
 
     // Fetch Data
     fun fetchReporting(
@@ -53,7 +62,22 @@ class TransactionViewModel @Inject constructor(
 
     val fetchRecentData = repository.fetchRecentTransaction().asLiveData()
 
-    val fetchTopSpending = repository.fetchTopSpending(month = 7, year = 2022).asLiveData()
+    val fetchTopSpendingCurrentMonth = repository.fetchTopSpending(month = 7, year = 2022).asLiveData()
+
+    fun fetchTopSpentThisMonthAndPreviousMonth(
+        currentMonth: Int,
+        currentYear: Int,
+        prevMonth: Int,
+        prevYear: Int
+    ): LiveData<List<TransactionsTable>> {
+
+        return repository.fetchTopSpentThisMonthAndPreviousMonth(
+            currentMonth,
+            currentYear,
+            prevMonth,
+            prevYear
+        ).asLiveData()
+    }
 
     val fetchTransactionsGroupByCategory =
         repository.fetchTransactionsGroupByCategory().asLiveData()

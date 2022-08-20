@@ -11,6 +11,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.budgetbuddy.databinding.ActivityMainBinding
 import com.example.budgetbuddy.fragments.category.CategoryList
 import com.example.budgetbuddy.fragments.currency.CurrencyList
@@ -61,29 +63,34 @@ class MainActivity : AppCompatActivity(), Serializable {
     }
 
     private fun setupBottomNav() {
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            val navController = findNavController(R.id.nav_host_fragment)
-            when (it.itemId) {
+        val navHostFragment =
+        supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        setupWithNavController(binding.bottomNavigationView, navController)
 
-                R.id.menu_transactionFragment -> {
-                    navController.navigate(R.id.nav_transactionFragment)
-                    return@setOnItemSelectedListener true
-                }
-                R.id.menu_homeFragment -> {
-                    navController.navigate(R.id.nav_homeFragment)
-                    return@setOnItemSelectedListener true
-                }
-                R.id.menu_profileFragment -> {
-                    navController.navigate(R.id.nav_profileFragment)
-                    return@setOnItemSelectedListener true
-                }
-                R.id.menu_settingsFragment -> {
-                    navController.navigate(R.id.nav_settingsFragment)
-                    return@setOnItemSelectedListener true
-                }
-            }
-            false
-        }
+//        binding.bottomNavigationView.setOnItemSelectedListener {
+//            val navController = findNavController(R.id.nav_host_fragment)
+//            when (it.itemId) {
+//
+//                R.id.menu_transactionFragment -> {
+//                    navController.navigate(R.id.nav_transactionFragment)
+//                    return@setOnItemSelectedListener true
+//                }
+//                R.id.menu_homeFragment -> {
+//                    navController.navigate(R.id.nav_homeFragment)
+//                    return@setOnItemSelectedListener true
+//                }
+//                R.id.menu_profileFragment -> {
+//                    navController.navigate(R.id.nav_profileFragment)
+//                    return@setOnItemSelectedListener true
+//                }
+//                R.id.menu_settingsFragment -> {
+//                    navController.navigate(R.id.nav_settingsFragment)
+//                    return@setOnItemSelectedListener true
+//                }
+//            }
+//            false
+//        }
     }
 
     private fun saveNewEntry(data: Intent?) {

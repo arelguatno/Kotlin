@@ -33,6 +33,10 @@ class TransactionsRepository @Inject constructor(
         return transactionsDao.fetchTopSpending(month, year)
     }
 
+    fun fetchTopSpentThisMonthAndPreviousMonth(currentMonth: Int, currentYear: Int, prevMonth: Int, prevYear:Int): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchTopSpentThisMonthAndPreviousMonth(currentMonth,currentYear,prevMonth,prevYear)
+    }
+
     fun fetchReportingByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>> {
         return transactionsDao.fetchReportingByMonthAndYear(month, year)
     }

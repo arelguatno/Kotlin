@@ -4,12 +4,12 @@
 
 
     <item
-        android:id="@+id/menu_homeFragment"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Home" />
 
     <item
-        android:id="@+id/menu_transactionFragment"
+        android:id="@+id/transactionFragment"
         android:icon="@drawable/ic_baseline_account_balance_24"
         android:title="Transactions" />
 
@@ -20,12 +20,12 @@
         />
 
     <item
-        android:id="@+id/menu_profileFragment"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_baseline_account_24"
         android:title="Account" />
 
     <item
-        android:id="@+id/menu_settingsFragment"
+        android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="Settings" />
 </menu>

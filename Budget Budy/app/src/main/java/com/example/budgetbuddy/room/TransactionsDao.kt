@@ -60,4 +60,8 @@ interface TransactionsDao {
 
     @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_month=:month and time_range_year =:year and date<=:date) as percentage FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year and date<=:date GROUP BY categoryrowValue ORDER BY sum(amount) DESC LIMIT 3")
     fun fetchTopSpending(month: Int, year: Int, date: Long = Date().time): Flow<List<TransactionsTable>>
+
+    @Query("SELECT *, sum(amount) as catAmount, (select sum(amount) from transactions_table where time_range_month=:prevMonth and time_range_year=:prevYear and date<=:date) as percentage from transactions_table where time_range_month=:currentMonth and time_range_year<=:currentYear and date<=:date")
+    fun fetchTopSpentThisMonthAndPreviousMonth(currentMonth: Int, currentYear: Int, prevMonth: Int, prevYear:Int, date: Long = Date().time): Flow<List<TransactionsTable>>
+
 }

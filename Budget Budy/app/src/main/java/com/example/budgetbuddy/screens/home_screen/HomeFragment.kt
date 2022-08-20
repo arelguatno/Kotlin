@@ -10,28 +10,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
+import com.example.budgetbuddy.screens.transactions_screen.PrevAndCurrent
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.github.mikephil.charting.utils.ViewPortHandler
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.roundToInt
+import java.util.*
 
 
 @AndroidEntryPoint
 class HomeFragment : MainFragment() {
-
     private lateinit var binding: FragmentHomeBinding
 
     private val viewModel: TransactionViewModel by activityViewModels()
     private val recentAdapter: RecentTransactionAdapter by lazy { RecentTransactionAdapter() }
-    private val spendingReports: RecentTransactionAdapter by lazy { RecentTransactionAdapter() }
+    private val topSpending: RecentTransactionAdapter by lazy { RecentTransactionAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,17 +46,54 @@ class HomeFragment : MainFragment() {
         super.onStart()
         initSpendingReports()
         initRecentData()
-        initBarChart()
+        initTotalSpentThisMonth()
+    }
+
+    private fun initTotalSpentThisMonth() {
+        cal.time = Date()
+        val prev = Calendar.getInstance()
+        prev.time = cal.time
+        prev.add(Calendar.MONTH, -1)
+
+        viewModel.fetchTopSpentThisMonthAndPreviousMonth(
+            cal.get(Calendar.MONTH),
+            cal.get(Calendar.YEAR),
+            prev.get(Calendar.MONTH),
+            prev.get(Calendar.YEAR)
+        )
+            .observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    viewModel.setPrevAndCurrentSpending(
+                        PrevAndCurrent(
+                            it[0].percentage,
+                            it[0].catAmount
+                        )
+                    )
+                }
+            }
+
+        viewModel.getPrevAndCurrentSpending().observe(viewLifecycleOwner) {
+            binding.spendingReport.txtTotalSpent.text = String.format("$ %.2f", it.current)
+
+            var barEntries = ArrayList<BarEntry>()
+            barEntries.add(BarEntry(0f, it.prev.toFloat())) // last month
+            barEntries.add(BarEntry(1f, it.current.toFloat())) // this month
+
+            var maxValue = it.prev
+            if(it.current > it.prev) maxValue = it.current
+
+            initBarChart(barEntries, maxValue +1)
+        }
     }
 
     private fun initSpendingReports() {
         binding.spendingReport.spendingReportRecycler.itemAnimator = null
-        binding.spendingReport.spendingReportRecycler.adapter = spendingReports
+        binding.spendingReport.spendingReportRecycler.adapter = topSpending
         binding.spendingReport.spendingReportRecycler.layoutManager =
             LinearLayoutManager(requireContext())
 
-        viewModel.fetchTopSpending.observe(viewLifecycleOwner) {
-            spendingReports.submitList(it)
+        viewModel.fetchTopSpendingCurrentMonth.observe(viewLifecycleOwner) {
+            topSpending.submitList(it)
         }
     }
 
@@ -72,10 +108,10 @@ class HomeFragment : MainFragment() {
         }
     }
 
-    private fun initBarChart() {
+    private fun initBarChart(barEntries: ArrayList<BarEntry>, maxValue: Double) {
         val xAxisLabels = arrayOf(getString(R.string.last_month), getString(R.string.this_month))
         var barChart: BarChart = binding.spendingReport.barChart
-        var barDataSet = BarDataSet(getBarEntries(), "")
+        var barDataSet = BarDataSet(barEntries, "")
         barDataSet.color = Color.parseColor("#76A7FA")
         val data = BarData(barDataSet)
         barChart.data = data
@@ -97,7 +133,7 @@ class HomeFragment : MainFragment() {
         barChart.setTouchEnabled(false);
         barChart.legend.isEnabled = false
         barChart.xAxis.isEnabled = true;
-        barChart.axisLeft.isEnabled = true;
+        barChart.axisLeft.isEnabled = true;  // left axis label
         barChart.axisRight.isEnabled = false;
         barChart.axisLeft.setDrawGridLines(false);
         barChart.xAxis.setDrawGridLines(false);
@@ -105,14 +141,12 @@ class HomeFragment : MainFragment() {
         barChart.barData.setValueTextColor(Color.WHITE)
         barChart.barData.setValueFormatter(BarChartDataFormatter())
         barChart.barData.setValueTextSize(8f)
-    }
 
+        val y: YAxis = barChart.axisLeft
+        y.setAxisMaxValue(maxValue.toFloat())
 
-    private fun getBarEntries(): ArrayList<BarEntry> {
-        val barEntries = ArrayList<BarEntry>()
-        barEntries.add(BarEntry(0f, 450f)) // last month
-        barEntries.add(BarEntry(1f, 194f)) // this month
-        return barEntries
+        barChart.invalidate()
+        barChart.notifyDataSetChanged()
     }
 
     class BarChartDataFormatter : ValueFormatter() {

@@ -67,7 +67,7 @@ class TransactionFragmentAdapterHeader :
             "${intMonthLongToString(cal.get(Calendar.MONTH))} ${cal.get(Calendar.YEAR)}"
         holder.binding.total.text = String.format("-$ %.2f", computeChildTotalCost(item.child))
 
-        val child = TransactionFragmentAdapterChild(item.child)
+        val child = TransactionFragmentAdapterChild(item.child.reversed())
         holder.binding.rvChild.layoutManager = LinearLayoutManager(
             holder.binding.rvChild.context,
             LinearLayoutManager.VERTICAL,
