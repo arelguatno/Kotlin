@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
@@ -77,6 +78,7 @@ class HomeFragment : MainFragment() {
             if (it != null) {
                 binding.spendingReport.txtTotalSpent.text = numberFormat(it.current)
                 var barEntries = ArrayList<BarEntry>()
+
                 barEntries.add(BarEntry(0f, it.prev.toFloat())) // last month
                 barEntries.add(BarEntry(1f, it.current.toFloat())) // this month
                 initBarChart(barEntries)
@@ -92,6 +94,11 @@ class HomeFragment : MainFragment() {
 
         viewModel.fetchTopSpendingCurrentMonth.observe(viewLifecycleOwner) {
             topSpending.submitList(it)
+
+            binding.spendingReport.txtNoData.isVisible = false
+            if (it.isEmpty()) {
+                binding.spendingReport.txtNoData.isVisible = true
+            }
         }
     }
 
@@ -103,6 +110,10 @@ class HomeFragment : MainFragment() {
 
         viewModel.fetchRecentData.observe(viewLifecycleOwner) {
             recentAdapter.submitList(it)
+            binding.recentTransaction.txtNoData.isVisible = false
+            if (it.isEmpty()) {
+                binding.recentTransaction.txtNoData.isVisible = true
+            }
         }
     }
 
