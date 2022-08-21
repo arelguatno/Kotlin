@@ -149,7 +149,7 @@ class TransactionViewModel @Inject constructor(
                         totalExpenses.value = totalExpenses.value?.plus(y.amount)
                     }
                 }
-                val row = TransactionList(header = i.date, child = childList)
+                val row = TransactionList(header = i.date!!, child = childList)
                 newFormattedList.add(row)
 
                 //output is an array of header and transactiontable

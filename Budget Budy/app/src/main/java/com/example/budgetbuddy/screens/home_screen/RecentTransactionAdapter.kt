@@ -62,11 +62,11 @@ class RecentTransactionAdapter :
             holder.binding.txtNote.text = numberFormat(item.catAmount)
         } else {
             holder.binding.txtCostPrice.text = "-${numberFormat(item.amount)}"
-            holder.binding.txtNote.text = dateToNice(item.date)
+            holder.binding.txtNote.text = dateToNice(item.date!!)
         }
 
-        holder.binding.txtCategory.text = item.category.rowValue
-        holder.binding.imageView.setImageResource(CategoryList.getImageID(item.category.uniqueID)!!)
+        holder.binding.txtCategory.text = item.category!!.rowValue
+        holder.binding.imageView.setImageResource(CategoryList.getImageID(item.category!!.uniqueID)!!)
 
     }
 }

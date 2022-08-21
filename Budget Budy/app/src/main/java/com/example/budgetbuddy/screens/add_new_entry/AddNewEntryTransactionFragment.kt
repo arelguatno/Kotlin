@@ -84,10 +84,10 @@ class AddNewEntryTransactionFragment : MainFragment() {
         } else { // user wants to edit transaction
             val transaction = editTransaction as TransactionsTable
             userClickedEditButton = true
-            viewModel.setNote(transaction.note)
-            viewModel.setDate(transaction.date)
-            viewModel.setCurrency(transaction.currency.uniqueID)
-            viewModel.setCategory(transaction.category)
+            viewModel.setNote(transaction.note!!)
+            viewModel.setDate(transaction.date!!)
+            viewModel.setCurrency(transaction.currency!!.uniqueID)
+            viewModel.setCategory(transaction.category!!)
             viewModel.setPrice(transaction.amount.toString())
         }
 

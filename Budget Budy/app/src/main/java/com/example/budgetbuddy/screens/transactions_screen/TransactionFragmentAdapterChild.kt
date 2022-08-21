@@ -33,7 +33,7 @@ class TransactionFragmentAdapterChild(private val children: List<TransactionsTab
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = children[position]
 
-        holder.binding.txtCategory.text = item.category.rowValue
+        holder.binding.txtCategory.text = item.category?.rowValue
         if (item.catAmount > 0.0) {
             holder.binding.txtCostPrice.text = "-${numberFormat(item.catAmount)}"
             holder.binding.txtNote.text = ""
@@ -49,7 +49,7 @@ class TransactionFragmentAdapterChild(private val children: List<TransactionsTab
             holder.binding.txtNote.text = item.note
         }
 
-        holder.binding.imageView.setImageResource(CategoryList.getImageID(item.category.uniqueID)!!)
+        holder.binding.imageView.setImageResource(CategoryList.getImageID(item.category!!.uniqueID)!!)
         //holder.binding.imageView.setImageResource(item.category.imageID)
 
     }

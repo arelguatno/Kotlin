@@ -237,7 +237,7 @@ class ReportingPeriodFragment : MainFragment() {
 
             val drawable: Drawable? =
                 ResourcesCompat.getDrawable(
-                    resources, list[i].category.imageID!!, null
+                    resources, list[i].category?.imageID!!, null
                 )
             val percentage = list[i].percentage
 

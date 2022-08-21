@@ -93,9 +93,9 @@ class TransactionDetailsFragment : MainFragment() {
     private fun viewInit() {
         viewModel.setTable(args.transaction)
         viewModel.getTable().observe(viewLifecycleOwner) {
-            binding.txtCategory.text = it.category.rowValue
+            binding.txtCategory.text = it.category?.rowValue
 
-            if (it.note.isEmpty()) {
+            if (it.note!!.isEmpty()) {
                 binding.txtNote.isVisible = false
 
                 binding.imgCalendar.updateLayoutParams<ViewGroup.MarginLayoutParams> {
@@ -106,11 +106,11 @@ class TransactionDetailsFragment : MainFragment() {
                 binding.txtNote.text = it.note
             }
 
-            binding.imgCategory.setImageResource(it.category.imageID)
+            binding.imgCategory.setImageResource(it.category!!.imageID)
 
             binding.txtPrice.text =
-                String.format("-${it.currency.textIcon} %.2f", it.amount)
-            binding.txtDate.text = dateToNice(it.date)
+                String.format("-${it.currency?.textIcon} %.2f", it.amount)
+            binding.txtDate.text = dateToNice(it.date!!)
         }
     }
 

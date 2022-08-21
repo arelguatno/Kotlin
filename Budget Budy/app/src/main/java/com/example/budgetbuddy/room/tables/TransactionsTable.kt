@@ -9,15 +9,15 @@ import java.util.*
 @Entity(tableName = "transactions_table")
 data class TransactionsTable(
     var amount: Double,
-    var note: String,
-    var date: Date,
-    var timeStamp: Date,
+    var note: String? = "",
+    var date: Date? = Date(),
+    var timeStamp: Date? = Date(),
     @Embedded(prefix = "currency")
-    var currency: SimpleListObject,
+    var currency: SimpleListObject?,
     @Embedded(prefix = "category")
-    var category: SimpleListObject,
+    var category: SimpleListObject?,
     @Embedded(prefix = "time_range_")
-    var time_range: DateRange,
+    var time_range: DateRange?,
     var catAmount: Double = 0.0,
     var percentage: Double = 0.0
 ) : Serializable {

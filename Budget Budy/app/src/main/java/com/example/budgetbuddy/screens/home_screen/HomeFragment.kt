@@ -74,12 +74,13 @@ class HomeFragment : MainFragment() {
             }
 
         viewModel.getPrevAndCurrentSpending().observe(viewLifecycleOwner) {
-            binding.spendingReport.txtTotalSpent.text = numberFormat(it.current).toString()
-
-            var barEntries = ArrayList<BarEntry>()
-            barEntries.add(BarEntry(0f, it.prev.toFloat())) // last month
-            barEntries.add(BarEntry(1f, it.current.toFloat())) // this month
-            initBarChart(barEntries)
+            if (it != null) {
+                binding.spendingReport.txtTotalSpent.text = numberFormat(it.current)
+                var barEntries = ArrayList<BarEntry>()
+                barEntries.add(BarEntry(0f, it.prev.toFloat())) // last month
+                barEntries.add(BarEntry(1f, it.current.toFloat())) // this month
+                initBarChart(barEntries)
+            }
         }
     }
 
@@ -142,7 +143,7 @@ class HomeFragment : MainFragment() {
         val y: YAxis = barChart.axisLeft
         val max = (barDataSet.yMax / 11)  // adding few extra space to make the data value visible
         println(barDataSet.yMax + max)
-        y.axisMaximum =  barDataSet.yMax + max
+        y.axisMaximum = barDataSet.yMax + max
 
 
         barChart.invalidate()
