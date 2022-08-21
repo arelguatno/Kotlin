@@ -13,6 +13,7 @@ import com.example.budgetbuddy.room.tables.TransactionList
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.utils.intDayToString
 import com.example.budgetbuddy.utils.intMonthLongToString
+import com.example.budgetbuddy.utils.numberFormat
 import com.example.budgetbuddy.utils.transformSingleDigitToTwoDigit
 import java.util.*
 
@@ -65,7 +66,7 @@ class TransactionFragmentAdapterHeader :
         holder.binding.dayOfWeek.text = intDayToString(cal.get(Calendar.DAY_OF_WEEK))
         holder.binding.monthAndYear.text =
             "${intMonthLongToString(cal.get(Calendar.MONTH))} ${cal.get(Calendar.YEAR)}"
-        holder.binding.total.text = String.format("-$ %.2f", computeChildTotalCost(item.child))
+        holder.binding.total.text = numberFormat(computeChildTotalCost(item.child))
 
         val child = TransactionFragmentAdapterChild(item.child.reversed())
         holder.binding.rvChild.layoutManager = LinearLayoutManager(

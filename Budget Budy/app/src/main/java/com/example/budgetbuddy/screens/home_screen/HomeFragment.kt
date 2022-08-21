@@ -12,6 +12,7 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
 import com.example.budgetbuddy.screens.transactions_screen.PrevAndCurrent
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
+import com.example.budgetbuddy.utils.numberFormat
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -73,16 +74,12 @@ class HomeFragment : MainFragment() {
             }
 
         viewModel.getPrevAndCurrentSpending().observe(viewLifecycleOwner) {
-            binding.spendingReport.txtTotalSpent.text = String.format("$ %.2f", it.current)
+            binding.spendingReport.txtTotalSpent.text = numberFormat(it.current).toString()
 
             var barEntries = ArrayList<BarEntry>()
             barEntries.add(BarEntry(0f, it.prev.toFloat())) // last month
             barEntries.add(BarEntry(1f, it.current.toFloat())) // this month
-
-            var maxValue = it.prev
-            if(it.current > it.prev) maxValue = it.current
-
-            initBarChart(barEntries, maxValue +1)
+            initBarChart(barEntries)
         }
     }
 
@@ -108,7 +105,7 @@ class HomeFragment : MainFragment() {
         }
     }
 
-    private fun initBarChart(barEntries: ArrayList<BarEntry>, maxValue: Double) {
+    private fun initBarChart(barEntries: ArrayList<BarEntry>) {
         val xAxisLabels = arrayOf(getString(R.string.last_month), getString(R.string.this_month))
         var barChart: BarChart = binding.spendingReport.barChart
         var barDataSet = BarDataSet(barEntries, "")
@@ -133,7 +130,7 @@ class HomeFragment : MainFragment() {
         barChart.setTouchEnabled(false);
         barChart.legend.isEnabled = false
         barChart.xAxis.isEnabled = true;
-        barChart.axisLeft.isEnabled = true;  // left axis label
+        barChart.axisLeft.isEnabled = false;  // left axis label
         barChart.axisRight.isEnabled = false;
         barChart.axisLeft.setDrawGridLines(false);
         barChart.xAxis.setDrawGridLines(false);
@@ -143,7 +140,10 @@ class HomeFragment : MainFragment() {
         barChart.barData.setValueTextSize(8f)
 
         val y: YAxis = barChart.axisLeft
-        y.setAxisMaxValue(maxValue.toFloat())
+        val max = (barDataSet.yMax / 11)  // adding few extra space to make the data value visible
+        println(barDataSet.yMax + max)
+        y.axisMaximum =  barDataSet.yMax + max
+
 
         barChart.invalidate()
         barChart.notifyDataSetChanged()
@@ -153,7 +153,7 @@ class HomeFragment : MainFragment() {
         override fun getFormattedValue(
             value: Float
         ): String {
-            return "$ ${value.toInt()}"
+            return "${numberFormat(value.toDouble())}"
         }
     }
 }

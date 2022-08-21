@@ -13,6 +13,7 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentTransactionBinding
 import com.example.budgetbuddy.enums.TimeRange
 import com.example.budgetbuddy.screens.reportingperiod.ReportingPeriodActivity
+import com.example.budgetbuddy.utils.numberFormat
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -74,11 +75,11 @@ class TransactionFragment() : MainFragment() {
         }
 
         viewModel.getTotalExpenses().observe(viewLifecycleOwner) {
-            binding.txtTotalExpenses.text = String.format("-$ %.2f", it)
+            binding.txtTotalExpenses.text = numberFormat(it)
         }
 
         viewModel.getSumAmount().observe(viewLifecycleOwner) {
-            binding.txtSum.text = String.format("-$ %.2f", it)
+            binding.txtSum.text = numberFormat(it)
         }
     }
 

@@ -16,10 +16,7 @@ import com.example.budgetbuddy.fragments.category.CategoryList
 import com.example.budgetbuddy.room.tables.TransactionList
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.screens.transactions_screen.TransactionFragmentDirections
-import com.example.budgetbuddy.utils.dateToNice
-import com.example.budgetbuddy.utils.intDayToString
-import com.example.budgetbuddy.utils.intMonthLongToString
-import com.example.budgetbuddy.utils.transformSingleDigitToTwoDigit
+import com.example.budgetbuddy.utils.*
 import java.util.*
 
 class RecentTransactionAdapter :
@@ -62,11 +59,9 @@ class RecentTransactionAdapter :
 
         if (item.catAmount > 0.0) {
             holder.binding.txtCostPrice.text = "${item.percentage.toInt()}%"
-            holder.binding.txtNote.text =
-                String.format("${item.currency.textIcon} %.2f", item.catAmount)
+            holder.binding.txtNote.text = numberFormat(item.catAmount)
         } else {
-            holder.binding.txtCostPrice.text =
-                String.format("-${item.currency.textIcon} %.2f", item.amount)
+            holder.binding.txtCostPrice.text = "-${numberFormat(item.amount)}"
             holder.binding.txtNote.text = dateToNice(item.date)
         }
 
