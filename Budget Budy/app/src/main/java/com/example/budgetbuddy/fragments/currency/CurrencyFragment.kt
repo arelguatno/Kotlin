@@ -39,7 +39,7 @@ class CurrencyFragment : MainFragment() {
     }
 
     private fun loadItems() {
-        val items = CurrencyAdapter(CurrencyList.geItems())
+        val items = CurrencyAdapter(CurrencyList.geItems(),getCurrency())
         binding.item.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.item.adapter = items

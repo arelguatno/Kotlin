@@ -1,5 +1,6 @@
 package com.example.budgetbuddy.fragments
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -7,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbuddy.databinding.SimplelistCustomRowBinding
 import com.example.budgetbuddy.databinding.TransactionsCustomRowBinding
 import com.example.budgetbuddy.fragments.category.SimpleListObject
+import com.example.budgetbuddy.room.tables.TransactionList
 
 
-class CurrencyAdapter(private val list: List<Pair<Int, SimpleListObject>>) :
+class CurrencyAdapter(private val list: List<Pair<Int, SimpleListObject>>, val currency: Int) :
     RecyclerView.Adapter<CurrencyAdapter.MyViewHolder>() {
 
     private lateinit var mListener: onItemClickListener
@@ -43,7 +45,13 @@ class CurrencyAdapter(private val list: List<Pair<Int, SimpleListObject>>) :
         holder.binding.txtNote.text = item.second.textIcon
         holder.binding.txtCategory.text = item.second.rowValue
         holder.binding.txtCostPrice.isVisible = false
-//
+
+        if(currency == item.first){
+            holder.binding.txtCostPrice.setTextColor(Color.WHITE)
+            holder.binding.txtCostPrice.text= "✓"
+            holder.binding.txtCostPrice.isVisible = true
+        }
+
         holder.itemView.setOnClickListener {
             mListener.onItemClick(item.second)
         }

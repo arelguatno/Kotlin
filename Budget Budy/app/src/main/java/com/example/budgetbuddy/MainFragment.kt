@@ -17,10 +17,11 @@ abstract class MainFragment : Fragment() {
     }
 
    // val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-//    fun getCurrency(): Int {
-//        sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)!!
-//        return sharedPref.getInt(getString(R.string.PREFERENCE_CURRENCY_ID), 1)
-//    }
+    fun getCurrency(): Int {
+       sharedPref =
+           activity?.getSharedPreferences(getString(R.string.PREFERENCE_CURRENCY_ID), Context.MODE_PRIVATE)!!
+       return sharedPref!!.getInt(getString(R.string.PREFERENCE_CURRENCY_ID), 1)
+    }
 
     fun <B> LogStr(param: B) {
         Log.d(TAG, param.toString())

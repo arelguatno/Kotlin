@@ -15,7 +15,7 @@ object CurrencyList {
         list[3] = SimpleListObject(R.drawable.united_states, "United States Dollar", 3, "USD-$","$")
         list[4] = SimpleListObject(R.drawable.european_union, "Euro", 4, "EUR-€","€")
         list[5] = SimpleListObject(R.drawable.india, "India Rupee", 5, "INR-₹","₹")
-        return list.toList()
+        return list.toList().sortedBy { (key, value) -> value.rowValue }
     }
 
     fun getCurrencyObj(v: Int): SimpleListObject?{
