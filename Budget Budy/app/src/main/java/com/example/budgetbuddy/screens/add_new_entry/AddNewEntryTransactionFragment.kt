@@ -137,9 +137,9 @@ class AddNewEntryTransactionFragment : MainFragment() {
             viewModel.setDate(result as Date)
         }
 
-        //Load previous selected currency. Default currencyID is 1 for USD
-        sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        val userSelectsCurrency = sharedPref.getInt(getString(R.string.PREFERENCE_CURRENCY_ID), 1)
+        sharedPref =
+            activity?.getSharedPreferences(getString(R.string.PREFERENCE_CURRENCY_ID), Context.MODE_PRIVATE)!!
+        val userSelectsCurrency = sharedPref!!.getInt(getString(R.string.PREFERENCE_CURRENCY_ID), 1)
         viewModel.setCurrency(userSelectsCurrency)
     }
 
@@ -160,7 +160,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
         }
 
         viewModel.getCurrency().observe(viewLifecycleOwner) {
-            binding.imgCurrency.setImageResource(it.imageID)
+            binding.imgCurrency.text = it.textIcon.substring(0,3)
         }
 
         viewModel.getDate().observe(viewLifecycleOwner) {

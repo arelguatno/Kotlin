@@ -5,10 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
@@ -58,12 +54,13 @@ class CurrencyFragment : MainFragment() {
     }
 
     private fun savePreparedCurrency(uniqueID: Int) {
-        sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
+        sharedPref =
+            activity?.getSharedPreferences(getString(R.string.PREFERENCE_CURRENCY_ID), Context.MODE_PRIVATE)!!
+        with(sharedPref!!.edit()) {
             putInt(
                 getString(R.string.PREFERENCE_CURRENCY_ID),
                 uniqueID
-            )  //#1 is USD in the CurrencyList
+            )
             apply()
         }
     }

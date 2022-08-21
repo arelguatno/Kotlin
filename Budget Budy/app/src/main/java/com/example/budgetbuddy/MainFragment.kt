@@ -1,5 +1,6 @@
 package com.example.budgetbuddy
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
@@ -10,12 +11,16 @@ import java.util.*
 abstract class MainFragment : Fragment() {
 
     companion object {
-        const val TAG = "MainFragment"
         internal lateinit var sharedPref: SharedPreferences
+        const val TAG = "MainFragment"
         val cal: Calendar = Calendar.getInstance()
-        var decimalFormat: DecimalFormat = DecimalFormat("#,###.##")
-
     }
+
+   // val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+//    fun getCurrency(): Int {
+//        sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)!!
+//        return sharedPref.getInt(getString(R.string.PREFERENCE_CURRENCY_ID), 1)
+//    }
 
     fun <B> LogStr(param: B) {
         Log.d(TAG, param.toString())

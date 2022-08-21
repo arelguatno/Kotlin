@@ -12,9 +12,9 @@ data class TransactionsTable(
     var note: String? = "",
     var date: Date? = Date(),
     var timeStamp: Date? = Date(),
-    @Embedded(prefix = "currency")
+    @Embedded(prefix = "currency_")
     var currency: SimpleListObject?,
-    @Embedded(prefix = "category")
+    @Embedded(prefix = "category_")
     var category: SimpleListObject?,
     @Embedded(prefix = "time_range_")
     var time_range: DateRange?,

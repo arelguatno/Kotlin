@@ -49,12 +49,20 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageButton
+<!--                <ImageButton-->
+<!--                    android:id="@+id/imgCurrency"-->
+<!--                    android:layout_width="60dp"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:background="@drawable/european_union"-->
+<!--                    app:srcCompat="@drawable/philippines"/>-->
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/imgCurrency"
                     android:layout_width="60dp"
                     android:layout_height="45dp"
-                    app:srcCompat="@drawable/ic_baseline_currency_pound_24"
-                    app:tint="@color/white" />
+                    android:text="GBP"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textView"

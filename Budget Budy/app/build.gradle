@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 android {
     compileSdk 32
@@ -87,4 +89,9 @@ dependencies {
 
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "com.github.PhilJay:MPAndroidChart:v$rootProject.mpandroidchart"
+
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.android.gms:play-services-ads:21.1.0'
 }

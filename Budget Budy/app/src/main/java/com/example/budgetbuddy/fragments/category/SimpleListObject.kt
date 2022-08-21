@@ -7,4 +7,5 @@ data class SimpleListObject(
     val rowValue: String,
     val uniqueID: Int,
     val textIcon: String,
+    val currencySign: String,
 ):Serializable

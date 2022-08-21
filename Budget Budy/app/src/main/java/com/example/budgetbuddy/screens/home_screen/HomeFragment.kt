@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.fragment.app.activityViewModels
@@ -23,6 +24,8 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -42,7 +45,17 @@ class HomeFragment : MainFragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater)
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        MobileAds.initialize(requireContext()) {}
+
+        val mAdView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
     }
 
     override fun onStart() {
@@ -50,6 +63,7 @@ class HomeFragment : MainFragment() {
         initSpendingReports()
         initRecentData()
         initTotalSpentThisMonth()
+
     }
 
     private fun initTotalSpentThisMonth() {
@@ -151,13 +165,12 @@ class HomeFragment : MainFragment() {
         barChart.barData.setValueTextColor(Color.WHITE)
         barChart.barData.setValueFormatter(BarChartDataFormatter())
         barChart.barData.setValueTextSize(8f)
-        barChart.setExtraOffsets(0f,0f,0f,0.5f)  // bottom padding
+        barChart.setExtraOffsets(0f, 0f, 0f, 0.5f)  // bottom padding
 
         val y: YAxis = barChart.axisLeft
         val max = (barDataSet.yMax / 11)  // adding few extra space to make the data value visible
         println(barDataSet.yMax + max)
         y.axisMaximum = barDataSet.yMax + max
-
 
         barChart.invalidate()
         barChart.notifyDataSetChanged()

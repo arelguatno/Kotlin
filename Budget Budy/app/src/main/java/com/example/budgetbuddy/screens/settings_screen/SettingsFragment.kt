@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.budgetbuddy.R
@@ -30,4 +31,18 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        initViews()
+    }
+
+    private fun initViews() {
+        binding.settingsDisplay.selectLanguage.setOnClickListener {
+
+        }
+
+        binding.settingsDisplay.currency.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_currencyFragment2)
+        }
+    }
 }

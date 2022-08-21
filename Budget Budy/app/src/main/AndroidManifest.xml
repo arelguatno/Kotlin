@@ -11,6 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RoomAye">
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1363370537348771~8710269816"/>
+
         <activity
             android:name=".screens.reportingperiod.ReportingPeriodActivity"
             android:exported="false"

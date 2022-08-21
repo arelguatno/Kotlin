@@ -30,7 +30,11 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.budgetbuddy.screens.settings_screen.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_currencyFragment2"
+            app:destination="@id/currencyFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/transactionDetailsFragment"
         android:name="com.example.budgetbuddy.fragments.transaction_detail_fragment.TransactionDetailsFragment"
@@ -42,5 +46,13 @@
         <argument
             android:name="transaction"
             app:argType="com.example.budgetbuddy.room.tables.TransactionsTable" />
+    </fragment>
+    <fragment
+        android:id="@+id/currencyFragment2"
+        android:name="com.example.budgetbuddy.fragments.currency.CurrencyFragment"
+        android:label="CurrencyFragment" >
+        <action
+            android:id="@+id/action_currencyFragment2_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 </navigation>

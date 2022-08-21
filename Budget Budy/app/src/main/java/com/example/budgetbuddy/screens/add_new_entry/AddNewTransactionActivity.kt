@@ -25,7 +25,7 @@ class AddNewTransactionActivity : AppCompatActivity(), Serializable {
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-       // getBundle()
+        // getBundle()
     }
 
     override fun onSupportNavigateUp(): Boolean {
