@@ -1,6 +1,7 @@
 package com.example.kotlinbasics
 
 import java.math.BigInteger
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -28,18 +29,18 @@ fun main() {
 //    var gg = intArrayOf(9, 9)
 //    println(plusOne(gg).toList())
 
-    var cal: Calendar = Calendar.getInstance()
-    cal.time = Date()
+//    var cal: Calendar = Calendar.getInstance()
+//    cal.time = Date()
+//
+//    val formattedDate =
+//        "${cal.get(Calendar.MONTH)}/${cal.get(Calendar.DAY_OF_MONTH)}/${cal.get(Calendar.YEAR)}"
+//    println(cal.get(Calendar.MONTH))
+//    println(cal.get(Calendar.MONTH) +1)
+//
+//
+//    println("This me test".capitalize())
 
-    val formattedDate =
-        "${cal.get(Calendar.MONTH)}/${cal.get(Calendar.DAY_OF_MONTH)}/${cal.get(Calendar.YEAR)}"
-    println(cal.get(Calendar.MONTH))
-    println(cal.get(Calendar.MONTH) +1)
 
-
-    println("This me test".capitalize())
-
-}
 
 fun plusOne(digits: IntArray): IntArray {
     for (i in digits.lastIndex downTo 0) {
