@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.view.setPadding
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
@@ -150,6 +151,7 @@ class HomeFragment : MainFragment() {
         barChart.barData.setValueTextColor(Color.WHITE)
         barChart.barData.setValueFormatter(BarChartDataFormatter())
         barChart.barData.setValueTextSize(8f)
+        barChart.setExtraOffsets(0f,0f,0f,0.5f)  // bottom padding
 
         val y: YAxis = barChart.axisLeft
         val max = (barDataSet.yMax / 11)  // adding few extra space to make the data value visible
