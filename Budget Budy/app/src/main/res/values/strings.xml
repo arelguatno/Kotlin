@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Budget Buddy</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="add_new_entry">Add new entry</string>
     <string name="PREFERENCE_CURRENCY_ID">com.example.budgetbuddy.PREFERENCE_CURRENCY_ID</string>
     <string name="selected_tab">selected_tab_transaction</string>
     <string name="future">Future</string>
@@ -12,4 +11,31 @@
     <string name="top_spending">Top Spending</string>
     <string name="last_month">Last Month</string>
     <string name="this_month">This Month</string>
+    <string name="click_to_add_spending_this_month">Click + to add spending this month</string>
+    <string name="added_transaction_will_show_up_here">Added transaction will show up here</string>
+    <string name="day">Day</string>
+    <string name="select_time_range">Select time range</string>
+    <string name="week">Week</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="all">All</string>
+    <string name="custom">Custom</string>
+    <string name="date">Date</string>
+    <string name="calendar">Calendar</string>
+    <string name="notes">Notes</string>
+    <string name="reports">Reports</string>
+    <string name="expense">Expense</string>
+    <string name="no_records_found">No records found</string>
+    <string name="transactions">Transactions</string>
+    <string name="inflow">Inflow</string>
+    <string name="expenses">Expenses</string>
+    <string name="view_report_this_period">View report this period</string>
+    <string name="delete">Delete</string>
+    <string name="my_wallets">My Wallets</string>
+    <string name="see_all">See All</string>
+    <string name="add_new_entry">Add new entry</string>
+    <string name="write_note">Write note</string>
+    <string name="select_category">Select Category</string>
+    <string name="amount">Amount</string>
+    <string name="today">Today</string>
 </resources>

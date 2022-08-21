@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:menu="@menu/home_transactions_menu"
-            app:title="Transactions" />
+            app:title="@string/transactions" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:text="Inflow"
+                        android:text="@string/inflow"
                         android:textSize="16sp" />
 
                     <TextView
@@ -86,7 +86,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:text="Expenses"
+                        android:text="@string/expenses"
                         android:textSize="16sp" />
 
                     <TextView
@@ -122,7 +122,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
-                    android:text="View report this period"
+                    android:text="@string/view_report_this_period"
                     android:textColor="@android:color/holo_blue_bright"
                     android:textStyle="bold" />
 

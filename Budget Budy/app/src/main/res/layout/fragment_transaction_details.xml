@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:navigationIcon="@drawable/ic_baseline_close_24"
-            app:title="Transaction" />
+            app:title="@string/transactions" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -130,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:text="Delete"
+            android:text="@string/delete"
             android:textColor="#FF3131"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>

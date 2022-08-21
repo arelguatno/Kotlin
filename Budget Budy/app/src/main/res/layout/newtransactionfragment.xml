@@ -20,7 +20,7 @@
             android:layout_height="?actionBarSize"
             app:menu="@menu/add_transaction"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-            app:title="Add new entry" />
+            app:title="@string/add_new_entry" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:background="#00000000"
                     android:focusable="true"
-                    android:hint="Amount"
+                    android:hint="@string/amount"
                     app:endIconMode="clear_text">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -110,7 +110,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:text="Select Category"
+                        android:text="@string/select_category"
                         android:textColor="@color/dark"
                         android:textSize="20sp" />
 
@@ -143,7 +143,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:text="Write note"
+                        android:text="@string/write_note"
                         android:textColor="@color/dark"
                         android:textSize="15sp" />
 
@@ -175,7 +175,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:text="Today"
+                        android:text="@string/today"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
 

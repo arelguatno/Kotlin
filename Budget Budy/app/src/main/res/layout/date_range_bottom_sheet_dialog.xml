@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Select time range"
+        android:text="@string/select_time_range"
         android:textSize="15sp" />
     <TextView
         android:id="@+id/btnDay"
@@ -21,7 +21,7 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         style="?android:listSeparatorTextViewStyle"
-        android:text="Day" />
+        android:text="@string/day" />
 
     <TextView
         android:id="@+id/btnWeek"
@@ -32,7 +32,7 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         style="?android:listSeparatorTextViewStyle"
-        android:text="Week" />
+        android:text="@string/week" />
 
     <TextView
         android:id="@+id/btnMonth"
@@ -43,7 +43,7 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         style="?android:listSeparatorTextViewStyle"
-        android:text="Month" />
+        android:text="@string/month" />
 
     <TextView
         android:id="@+id/btnQuarter"
@@ -65,7 +65,7 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         style="?android:listSeparatorTextViewStyle"
-        android:text="Year" />
+        android:text="@string/year" />
 
     <TextView
         android:id="@+id/btnAll"
@@ -76,7 +76,7 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         style="?android:listSeparatorTextViewStyle"
-        android:text="All" />
+        android:text="@string/all" />
 
     <TextView
         android:id="@+id/btnCustom"
@@ -87,6 +87,6 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         style="?android:listSeparatorTextViewStyle"
-        android:text="Custom" />
+        android:text="@string/custom" />
 
 </LinearLayout>

@@ -239,7 +239,7 @@ class ReportingPeriodFragment : MainFragment() {
                 ResourcesCompat.getDrawable(
                     resources, list[i].category?.imageID!!, null
                 )
-            val percentage = list[i].percentage
+            val percentage = list[i].percentage!!
 
             if (percentage <= 2.0) {
                 dataEntries.add(PieEntry(percentage.toFloat()))
@@ -247,7 +247,7 @@ class ReportingPeriodFragment : MainFragment() {
                 dataEntries.add(PieEntry(percentage.toFloat(), drawable))
             }
 
-            sum += list[i].catAmount
+            sum += list[i].catAmount!!
 
             colors.add(Color.parseColor(colorsArray[i]))
             binding.txtSum.text = numberFormat(sum)

@@ -1,7 +1,6 @@
 package com.example.budgetbuddy.room
 
 import androidx.room.*
-import com.example.budgetbuddy.room.tables.DateMonth
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import kotlinx.coroutines.flow.Flow
 import java.util.*

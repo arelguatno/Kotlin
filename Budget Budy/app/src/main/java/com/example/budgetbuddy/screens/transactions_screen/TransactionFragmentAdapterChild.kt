@@ -34,7 +34,7 @@ class TransactionFragmentAdapterChild(private val children: List<TransactionsTab
         val item = children[position]
 
         holder.binding.txtCategory.text = item.category?.rowValue
-        if (item.catAmount > 0.0) {
+        if (item.catAmount!! > 0.00) {
             holder.binding.txtCostPrice.text = "-${numberFormat(item.catAmount)}"
             holder.binding.txtNote.text = ""
         } else {

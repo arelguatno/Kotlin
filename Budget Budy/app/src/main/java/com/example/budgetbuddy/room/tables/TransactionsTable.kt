@@ -18,17 +18,17 @@ data class TransactionsTable(
     var category: SimpleListObject?,
     @Embedded(prefix = "time_range_")
     var time_range: DateRange?,
-    var catAmount: Double = 0.0,
-    var percentage: Double = 0.0
+    var catAmount: Double = 0.00,
+    var percentage: Double = 0.00
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }
 
 data class DateRange(
-    val day: Int,
-    val week: Int,
-    val month: Int,
-    val quarter: Int,
-    val year: Int
-):Serializable
+    val day: Int = 0,
+    val week: Int = 0,
+    val month: Int = 0,
+    val quarter: Int = 0,
+    val year: Int = 0
+) : Serializable

@@ -57,8 +57,8 @@ class RecentTransactionAdapter :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = getItem(position)
 
-        if (item.catAmount > 0.0) {
-            holder.binding.txtCostPrice.text = "${item.percentage.toInt()}%"
+        if (item.catAmount!! > 0.0) {
+            holder.binding.txtCostPrice.text = "${item.percentage!!.toInt()}%"
             holder.binding.txtNote.text = numberFormat(item.catAmount)
         } else {
             holder.binding.txtCostPrice.text = "-${numberFormat(item.amount)}"

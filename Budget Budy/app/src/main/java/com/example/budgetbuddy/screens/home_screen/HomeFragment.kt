@@ -67,8 +67,8 @@ class HomeFragment : MainFragment() {
                 if (it.isNotEmpty()) {
                     viewModel.setPrevAndCurrentSpending(
                         PrevAndCurrent(
-                            it[0].percentage,
-                            it[0].catAmount
+                            it[0].percentage!!,
+                            it[0].catAmount!!
                         )
                     )
                 }
