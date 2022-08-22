@@ -1,32 +1,33 @@
 package com.example.budgetbuddy.screens.transactions_screen
 
 import androidx.lifecycle.*
-import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.enums.TimeRange
 import com.example.budgetbuddy.room.TransactionsRepository
 import com.example.budgetbuddy.room.tables.TransactionList
 import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.NumberFormatOrigin
 import com.example.budgetbuddy.utils.getDateQuarter
 import com.example.budgetbuddy.utils.intMonthLongToString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import java.sql.Time
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class TransactionViewModel @Inject constructor(
-    private val repository: TransactionsRepository
+    private val repository: TransactionsRepository,
+    private val numberFormatOrigin: NumberFormatOrigin
 ) : ViewModel() {
-    private val cal = Calendar.getInstance()
     private val date = MutableLiveData(Date())
     private var totalExpenses = MutableLiveData(0.00)
     private var sumAmount = MutableLiveData(0.00)
     private var inflowAmount = MutableLiveData(0.00)
     private var dateAndTimeRange = MutableLiveData<DateAndTimeRange>()
     private var prevAndCurrentSpending = MutableLiveData<PrevAndCurrent>()
+    private var totalExpensesLabel = MutableLiveData<String>()
+    private var totalSumLabel = MutableLiveData("")
+    private var totalInflow = MutableLiveData("")
 
     fun setPrevAndCurrentSpending(v: PrevAndCurrent) {
         prevAndCurrentSpending.value = v
@@ -62,7 +63,8 @@ class TransactionViewModel @Inject constructor(
 
     val fetchRecentData = repository.fetchRecentTransaction().asLiveData()
 
-    val fetchTopSpendingCurrentMonth = repository.fetchTopSpending(month = 7, year = 2022).asLiveData()
+    val fetchTopSpendingCurrentMonth =
+        repository.fetchTopSpending(month = 7, year = 2022).asLiveData()
 
     fun fetchTopSpentThisMonthAndPreviousMonth(
         currentMonth: Int,
@@ -139,14 +141,24 @@ class TransactionViewModel @Inject constructor(
         var tempDate = Calendar.getInstance().time
         var newFormattedList = mutableListOf<TransactionList>()
         totalExpenses.value = 0.00
-
         for (i in param) { // Loop through all data
             if (tempDate != i.date) { // found a unique date
                 val childList = mutableListOf<TransactionsTable>()
+                var totalChild = 0.0
                 for (y in param) {   // loop again and find transaction with the same date
                     if (i.date == y.date) {
-                        childList.add(y)
+
                         totalExpenses.value = totalExpenses.value?.plus(y.amount)
+
+                        //Transactions label for child
+                        y.labels!!.catAmountLabel = numberFormatOrigin.format(y.catAmount)
+                        y.labels!!.amountLabel = numberFormatOrigin.format(y.amount)
+
+                        //Transactions label for header
+                        totalChild = totalChild.plus(y.amount)
+                        y.labels!!.headerLabel = numberFormatOrigin.format(totalChild)
+
+                        childList.add(y)
                     }
                 }
                 val row = TransactionList(header = i.date!!, child = childList)
@@ -159,6 +171,10 @@ class TransactionViewModel @Inject constructor(
             tempDate = i.date
         }
         sumAmount.value = totalExpenses.value!! - inflowAmount.value!!
+
+        totalExpensesLabel.value = numberFormatOrigin.format(totalExpenses.value)
+        totalSumLabel.value = numberFormatOrigin.format(sumAmount.value)
+        totalInflow.value = numberFormatOrigin.format(0.00)
         return newFormattedList
     }
 
@@ -235,11 +251,29 @@ class TransactionViewModel @Inject constructor(
         return "$year"
     }
 
-    fun getTotalExpenses(): MutableLiveData<Double> {
-        return totalExpenses
+    fun getSumAmountLabel(): MutableLiveData<String> {
+        return totalSumLabel
     }
 
-    fun getSumAmount(): MutableLiveData<Double> {
-        return sumAmount
+    fun getTotalExpensesLabel(): MutableLiveData<String> {
+        return totalExpensesLabel
+    }
+
+    fun getTotalInflow(): MutableLiveData<String>{
+        return totalInflow
+    }
+
+    fun processCategoryAmount(param: List<TransactionsTable>): List<TransactionsTable> {
+        for (i in param) {
+            i.labels!!.catAmountLabel = numberFormatOrigin.format(i.catAmount)
+        }
+        return param
+    }
+
+    fun processTransactionAmount(param: List<TransactionsTable>): List<TransactionsTable> {
+        for (i in param) {
+            i.labels!!.amountLabel = numberFormatOrigin.format(i.amount)
+        }
+        return param
     }
 }

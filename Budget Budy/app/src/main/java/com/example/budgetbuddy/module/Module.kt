@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.budgetbuddy.room.AppRoomDatabase
 import com.example.budgetbuddy.room.TransactionsDao
+import com.example.budgetbuddy.NumberFormatOrigin
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,5 +27,11 @@ class Module {
     @Provides
     fun provideChannelDao(appDatabase: AppRoomDatabase): TransactionsDao {
         return appDatabase.profileDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideNumberFormatOrigin(@ApplicationContext context: Context): NumberFormatOrigin {
+        return NumberFormatOrigin(context)
     }
 }

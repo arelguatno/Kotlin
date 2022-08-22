@@ -23,7 +23,6 @@ import com.example.budgetbuddy.screens.transactions_screen.DateAndTimeRange
 import com.example.budgetbuddy.screens.transactions_screen.TransactionFragmentAdapterChild
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
 import com.example.budgetbuddy.utils.getDateQuarter
-import com.example.budgetbuddy.utils.numberFormat
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -131,7 +130,8 @@ class ReportingPeriodFragment : MainFragment() {
             time_range = timeRange
         ).observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-                val child = TransactionFragmentAdapterChild(it)
+                val formattedData = viewModel.processCategoryAmount(it)
+                val child = TransactionFragmentAdapterChild(formattedData)
                 binding.recycler.layoutManager = LinearLayoutManager(
                     binding.recycler.context,
                     LinearLayoutManager.VERTICAL,
@@ -250,7 +250,7 @@ class ReportingPeriodFragment : MainFragment() {
             sum += list[i].catAmount!!
 
             colors.add(Color.parseColor(colorsArray[i]))
-            binding.txtSum.text = numberFormat(sum)
+            binding.txtSum.text = numberFormat.format(sum)
         }
 
         val dataSet = PieDataSet(dataEntries, "")

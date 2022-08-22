@@ -21,7 +21,6 @@ import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.screens.add_new_entry.AddNewEntryTransactionFragment
 import com.example.budgetbuddy.screens.add_new_entry.AddNewTransactionActivity
 import com.example.budgetbuddy.utils.dateToNice
-import com.example.budgetbuddy.utils.numberFormat
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -109,7 +108,7 @@ class TransactionDetailsFragment : MainFragment() {
 
             binding.imgCategory.setImageResource(it.category!!.imageID)
 
-            binding.txtPrice.text = numberFormat(it.amount)
+            binding.txtPrice.text = numberFormat.format(it.amount)
                // String.format("-${it.currency?.currencySign} %.2f", it.amount)
             binding.txtDate.text = dateToNice(it.date!!)
         }

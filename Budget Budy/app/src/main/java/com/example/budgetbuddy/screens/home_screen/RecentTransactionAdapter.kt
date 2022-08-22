@@ -2,22 +2,15 @@ package com.example.budgetbuddy.screens.home_screen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import androidx.core.view.marginTop
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.budgetbuddy.databinding.RecentTransactionsBinding
 import com.example.budgetbuddy.databinding.TransactionsCustomRowBinding
-import com.example.budgetbuddy.databinding.TransactionsParentBinding
 import com.example.budgetbuddy.fragments.category.CategoryList
-import com.example.budgetbuddy.room.tables.TransactionList
 import com.example.budgetbuddy.room.tables.TransactionsTable
-import com.example.budgetbuddy.screens.transactions_screen.TransactionFragmentDirections
 import com.example.budgetbuddy.utils.*
 import java.util.*
+import javax.inject.Inject
 
 class RecentTransactionAdapter :
     ListAdapter<TransactionsTable, RecentTransactionAdapter.MyViewHolder>(WORDS_COMPARATOR) {
@@ -58,10 +51,12 @@ class RecentTransactionAdapter :
         val item = getItem(position)
 
         if (item.catAmount!! > 0.0) {
+            //Top Spending
             holder.binding.txtCostPrice.text = "${item.percentage!!.toInt()}%"
-            holder.binding.txtNote.text = numberFormat(item.catAmount)
+            holder.binding.txtNote.text = item.labels!!.catAmountLabel
         } else {
-            holder.binding.txtCostPrice.text = "-${numberFormat(item.amount)}"
+            //Recent Transactions
+            holder.binding.txtCostPrice.text = "-${item.labels!!.amountLabel}"
             holder.binding.txtNote.text = dateToNice(item.date!!)
         }
 

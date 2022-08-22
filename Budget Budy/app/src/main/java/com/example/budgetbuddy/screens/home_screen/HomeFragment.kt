@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.core.view.isVisible
-import androidx.core.view.setPadding
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
@@ -15,7 +13,7 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
 import com.example.budgetbuddy.screens.transactions_screen.PrevAndCurrent
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
-import com.example.budgetbuddy.utils.numberFormat
+import com.example.budgetbuddy.NumberFormatOrigin
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -91,7 +89,7 @@ class HomeFragment : MainFragment() {
 
         viewModel.getPrevAndCurrentSpending().observe(viewLifecycleOwner) {
             if (it != null) {
-                binding.spendingReport.txtTotalSpent.text = numberFormat(it.current)
+                binding.spendingReport.txtTotalSpent.text = numberFormat.format(it.current)
                 var barEntries = ArrayList<BarEntry>()
 
                 barEntries.add(BarEntry(0f, it.prev.toFloat())) // last month
@@ -108,7 +106,8 @@ class HomeFragment : MainFragment() {
             LinearLayoutManager(requireContext())
 
         viewModel.fetchTopSpendingCurrentMonth.observe(viewLifecycleOwner) {
-            topSpending.submitList(it)
+            val transform = viewModel.processCategoryAmount(it)
+            topSpending.submitList(transform)
 
             binding.spendingReport.txtNoData.isVisible = false
             if (it.isEmpty()) {
@@ -124,7 +123,8 @@ class HomeFragment : MainFragment() {
             LinearLayoutManager(requireContext())
 
         viewModel.fetchRecentData.observe(viewLifecycleOwner) {
-            recentAdapter.submitList(it)
+            val transform = viewModel.processTransactionAmount(it)
+            recentAdapter.submitList(transform)
             binding.recentTransaction.txtNoData.isVisible = false
             if (it.isEmpty()) {
                 binding.recentTransaction.txtNoData.isVisible = true
@@ -163,7 +163,7 @@ class HomeFragment : MainFragment() {
         barChart.xAxis.setDrawGridLines(false);
         barChart.axisLeft.setStartAtZero(true);
         barChart.barData.setValueTextColor(Color.WHITE)
-        barChart.barData.setValueFormatter(BarChartDataFormatter())
+        barChart.barData.setValueFormatter(BarChartDataFormatter(numberFormat))
         barChart.barData.setValueTextSize(8f)
         barChart.setExtraOffsets(0f, 0f, 0f, 0.5f)  // bottom padding
 
@@ -174,13 +174,16 @@ class HomeFragment : MainFragment() {
 
         barChart.invalidate()
         barChart.notifyDataSetChanged()
+
+
     }
 
-    class BarChartDataFormatter : ValueFormatter() {
+    class BarChartDataFormatter(val numberFormat: NumberFormatOrigin) : ValueFormatter() {
+
         override fun getFormattedValue(
             value: Float
         ): String {
-            return "${numberFormat(value.toDouble())}"
+            return "${numberFormat.format(value.toDouble())}"
         }
     }
 }

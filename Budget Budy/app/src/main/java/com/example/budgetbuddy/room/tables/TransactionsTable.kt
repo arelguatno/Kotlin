@@ -19,7 +19,9 @@ data class TransactionsTable(
     @Embedded(prefix = "time_range_")
     var time_range: DateRange?,
     var catAmount: Double = 0.00,
-    var percentage: Double = 0.00
+    var percentage: Double = 0.00,
+    @Embedded(prefix = "text_labels_")
+    var labels: Labels? = Labels("", "", ""),
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
@@ -31,4 +33,10 @@ data class DateRange(
     val month: Int = 0,
     val quarter: Int = 0,
     val year: Int = 0
+) : Serializable
+
+data class Labels(
+    var amountLabel: String? = "",
+    var catAmountLabel: String? = "",
+    var headerLabel: String? = ""
 ) : Serializable

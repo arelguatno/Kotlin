@@ -1,7 +1,6 @@
 package com.example.budgetbuddy
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -27,7 +26,6 @@ import java.io.Serializable
 class MainActivity : AppCompatActivity(), Serializable {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-
     private val viewModel: TransactionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

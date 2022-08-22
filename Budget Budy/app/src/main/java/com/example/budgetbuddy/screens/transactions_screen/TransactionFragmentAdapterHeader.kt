@@ -13,14 +13,14 @@ import com.example.budgetbuddy.room.tables.TransactionList
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.utils.intDayToString
 import com.example.budgetbuddy.utils.intMonthLongToString
-import com.example.budgetbuddy.utils.numberFormat
 import com.example.budgetbuddy.utils.transformSingleDigitToTwoDigit
 import java.util.*
 
 class TransactionFragmentAdapterHeader :
     ListAdapter<TransactionList, TransactionFragmentAdapterHeader.MyViewHolder>(WORDS_COMPARATOR) {
 
-    class MyViewHolder(val binding: TransactionsParentBinding) : RecyclerView.ViewHolder(binding.root)
+    class MyViewHolder(val binding: TransactionsParentBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     companion object {
         private val WORDS_COMPARATOR = object : DiffUtil.ItemCallback<TransactionList>() {
@@ -57,16 +57,15 @@ class TransactionFragmentAdapterHeader :
         val cal = Calendar.getInstance()
         cal.time = item.header
 
-        if(position != 0){
+        if (position != 0) {
             //holder.binding.haha.isVisible = false
         }
 
         holder.binding.dayOfMonth.text =
             transformSingleDigitToTwoDigit(cal.get(Calendar.DAY_OF_MONTH))
         holder.binding.dayOfWeek.text = intDayToString(cal.get(Calendar.DAY_OF_WEEK))
-        holder.binding.monthAndYear.text =
-            "${intMonthLongToString(cal.get(Calendar.MONTH))} ${cal.get(Calendar.YEAR)}"
-        holder.binding.total.text = numberFormat(computeChildTotalCost(item.child))
+        holder.binding.monthAndYear.text = "${intMonthLongToString(cal.get(Calendar.MONTH))} ${cal.get(Calendar.YEAR)}"
+        holder.binding.total.text = item.child[item.child.lastIndex].labels!!.headerLabel
 
         val child = TransactionFragmentAdapterChild(item.child.reversed())
         holder.binding.rvChild.layoutManager = LinearLayoutManager(
@@ -75,14 +74,6 @@ class TransactionFragmentAdapterHeader :
             false
         )
         holder.binding.rvChild.adapter = child
-    }
-
-    private fun computeChildTotalCost(child: List<TransactionsTable>): Double {
-        var total = 0.0
-        for (i in child) {
-            total += i.amount
-        }
-        return total
     }
 }
 

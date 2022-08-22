@@ -12,8 +12,9 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentCurrencyBinding
 import com.example.budgetbuddy.fragments.CurrencyAdapter
 import com.example.budgetbuddy.fragments.category.SimpleListObject
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CurrencyFragment : MainFragment() {
     private lateinit var binding: FragmentCurrencyBinding
 
@@ -39,7 +40,7 @@ class CurrencyFragment : MainFragment() {
     }
 
     private fun loadItems() {
-        val items = CurrencyAdapter(CurrencyList.geItems(),getCurrency())
+        val items = CurrencyAdapter(CurrencyList.geItems(), numberFormat.getSavedCurrency())
         binding.item.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.item.adapter = items

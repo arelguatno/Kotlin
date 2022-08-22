@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbuddy.databinding.TransactionsCustomRowBinding
 import com.example.budgetbuddy.fragments.category.CategoryList
 import com.example.budgetbuddy.room.tables.TransactionsTable
-import com.example.budgetbuddy.utils.numberFormat
 
 
 class TransactionFragmentAdapterChild(private val children: List<TransactionsTable>) :
@@ -34,11 +33,13 @@ class TransactionFragmentAdapterChild(private val children: List<TransactionsTab
         val item = children[position]
 
         holder.binding.txtCategory.text = item.category?.rowValue
-        if (item.catAmount!! > 0.00) {
-            holder.binding.txtCostPrice.text = "-${numberFormat(item.catAmount)}"
+        if (item.catAmount > 0.00) {
+            //Reporting Period
+            holder.binding.txtCostPrice.text = item.labels!!.catAmountLabel
             holder.binding.txtNote.text = ""
         } else {
-            holder.binding.txtCostPrice.text = "-${numberFormat(item.amount)}"
+            //Transaction View
+            holder.binding.txtCostPrice.text = item.labels!!.amountLabel
             holder.itemView.setOnClickListener {
                 val action =
                     TransactionFragmentDirections.actionTransactionFragmentToTransactionDetailsFragment(

@@ -25,8 +25,11 @@ import com.example.budgetbuddy.room.tables.DateRange
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.utils.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AddNewEntryTransactionFragment : MainFragment() {
     private lateinit var binding: NewtransactionfragmentBinding
     private val viewModel: AddNewTransactionActivityViewModel by activityViewModels()
@@ -140,7 +143,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
 //        sharedPref =
 //            activity?.getSharedPreferences(getString(R.string.PREFERENCE_CURRENCY_ID), Context.MODE_PRIVATE)!!
 //        val userSelectsCurrency = sharedPref!!.getInt(getString(R.string.PREFERENCE_CURRENCY_ID), 1)
-        viewModel.setCurrency(getCurrency())
+        viewModel.setCurrency(numberFormat.getSavedCurrency())
     }
 
     private fun setUpViewModelsListener() {
