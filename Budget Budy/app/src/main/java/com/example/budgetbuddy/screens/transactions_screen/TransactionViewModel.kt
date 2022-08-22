@@ -5,7 +5,7 @@ import com.example.budgetbuddy.enums.TimeRange
 import com.example.budgetbuddy.room.TransactionsRepository
 import com.example.budgetbuddy.room.tables.TransactionList
 import com.example.budgetbuddy.room.tables.TransactionsTable
-import com.example.budgetbuddy.NumberFormatOrigin
+import com.example.budgetbuddy.DigitsConverter
 import com.example.budgetbuddy.utils.getDateQuarter
 import com.example.budgetbuddy.utils.intMonthLongToString
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TransactionViewModel @Inject constructor(
     private val repository: TransactionsRepository,
-    private val numberFormatOrigin: NumberFormatOrigin
+    private val digitsConverter: DigitsConverter
 ) : ViewModel() {
     private val date = MutableLiveData(Date())
     private var totalExpenses = MutableLiveData(0.00)
@@ -151,12 +151,12 @@ class TransactionViewModel @Inject constructor(
                         totalExpenses.value = totalExpenses.value?.plus(y.amount)
 
                         //Transactions label for child
-                        y.labels!!.catAmountLabel = numberFormatOrigin.format(y.catAmount)
-                        y.labels!!.amountLabel = numberFormatOrigin.format(y.amount)
+                        y.labels!!.catAmountLabel = digitsConverter.formatWithCurrency(y.catAmount)
+                        y.labels!!.amountLabel = digitsConverter.formatWithCurrency(y.amount)
 
                         //Transactions label for header
                         totalChild = totalChild.plus(y.amount)
-                        y.labels!!.headerLabel = numberFormatOrigin.format(totalChild)
+                        y.labels!!.headerLabel = digitsConverter.formatWithCurrency(totalChild)
 
                         childList.add(y)
                     }
@@ -172,9 +172,9 @@ class TransactionViewModel @Inject constructor(
         }
         sumAmount.value = totalExpenses.value!! - inflowAmount.value!!
 
-        totalExpensesLabel.value = numberFormatOrigin.format(totalExpenses.value)
-        totalSumLabel.value = numberFormatOrigin.format(sumAmount.value)
-        totalInflow.value = numberFormatOrigin.format(0.00)
+        totalExpensesLabel.value = digitsConverter.formatWithCurrency(totalExpenses.value)
+        totalSumLabel.value = digitsConverter.formatWithCurrency(sumAmount.value)
+        totalInflow.value = digitsConverter.formatWithCurrency(0.00)
         return newFormattedList
     }
 
@@ -265,14 +265,14 @@ class TransactionViewModel @Inject constructor(
 
     fun processCategoryAmount(param: List<TransactionsTable>): List<TransactionsTable> {
         for (i in param) {
-            i.labels!!.catAmountLabel = numberFormatOrigin.format(i.catAmount)
+            i.labels!!.catAmountLabel = digitsConverter.formatWithCurrency(i.catAmount)
         }
         return param
     }
 
     fun processTransactionAmount(param: List<TransactionsTable>): List<TransactionsTable> {
         for (i in param) {
-            i.labels!!.amountLabel = numberFormatOrigin.format(i.amount)
+            i.labels!!.amountLabel = digitsConverter.formatWithCurrency(i.amount)
         }
         return param
     }

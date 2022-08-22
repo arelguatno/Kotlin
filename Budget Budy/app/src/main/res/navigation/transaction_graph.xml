@@ -73,5 +73,9 @@
         <action
             android:id="@+id/action_currencyFragment_to_addNewEntryTransactionFragment"
             app:destination="@id/addNewEntryTransactionFragment" />
+        <argument
+            android:name="fromSettings"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
 </navigation>

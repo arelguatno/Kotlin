@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.budgetbuddy.room.AppRoomDatabase
 import com.example.budgetbuddy.room.TransactionsDao
-import com.example.budgetbuddy.NumberFormatOrigin
+import com.example.budgetbuddy.DigitsConverter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +31,7 @@ class Module {
 
     @Singleton
     @Provides
-    fun provideNumberFormatOrigin(@ApplicationContext context: Context): NumberFormatOrigin {
-        return NumberFormatOrigin(context)
+    fun provideNumberFormatOrigin(@ApplicationContext context: Context): DigitsConverter {
+        return DigitsConverter(context)
     }
 }

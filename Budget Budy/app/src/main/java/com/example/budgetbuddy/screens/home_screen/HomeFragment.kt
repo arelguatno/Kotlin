@@ -13,7 +13,7 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
 import com.example.budgetbuddy.screens.transactions_screen.PrevAndCurrent
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
-import com.example.budgetbuddy.NumberFormatOrigin
+import com.example.budgetbuddy.DigitsConverter
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -89,7 +89,7 @@ class HomeFragment : MainFragment() {
 
         viewModel.getPrevAndCurrentSpending().observe(viewLifecycleOwner) {
             if (it != null) {
-                binding.spendingReport.txtTotalSpent.text = numberFormat.format(it.current)
+                binding.spendingReport.txtTotalSpent.text = digitsConverter.formatWithCurrency(it.current)
                 var barEntries = ArrayList<BarEntry>()
 
                 barEntries.add(BarEntry(0f, it.prev.toFloat())) // last month
@@ -163,7 +163,7 @@ class HomeFragment : MainFragment() {
         barChart.xAxis.setDrawGridLines(false);
         barChart.axisLeft.setStartAtZero(true);
         barChart.barData.setValueTextColor(Color.WHITE)
-        barChart.barData.setValueFormatter(BarChartDataFormatter(numberFormat))
+        barChart.barData.setValueFormatter(BarChartDataFormatter(digitsConverter))
         barChart.barData.setValueTextSize(8f)
         barChart.setExtraOffsets(0f, 0f, 0f, 0.5f)  // bottom padding
 
@@ -178,12 +178,12 @@ class HomeFragment : MainFragment() {
 
     }
 
-    class BarChartDataFormatter(val numberFormat: NumberFormatOrigin) : ValueFormatter() {
+    class BarChartDataFormatter(val numberFormat: DigitsConverter) : ValueFormatter() {
 
         override fun getFormattedValue(
             value: Float
         ): String {
-            return "${numberFormat.format(value.toDouble())}"
+            return "${numberFormat.formatWithCurrency(value.toDouble())}"
         }
     }
 }

@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Budget Buddy</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="PREFERENCE_CURRENCY_ID">com.example.budgetbuddy.preference_currency</string>
+    <string name="currency_id">com.example.budgetbuddy.preference_currency_transaction</string>
+    <string name="global_currency_id">com.example.budgetbuddy.preference_currency_global</string>
     <string name="selected_tab">selected_tab_transaction</string>
     <string name="future">Future</string>
     <string name="budget_buddy">Budget Buddy</string>

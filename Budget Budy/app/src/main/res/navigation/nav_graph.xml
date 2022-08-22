@@ -32,8 +32,10 @@
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
-            android:id="@+id/action_settingsFragment_to_currencyFragment2"
-            app:destination="@id/currencyFragment2" />
+            android:id="@+id/action_settingsFragment_to_currencyFragment"
+            app:destination="@id/currencyFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/transactionDetailsFragment"
@@ -48,11 +50,15 @@
             app:argType="com.example.budgetbuddy.room.tables.TransactionsTable" />
     </fragment>
     <fragment
-        android:id="@+id/currencyFragment2"
+        android:id="@+id/currencyFragment"
         android:name="com.example.budgetbuddy.fragments.currency.CurrencyFragment"
         android:label="CurrencyFragment" >
         <action
             android:id="@+id/action_currencyFragment2_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <argument
+            android:name="fromSettings"
+            app:argType="boolean"
+            android:defaultValue="true" />
     </fragment>
 </navigation>

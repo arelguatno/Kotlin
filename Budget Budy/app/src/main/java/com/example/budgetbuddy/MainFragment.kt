@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 abstract class MainFragment : Fragment() {
-    @Inject lateinit var numberFormat: NumberFormatOrigin
+    @Inject lateinit var digitsConverter: DigitsConverter
 
     companion object {
         internal lateinit var sharedPref: SharedPreferences

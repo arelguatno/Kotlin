@@ -250,7 +250,7 @@ class ReportingPeriodFragment : MainFragment() {
             sum += list[i].catAmount!!
 
             colors.add(Color.parseColor(colorsArray[i]))
-            binding.txtSum.text = numberFormat.format(sum)
+            binding.txtSum.text = digitsConverter.formatWithCurrency(sum)
         }
 
         val dataSet = PieDataSet(dataEntries, "")

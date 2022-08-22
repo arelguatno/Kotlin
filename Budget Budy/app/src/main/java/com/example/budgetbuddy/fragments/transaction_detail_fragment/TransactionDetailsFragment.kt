@@ -108,7 +108,7 @@ class TransactionDetailsFragment : MainFragment() {
 
             binding.imgCategory.setImageResource(it.category!!.imageID)
 
-            binding.txtPrice.text = numberFormat.format(it.amount)
+            binding.txtPrice.text = digitsConverter.formatWithCurrency(it.amount)
                // String.format("-${it.currency?.currencySign} %.2f", it.amount)
             binding.txtDate.text = dateToNice(it.date!!)
         }

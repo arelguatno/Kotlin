@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentSettingsBinding
+import com.example.budgetbuddy.fragments.currency.CurrencyFragmentDirections
+import com.example.budgetbuddy.screens.transactions_screen.TransactionFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,12 +31,12 @@ class SettingsFragment : MainFragment() {
         super.onStart()
         initViews()
         initViewModelObserver()
-        viewModel.setCurrency(numberFormat.getSavedCurrency())
+        viewModel.setCurrency(digitsConverter.getCurrencySettings())
     }
 
     private fun initViewModelObserver() {
-        viewModel.getCurrency().observe(viewLifecycleOwner){
-            binding.settingsDisplay.txtCurrency.text = it.textIcon.substring(0,3)
+        viewModel.getCurrency().observe(viewLifecycleOwner) {
+            binding.settingsDisplay.txtCurrency.text = it.textIcon.substring(0, 3)
         }
     }
 
@@ -44,7 +46,8 @@ class SettingsFragment : MainFragment() {
         }
 
         binding.settingsDisplay.currency.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_currencyFragment2)
+            val action = SettingsFragmentDirections.actionSettingsFragmentToCurrencyFragment()
+            findNavController().navigate(action)
         }
     }
 }

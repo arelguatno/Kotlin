@@ -6,17 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentCurrencyBinding
 import com.example.budgetbuddy.fragments.CurrencyAdapter
 import com.example.budgetbuddy.fragments.category.SimpleListObject
+import com.example.budgetbuddy.fragments.transaction_detail_fragment.TransactionDetailsFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CurrencyFragment : MainFragment() {
     private lateinit var binding: FragmentCurrencyBinding
+    private val args: CurrencyFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +43,13 @@ class CurrencyFragment : MainFragment() {
     }
 
     private fun loadItems() {
-        val items = CurrencyAdapter(CurrencyList.geItems(), numberFormat.getSavedCurrency())
+        var selectedItem = if (args.fromSettings) {
+            digitsConverter.getCurrencySettings()
+        } else {
+            digitsConverter.getCurrencyNewEntry()
+        }
+
+        val items = CurrencyAdapter(CurrencyList.geItems(), selectedItem)
         binding.item.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.item.adapter = items
@@ -56,12 +65,17 @@ class CurrencyFragment : MainFragment() {
 
     private fun savePreparedCurrency(uniqueID: Int) {
         sharedPref =
-            activity?.getSharedPreferences(getString(R.string.PREFERENCE_CURRENCY_ID), Context.MODE_PRIVATE)!!
+            activity?.getSharedPreferences(
+                getString(R.string.global_currency_id),
+                Context.MODE_PRIVATE
+            )!!
         with(sharedPref!!.edit()) {
-            putInt(
-                getString(R.string.PREFERENCE_CURRENCY_ID),
-                uniqueID
-            )
+            if (args.fromSettings) {
+                putInt(getString(R.string.global_currency_id), uniqueID)
+            } else {
+                putInt(getString(R.string.currency_id), uniqueID)
+            }
+
             apply()
         }
     }

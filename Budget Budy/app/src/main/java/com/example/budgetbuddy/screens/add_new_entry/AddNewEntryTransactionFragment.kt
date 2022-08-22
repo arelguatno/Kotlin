@@ -140,10 +140,11 @@ class AddNewEntryTransactionFragment : MainFragment() {
             viewModel.setDate(result as Date)
         }
 
-//        sharedPref =
-//            activity?.getSharedPreferences(getString(R.string.PREFERENCE_CURRENCY_ID), Context.MODE_PRIVATE)!!
-//        val userSelectsCurrency = sharedPref!!.getInt(getString(R.string.PREFERENCE_CURRENCY_ID), 1)
-        viewModel.setCurrency(numberFormat.getSavedCurrency())
+        sharedPref =
+            activity?.getSharedPreferences(getString(R.string.global_currency_id), Context.MODE_PRIVATE)!!
+        val userSelectsCurrency = sharedPref!!.getInt(getString(R.string.currency_id), 1)
+        //viewModel.setCurrency(numberFormat.getSavedCurrency())
+        viewModel.setCurrency(userSelectsCurrency)
     }
 
     private fun setUpViewModelsListener() {
