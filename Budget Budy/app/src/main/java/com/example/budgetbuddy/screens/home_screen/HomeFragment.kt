@@ -70,11 +70,7 @@ class HomeFragment : MainFragment() {
         prev.time = cal.time
         prev.add(Calendar.MONTH, -1)
 
-        viewModel.fetchTopSpentThisMonthAndPreviousMonth(
-            cal.get(Calendar.MONTH),
-            cal.get(Calendar.YEAR),
-            prev.get(Calendar.MONTH),
-            prev.get(Calendar.YEAR)
+        viewModel.fetchTopSpentThisMonthAndPreviousMonth(prev.get(Calendar.MONTH), prev.get(Calendar.YEAR)
         )
             .observe(viewLifecycleOwner) {
                 if (it.isNotEmpty()) {

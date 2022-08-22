@@ -56,3 +56,15 @@ fun getDateQuarter(v: String): Int{
         else -> {1}
     }
 }
+
+fun getCurrentMonth(): Int{
+    var cal = Calendar.getInstance()
+    cal.time = Date()
+    return cal.get(Calendar.MONTH)
+}
+
+fun getCurrentYear(): Int{
+    var cal = Calendar.getInstance()
+    cal.time = Date()
+    return cal.get(Calendar.YEAR)
+}

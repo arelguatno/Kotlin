@@ -8,20 +8,16 @@ import java.util.*
 
 @Entity(tableName = "transactions_table")
 data class TransactionsTable(
-    var amount: Double,
+    var amount: Double = 0.00,
     var note: String? = "",
     var date: Date? = Date(),
     var timeStamp: Date? = Date(),
-    @Embedded(prefix = "currency_")
-    var currency: SimpleListObject?,
-    @Embedded(prefix = "category_")
-    var category: SimpleListObject?,
-    @Embedded(prefix = "time_range_")
-    var time_range: DateRange?,
     var catAmount: Double = 0.00,
     var percentage: Double = 0.00,
-    @Embedded(prefix = "text_labels_")
-    var labels: Labels? = Labels("", "", ""),
+    @Embedded(prefix = "currency_") var currency: SimpleListObject?,
+    @Embedded(prefix = "category_") var category: SimpleListObject?,
+    @Embedded(prefix = "time_range_") var time_range: DateRange? = DateRange(0, 0, 0, 0, 0),
+    @Embedded(prefix = "text_labels_") var labels: Labels? = Labels("", "", ""),
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

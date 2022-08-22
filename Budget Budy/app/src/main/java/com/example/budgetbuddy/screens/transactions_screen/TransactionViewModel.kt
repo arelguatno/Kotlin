@@ -6,6 +6,8 @@ import com.example.budgetbuddy.room.TransactionsRepository
 import com.example.budgetbuddy.room.tables.TransactionList
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.DigitsConverter
+import com.example.budgetbuddy.utils.getCurrentMonth
+import com.example.budgetbuddy.utils.getCurrentYear
 import com.example.budgetbuddy.utils.getDateQuarter
 import com.example.budgetbuddy.utils.intMonthLongToString
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -64,21 +66,13 @@ class TransactionViewModel @Inject constructor(
     val fetchRecentData = repository.fetchRecentTransaction().asLiveData()
 
     val fetchTopSpendingCurrentMonth =
-        repository.fetchTopSpending(month = 7, year = 2022).asLiveData()
+        repository.fetchTopSpending().asLiveData()
 
     fun fetchTopSpentThisMonthAndPreviousMonth(
-        currentMonth: Int,
-        currentYear: Int,
         prevMonth: Int,
         prevYear: Int
     ): LiveData<List<TransactionsTable>> {
-
-        return repository.fetchTopSpentThisMonthAndPreviousMonth(
-            currentMonth,
-            currentYear,
-            prevMonth,
-            prevYear
-        ).asLiveData()
+        return repository.fetchTopSpentThisMonthAndPreviousMonth(prevMonth, prevYear).asLiveData()
     }
 
     val fetchTransactionsGroupByCategory =
@@ -259,7 +253,7 @@ class TransactionViewModel @Inject constructor(
         return totalExpensesLabel
     }
 
-    fun getTotalInflow(): MutableLiveData<String>{
+    fun getTotalInflow(): MutableLiveData<String> {
         return totalInflow
     }
 

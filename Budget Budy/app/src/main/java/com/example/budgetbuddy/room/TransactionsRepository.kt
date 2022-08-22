@@ -9,8 +9,12 @@ class TransactionsRepository @Inject constructor(
     private val transactionsDao: TransactionsDao
 ) {
 
-    fun fetchRecordByMonthAndYear(month: Int, year: Int, date:Long): Flow<List<TransactionsTable>> {
-        return transactionsDao.fetchRecordByMonthAndYear(month, year,date)
+    fun fetchRecordByMonthAndYear(
+        month: Int,
+        year: Int,
+        date: Long
+    ): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchRecordByMonthAndYear(month, year, date)
     }
 
     fun fetchRecordByMonthAndYearFuture(date: Long): Flow<List<TransactionsTable>> {
@@ -29,19 +33,29 @@ class TransactionsRepository @Inject constructor(
         return transactionsDao.fetchRecentTransaction()
     }
 
-    fun fetchTopSpending(month: Int, year: Int): Flow<List<TransactionsTable>> {
-        return transactionsDao.fetchTopSpending(month, year)
+    fun fetchTopSpending(): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchTopSpending()
     }
 
-    fun fetchTopSpentThisMonthAndPreviousMonth(currentMonth: Int, currentYear: Int, prevMonth: Int, prevYear:Int): Flow<List<TransactionsTable>> {
-        return transactionsDao.fetchTopSpentThisMonthAndPreviousMonth(currentMonth,currentYear,prevMonth,prevYear)
+    fun fetchTopSpentThisMonthAndPreviousMonth(
+        prevMonth: Int,
+        prevYear: Int
+    ): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchTopSpentThisMonthAndPreviousMonth(
+            prevMonth = prevMonth,
+            prevYear = prevYear
+        )
     }
 
     fun fetchReportingByMonthAndYear(month: Int, year: Int): Flow<List<TransactionsTable>> {
         return transactionsDao.fetchReportingByMonthAndYear(month, year)
     }
 
-    fun fetchReportingByMonthAndYearAndDay(month: Int, year: Int, day: Int): Flow<List<TransactionsTable>> {
+    fun fetchReportingByMonthAndYearAndDay(
+        month: Int,
+        year: Int,
+        day: Int
+    ): Flow<List<TransactionsTable>> {
         return transactionsDao.fetchReportingByMonthAndYearAndDay(month, year, day)
     }
 
@@ -65,11 +79,11 @@ class TransactionsRepository @Inject constructor(
         transactionsDao.insertProfileRecord(transactionsTable)
     }
 
-    suspend fun deleteTransaction(transactionsTable: TransactionsTable){
+    suspend fun deleteTransaction(transactionsTable: TransactionsTable) {
         transactionsDao.deleteTransaction(transactionsTable)
     }
 
-    suspend fun updateTransaction(transactionsTable: TransactionsTable){
+    suspend fun updateTransaction(transactionsTable: TransactionsTable) {
         transactionsDao.updateTransaction(transactionsTable)
     }
 }

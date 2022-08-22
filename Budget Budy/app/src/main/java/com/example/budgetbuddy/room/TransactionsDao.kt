@@ -2,6 +2,8 @@ package com.example.budgetbuddy.room
 
 import androidx.room.*
 import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.utils.getCurrentMonth
+import com.example.budgetbuddy.utils.getCurrentYear
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 
@@ -28,15 +30,23 @@ interface TransactionsDao {
     fun fetchRecordByMonthAndYearFuture(date: Long): Flow<List<TransactionsTable>>
 
     @Query("SELECT * FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year and date<=:date ORDER BY date DESC")
-    fun fetchRecordByMonthAndYear(month: Int, year: Int, date:Long): Flow<List<TransactionsTable>>
+    fun fetchRecordByMonthAndYear(month: Int, year: Int, date: Long): Flow<List<TransactionsTable>>
 
     // Month, Year
     @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_month=:month and time_range_year =:year and date<=:date) as percentage FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year and date<=:date GROUP BY category_rowValue ORDER BY sum(amount) DESC")
-    fun fetchReportingByMonthAndYear(month: Int, year: Int, date: Long = Date().time): Flow<List<TransactionsTable>>
+    fun fetchReportingByMonthAndYear(
+        month: Int,
+        year: Int,
+        date: Long = Date().time
+    ): Flow<List<TransactionsTable>>
 
     // Month, Year, Day
     @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_month=:month and time_range_year =:year and time_range_day=:day) as percentage FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year AND time_range_day=:day GROUP BY category_rowValue ORDER BY sum(amount) DESC")
-    fun fetchReportingByMonthAndYearAndDay(month: Int, year: Int, day: Int): Flow<List<TransactionsTable>>
+    fun fetchReportingByMonthAndYearAndDay(
+        month: Int,
+        year: Int,
+        day: Int
+    ): Flow<List<TransactionsTable>>
 
     // Year
     @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_year =:year) as percentage FROM transactions_table WHERE time_range_year =:year GROUP BY category_rowValue ORDER BY sum(amount) DESC")
@@ -58,9 +68,19 @@ interface TransactionsDao {
     fun fetchRecentTransaction(date: Long = Date().time): Flow<List<TransactionsTable>>
 
     @Query("SELECT *, sum(amount) AS catAmount, sum(amount) * 100.0 / (select sum(amount) from transactions_table where time_range_month=:month and time_range_year =:year and date<=:date) as percentage FROM transactions_table WHERE time_range_month =:month AND time_range_year =:year and date<=:date GROUP BY category_rowValue ORDER BY sum(amount) DESC LIMIT 3")
-    fun fetchTopSpending(month: Int, year: Int, date: Long = Date().time): Flow<List<TransactionsTable>>
+    fun fetchTopSpending(
+        month: Int = getCurrentMonth(),
+        year: Int = getCurrentYear(),
+        date: Long = Date().time
+    ): Flow<List<TransactionsTable>>
 
     @Query("SELECT *, sum(amount) as catAmount, (select sum(amount) from transactions_table where time_range_month=:prevMonth and time_range_year=:prevYear and date<=:date) as percentage from transactions_table where time_range_month=:currentMonth and time_range_year<=:currentYear and date<=:date")
-    fun fetchTopSpentThisMonthAndPreviousMonth(currentMonth: Int, currentYear: Int, prevMonth: Int, prevYear:Int, date: Long = Date().time): Flow<List<TransactionsTable>>
+    fun fetchTopSpentThisMonthAndPreviousMonth(
+        currentMonth: Int = getCurrentMonth(),
+        currentYear: Int = getCurrentYear(),
+        prevMonth: Int,
+        prevYear: Int,
+        date: Long = Date().time
+    ): Flow<List<TransactionsTable>>
 
 }
