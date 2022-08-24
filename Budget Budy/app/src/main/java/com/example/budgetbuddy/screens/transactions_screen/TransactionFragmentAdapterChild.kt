@@ -3,13 +3,19 @@ package com.example.budgetbuddy.screens.transactions_screen
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbuddy.databinding.TransactionsCustomRowBinding
 import com.example.budgetbuddy.fragments.category.CategoryList
+import com.example.budgetbuddy.fragments.transaction_detail_fragment.TransactionDetailsFragmentArgs
 import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.screens.search_screen.SearchTransactionFragmentDirections
 
 
-class TransactionFragmentAdapterChild(private val children: List<TransactionsTable>) :
+class TransactionFragmentAdapterChild(
+    private val children: List<TransactionsTable>,
+    private val searchFeature: Boolean
+) :
     RecyclerView.Adapter<TransactionFragmentAdapterChild.MyViewHolder>() {
 
     class MyViewHolder(val binding: TransactionsCustomRowBinding) :
@@ -38,13 +44,19 @@ class TransactionFragmentAdapterChild(private val children: List<TransactionsTab
             holder.binding.txtCostPrice.text = item.labels!!.catAmountLabel
             holder.binding.txtNote.text = ""
         } else {
-            //Transaction View
+            //Detailed
             holder.binding.txtCostPrice.text = item.labels!!.amountLabel
             holder.itemView.setOnClickListener {
-                val action =
+                val action = if (searchFeature) {
+                    SearchTransactionFragmentDirections.actionNewSearchFragmentToTransactionDetailsFragment2(
+                        item
+                    )
+                } else {
                     TransactionFragmentDirections.actionTransactionFragmentToTransactionDetailsFragment(
                         item
                     )
+                }
+
                 it.findNavController().navigate(action)
             }
             holder.binding.txtNote.text = item.note

@@ -35,11 +35,13 @@
         <entry key="app/src/main/res/drawable/ic_category_personal.xml" value="0.234" />
         <entry key="app/src/main/res/drawable/ic_fashion.xml" value="0.3425" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.154" />
+        <entry key="app/src/main/res/drawable/search_view_bg.xml" value="0.279" />
         <entry key="app/src/main/res/drawable/shape_drop_down_normal.xml" value="0.387" />
         <entry key="app/src/main/res/layout/activity_add_new_transaction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27808988764044945" />
         <entry key="app/src/main/res/layout/activity_note_fragment2.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/activity_reporting_period.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/blank_layout.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/checkroom-48px.xml" value="0.35784523300555793" />
         <entry key="app/src/main/res/layout/date_bottom_sheet_dialog.xml" value="0.30867892261650276" />
@@ -53,9 +55,11 @@
         <entry key="app/src/main/res/layout/fragment_currency.xml" value="0.4008547008547009" />
         <entry key="app/src/main/res/layout/fragment_date.xml" value="0.30854700854700856" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3047699451245251" />
+        <entry key="app/src/main/res/layout/fragment_new_search.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_note.xml" value="0.30854700854700856" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_reportin_period.xml" value="0.4566053869174861" />
+        <entry key="app/src/main/res/layout/fragment_search_transaction.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_settings_currency.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.33" />
@@ -67,12 +71,14 @@
         <entry key="app/src/main/res/layout/newtransactionfragment.xml" value="0.3047699451245251" />
         <entry key="app/src/main/res/layout/qyqy.xml" value="3.8642857142857143" />
         <entry key="app/src/main/res/layout/recent_transactions.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/search_parent.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/settings_about_us.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/settings_app_name.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/settings_display.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/settings_premium.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/simplelist_custom_row.xml" value="0.5" />
         <entry key="app/src/main/res/layout/spending_report.xml" value="0.30867892261650276" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/transactions_custom_row.xml" value="0.33" />
         <entry key="app/src/main/res/layout/transactions_parent.xml" value="0.33" />
         <entry key="app/src/main/res/menu/add_transaction.xml" value="0.33" />
@@ -83,6 +89,7 @@
         <entry key="app/src/main/res/menu/notification.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/menu/reporting_menu.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/search.xml" value="0.30867892261650276" />
+        <entry key="app/src/main/res/menu/search_new.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.154" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.154" />
       </map>

@@ -14,6 +14,10 @@ class DigitsConverter(val context: Context) : com.example.budgetbuddy.utils.Deci
         return "${currencySign()} ${decimalFormat(value)} "
     }
 
+    fun <b> formatWithCurrencyWithNegative(value: b): String {
+        return "-${currencySign()} ${decimalFormat(value)} "
+    }
+
     private fun <c> decimalFormat(value: c): String {
         return numberFormat.format(value)
     }

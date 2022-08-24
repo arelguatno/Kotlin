@@ -83,4 +83,7 @@ interface TransactionsDao {
         date: Long = Date().time
     ): Flow<List<TransactionsTable>>
 
+    //Search feature
+    @Query("SELECT * FROM transactions_table WHERE category_rowValue LIKE :query OR amount like :query OR note LIKE :query ORDER by date DESC")
+    fun searchFeature(query: String): Flow<List<TransactionsTable>>
 }

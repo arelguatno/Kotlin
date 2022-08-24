@@ -56,7 +56,7 @@ class RecentTransactionAdapter :
             holder.binding.txtNote.text = item.labels!!.catAmountLabel
         } else {
             //Recent Transactions
-            holder.binding.txtCostPrice.text = "-${item.labels!!.amountLabel}"
+            holder.binding.txtCostPrice.text = item.labels!!.amountLabel
             holder.binding.txtNote.text = dateToNice(item.date!!)
         }
 

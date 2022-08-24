@@ -2,15 +2,12 @@ package com.example.budgetbuddy.screens.transactions_screen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import androidx.core.view.marginTop
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbuddy.databinding.TransactionsParentBinding
 import com.example.budgetbuddy.room.tables.TransactionList
-import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.utils.intDayToString
 import com.example.budgetbuddy.utils.intMonthLongToString
 import com.example.budgetbuddy.utils.transformSingleDigitToTwoDigit
@@ -67,7 +64,7 @@ class TransactionFragmentAdapterHeader :
         holder.binding.monthAndYear.text = "${intMonthLongToString(cal.get(Calendar.MONTH))} ${cal.get(Calendar.YEAR)}"
         holder.binding.total.text = item.child[item.child.lastIndex].labels!!.headerLabel
 
-        val child = TransactionFragmentAdapterChild(item.child.reversed())
+        val child = TransactionFragmentAdapterChild(item.child.reversed(), false)
         holder.binding.rvChild.layoutManager = LinearLayoutManager(
             holder.binding.rvChild.context,
             LinearLayoutManager.VERTICAL,

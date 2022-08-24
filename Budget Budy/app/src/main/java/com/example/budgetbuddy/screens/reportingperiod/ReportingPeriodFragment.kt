@@ -10,14 +10,12 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.DateRangeBottomSheetDialogBinding
 import com.example.budgetbuddy.databinding.FragmentReportinPeriodBinding
 import com.example.budgetbuddy.enums.TimeRange
-import com.example.budgetbuddy.fragments.category.CategoryList
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.screens.transactions_screen.DateAndTimeRange
 import com.example.budgetbuddy.screens.transactions_screen.TransactionFragmentAdapterChild
@@ -30,7 +28,6 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -131,7 +128,7 @@ class ReportingPeriodFragment : MainFragment() {
         ).observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 val formattedData = viewModel.processCategoryAmount(it)
-                val child = TransactionFragmentAdapterChild(formattedData)
+                val child = TransactionFragmentAdapterChild(formattedData, true)
                 binding.recycler.layoutManager = LinearLayoutManager(
                     binding.recycler.context,
                     LinearLayoutManager.VERTICAL,

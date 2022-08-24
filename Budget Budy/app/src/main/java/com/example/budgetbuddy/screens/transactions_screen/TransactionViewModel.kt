@@ -65,6 +65,8 @@ class TransactionViewModel @Inject constructor(
 
     val fetchRecentData = repository.fetchRecentTransaction().asLiveData()
 
+
+
     val fetchTopSpendingCurrentMonth =
         repository.fetchTopSpending().asLiveData()
 
@@ -166,8 +168,8 @@ class TransactionViewModel @Inject constructor(
         }
         sumAmount.value = totalExpenses.value!! - inflowAmount.value!!
 
-        totalExpensesLabel.value = digitsConverter.formatWithCurrency(totalExpenses.value)
-        totalSumLabel.value = digitsConverter.formatWithCurrency(sumAmount.value)
+        totalExpensesLabel.value = digitsConverter.formatWithCurrencyWithNegative(totalExpenses.value)
+        totalSumLabel.value = digitsConverter.formatWithCurrencyWithNegative(sumAmount.value)
         totalInflow.value = digitsConverter.formatWithCurrency(0.00)
         return newFormattedList
     }

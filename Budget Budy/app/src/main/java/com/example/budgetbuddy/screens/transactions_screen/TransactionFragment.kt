@@ -1,10 +1,14 @@
 package com.example.budgetbuddy.screens.transactions_screen
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,13 +16,17 @@ import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentTransactionBinding
 import com.example.budgetbuddy.enums.TimeRange
+import com.example.budgetbuddy.screens.add_new_entry.AddNewEntryTransactionFragment
+import com.example.budgetbuddy.screens.add_new_entry.AddNewTransactionActivity
 import com.example.budgetbuddy.screens.reportingperiod.ReportingPeriodActivity
+import com.example.budgetbuddy.screens.search_screen.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
 class TransactionFragment() : MainFragment() {
     private lateinit var binding: FragmentTransactionBinding
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
 
     companion object {
 
@@ -37,10 +45,43 @@ class TransactionFragment() : MainFragment() {
 
     override fun onStart() {
         super.onStart()
-
         initOnCLick()
         initViewModel()
         initTransactionData()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        menu()
+        startForResult()
+    }
+
+    private fun menu() {
+        binding.appBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.search -> launchSearchActivity()
+            }
+            true
+        }
+    }
+
+    private fun launchSearchActivity() {
+        val intent = Intent(requireContext(), SearchActivity::class.java).apply {
+            // Put extra
+        }
+        startForResult.launch(intent)
+    }
+
+    private fun startForResult() {
+        startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+
+                if (result.resultCode == Activity.RESULT_OK) {
+                    if (result.data?.getSerializableExtra(AddNewEntryTransactionFragment.EDIT_EXISTING_ENTRY) != null) {
+                        //do anything
+                    }
+                }
+            }
     }
 
     private fun initTransactionData() {

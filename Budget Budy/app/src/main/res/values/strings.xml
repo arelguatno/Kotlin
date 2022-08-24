@@ -25,7 +25,7 @@
     <string name="calendar">Calendar</string>
     <string name="notes">Notes</string>
     <string name="reports">Reports</string>
-    <string name="expense">Expense</string>
+    <string name="expense">Expenses</string>
     <string name="no_records_found">No records found</string>
     <string name="transactions">Transactions</string>
     <string name="inflow">Inflow</string>
