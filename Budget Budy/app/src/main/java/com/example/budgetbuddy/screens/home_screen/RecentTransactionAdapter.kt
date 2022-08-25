@@ -1,5 +1,6 @@
 package com.example.budgetbuddy.screens.home_screen
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -56,6 +57,9 @@ class RecentTransactionAdapter :
             holder.binding.txtNote.text = item.labels!!.catAmountLabel
         } else {
             //Recent Transactions
+            if (item.category!!.uniqueID == getIncomeID()) {
+                holder.binding.txtCostPrice.setTextColor(Color.parseColor("#ff00ddff"))
+            }
             holder.binding.txtCostPrice.text = item.labels!!.amountLabel
             holder.binding.txtNote.text = dateToNice(item.date!!)
         }

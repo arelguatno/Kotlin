@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
+import kotlin.math.abs
 
 @HiltViewModel
 class TransactionViewModel @Inject constructor(
@@ -23,13 +24,13 @@ class TransactionViewModel @Inject constructor(
 ) : ViewModel() {
     private val date = MutableLiveData(Date())
     private var totalExpenses = MutableLiveData(0.00)
+    private var totalInflow = MutableLiveData(0.00)
     private var sumAmount = MutableLiveData(0.00)
-    private var inflowAmount = MutableLiveData(0.00)
     private var dateAndTimeRange = MutableLiveData<DateAndTimeRange>()
     private var prevAndCurrentSpending = MutableLiveData<PrevAndCurrent>()
     private var totalExpensesLabel = MutableLiveData<String>()
     private var totalSumLabel = MutableLiveData("")
-    private var totalInflow = MutableLiveData("")
+    private var totalInflowLabel = MutableLiveData("")
 
     fun setPrevAndCurrentSpending(v: PrevAndCurrent) {
         prevAndCurrentSpending.value = v
@@ -58,13 +59,15 @@ class TransactionViewModel @Inject constructor(
             TimeRange.QUARTER -> repository.fetchReportingByQuarterAndYear(quarter, year)
                 .asLiveData()
             TimeRange.ALL -> repository.fetchReportingAll().asLiveData()
-            TimeRange.FUTURE -> repository.fetchRecordByMonthAndYearFuture(date).asLiveData()
-            else -> repository.fetchRecordByMonthAndYear(month, year, date).asLiveData()
+            TimeRange.FUTURE -> repository.fetchRecordByMonthAndYearFuture(date)
+                .asLiveData()  // transactions
+            else -> repository.fetchRecordByMonthAndYear(month, year, date)
+                .asLiveData()     // transactions
         }
     }
 
     val fetchRecentData = repository.fetchRecentTransaction().asLiveData()
-
+    val fetchMyWallet = repository.fetchMyWallet().asLiveData()
 
 
     val fetchTopSpendingCurrentMonth =
@@ -137,26 +140,39 @@ class TransactionViewModel @Inject constructor(
         var tempDate = Calendar.getInstance().time
         var newFormattedList = mutableListOf<TransactionList>()
         totalExpenses.value = 0.00
+        totalInflow.value = 0.00
         for (i in param) { // Loop through all data
             if (tempDate != i.date) { // found a unique date
                 val childList = mutableListOf<TransactionsTable>()
-                var totalChild = 0.0
+                var subExpensesTotal = 0.0
+                var subInflowTotal = 0.0
+
                 for (y in param) {   // loop again and find transaction with the same date
                     if (i.date == y.date) {
 
-                        totalExpenses.value = totalExpenses.value?.plus(y.amount)
+                        if (y.incomeInflow) {
+                            totalInflow.value = totalInflow.value?.plus(y.amount)
+                            subInflowTotal = subInflowTotal.plus(y.amount)
+                        }
+                        if (!y.incomeInflow) {
+                            totalExpenses.value = totalExpenses.value?.plus(y.amount)
+                            subExpensesTotal = subExpensesTotal.plus(y.amount)
+                        }
 
                         //Transactions label for child
                         y.labels!!.catAmountLabel = digitsConverter.formatWithCurrency(y.catAmount)
                         y.labels!!.amountLabel = digitsConverter.formatWithCurrency(y.amount)
 
                         //Transactions label for header
-                        totalChild = totalChild.plus(y.amount)
-                        y.labels!!.headerLabel = digitsConverter.formatWithCurrency(totalChild)
+                        y.labels!!.headerLabel = digitsConverter.formatCurrencyPositiveOrNegative(
+                            subInflowTotal,
+                            subExpensesTotal
+                        )
 
                         childList.add(y)
                     }
                 }
+
                 val row = TransactionList(header = i.date!!, child = childList)
                 newFormattedList.add(row)
 
@@ -166,11 +182,14 @@ class TransactionViewModel @Inject constructor(
             }
             tempDate = i.date
         }
-        sumAmount.value = totalExpenses.value!! - inflowAmount.value!!
+        sumAmount.value = totalInflow.value!! - totalExpenses.value!!
 
-        totalExpensesLabel.value = digitsConverter.formatWithCurrencyWithNegative(totalExpenses.value)
-        totalSumLabel.value = digitsConverter.formatWithCurrencyWithNegative(sumAmount.value)
-        totalInflow.value = digitsConverter.formatWithCurrency(0.00)
+        totalExpensesLabel.value =
+            digitsConverter.formatWithCurrencyWithNegative(totalExpenses.value)
+        totalInflowLabel.value = digitsConverter.formatWithCurrency(totalInflow.value)
+        totalSumLabel.value =
+            digitsConverter.formatCurrencyPositiveOrNegative(totalInflow.value, totalExpenses.value)
+
         return newFormattedList
     }
 
@@ -256,7 +275,7 @@ class TransactionViewModel @Inject constructor(
     }
 
     fun getTotalInflow(): MutableLiveData<String> {
-        return totalInflow
+        return totalInflowLabel
     }
 
     fun processCategoryAmount(param: List<TransactionsTable>): List<TransactionsTable> {

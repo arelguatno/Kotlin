@@ -2,6 +2,7 @@ package com.example.budgetbuddy.fragments.category
 
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.fragments.currency.CurrencyList
+import com.example.budgetbuddy.utils.getIncomeID
 
 object CategoryList {
 
@@ -19,10 +20,10 @@ object CategoryList {
         list[8] = SimpleListObject(R.drawable.ic_baseline_apps_24, "Apps", 8,"","")
         list[9] = SimpleListObject(R.drawable.ic_baseline_handyman_24, "HouseWare", 9,"","")
         list[10] = SimpleListObject(R.drawable.ic_baseline_medication_24, "Health", 10,"","")
-        list[11] = SimpleListObject(R.drawable.ic_baseline_income_24, "Income", 11,"","")
+        list[11] = SimpleListObject(R.drawable.ic_baseline_income_24, "Income", getIncomeID(),"","") // permanent ID, don't change it
         list[12] = SimpleListObject(R.drawable.ic_baseline_circle_24, "Other Expenses", 12,"","")
 
-        return list.toList()
+        return list.toList().sortedBy { (key, value) -> value.rowValue }
     }
 
     fun getImageID(v: Int): Int?{

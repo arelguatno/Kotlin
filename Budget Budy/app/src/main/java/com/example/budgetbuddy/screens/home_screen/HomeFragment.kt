@@ -61,7 +61,17 @@ class HomeFragment : MainFragment() {
         initSpendingReports()
         initRecentData()
         initTotalSpentThisMonth()
+        initWallet()
+    }
 
+    private fun initWallet() {
+        viewModel.fetchMyWallet.observe(viewLifecycleOwner){
+            if(it.isNotEmpty()){
+                val totalExpenses = it[0].catAmount
+                val totalInflow = it[0].percentage
+                binding.myWallet.txtWallet.text = digitsConverter.formatCurrencyPositiveOrNegative(totalInflow,totalExpenses)
+            }
+        }
     }
 
     private fun initTotalSpentThisMonth() {

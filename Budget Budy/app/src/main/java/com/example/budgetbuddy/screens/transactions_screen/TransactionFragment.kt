@@ -3,6 +3,7 @@ package com.example.budgetbuddy.screens.transactions_screen
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.example.budgetbuddy.screens.add_new_entry.AddNewEntryTransactionFragm
 import com.example.budgetbuddy.screens.add_new_entry.AddNewTransactionActivity
 import com.example.budgetbuddy.screens.reportingperiod.ReportingPeriodActivity
 import com.example.budgetbuddy.screens.search_screen.SearchActivity
+import com.example.budgetbuddy.utils.intMonthShortToString
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -88,27 +90,21 @@ class TransactionFragment() : MainFragment() {
         binding.homeFragmentRecyclerViewParent.itemAnimator = null
         binding.homeFragmentRecyclerViewParent.adapter = myAdapterHeader
         binding.homeFragmentRecyclerViewParent.layoutManager = LinearLayoutManager(requireContext())
-
-
-        val date = viewModel.getDate().value
-        cal.time = date
-        if (date != null) {
-            viewModel.setDate(date)
-        }
     }
 
     private fun initViewModel() {
         viewModel.getDate().observe(viewLifecycleOwner) {
+            val cal = Calendar.getInstance()
             cal.time = it
             val currentMonth = cal.get(Calendar.MONTH)
             val year = cal.get(Calendar.YEAR)
+            //LogStr()
             val ff = viewModel.transformDateToMonthAndYear(currentMonth, year)
 
             if (Date() >= it) {
                 binding.calendarSelect.txtDate.text = ff
                 queryData(currentMonth, year, timeRange = TimeRange.OTHERS)
             } else {
-                val c = Calendar.getInstance()
                 binding.calendarSelect.txtDate.text = getString(R.string.future)
                 queryData(timeRange = TimeRange.FUTURE)
             }
@@ -155,6 +151,7 @@ class TransactionFragment() : MainFragment() {
         year: Int = 0,
         timeRange: TimeRange
     ) {
+        println("Aye $month $year $timeRange")
         viewModel.fetchReporting(
             month = month,
             year = year,

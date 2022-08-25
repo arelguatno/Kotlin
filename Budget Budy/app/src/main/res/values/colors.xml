@@ -11,4 +11,5 @@
     <color name="white">#ffffff</color>
     <color name="dark">#808080</color>
 
+    <string name="holo_light_blue">#ff00ddff</string>
 </resources>

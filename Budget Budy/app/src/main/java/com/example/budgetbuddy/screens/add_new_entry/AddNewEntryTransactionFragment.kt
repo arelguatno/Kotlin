@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -141,7 +142,10 @@ class AddNewEntryTransactionFragment : MainFragment() {
         }
 
         sharedPref =
-            activity?.getSharedPreferences(getString(R.string.global_currency_id), Context.MODE_PRIVATE)!!
+            activity?.getSharedPreferences(
+                getString(R.string.global_currency_id),
+                Context.MODE_PRIVATE
+            )!!
         val userSelectsCurrency = sharedPref!!.getInt(getString(R.string.currency_id), 1)
         //viewModel.setCurrency(numberFormat.getSavedCurrency())
         viewModel.setCurrency(userSelectsCurrency)
@@ -164,7 +168,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
         }
 
         viewModel.getCurrency().observe(viewLifecycleOwner) {
-            binding.imgCurrency.text = it.textIcon.substring(0,3)
+            binding.imgCurrency.text = it.textIcon.substring(0, 3)
         }
 
         viewModel.getDate().observe(viewLifecycleOwner) {
@@ -219,6 +223,8 @@ class AddNewEntryTransactionFragment : MainFragment() {
             val data = Intent()
             val timestamp = Date()
 
+            var incomeFlow: Boolean = category.uniqueID == 11  //11 income see CategoryList
+
             val timeRange = DateRange(
                 day = getDateDay(ddMMdyYYY),
                 week = getDateWeek(ddMMdyYYY),
@@ -236,7 +242,8 @@ class AddNewEntryTransactionFragment : MainFragment() {
                     note = note,
                     date = Date(ddMMdyYYY),
                     timeStamp = timestamp,
-                    time_range = timeRange
+                    time_range = timeRange,
+                    incomeInflow = incomeFlow
                 )
                 data.putExtra(ADD_NEW_ENTRY, transaction)
             } else {
@@ -250,6 +257,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
                 updateTransaction.note = note
                 updateTransaction.date = Date(ddMMdyYYY)
                 updateTransaction.time_range = timeRange
+                updateTransaction.incomeInflow = incomeFlow
                 data.putExtra(EDIT_EXISTING_ENTRY, updateTransaction)
             }
 

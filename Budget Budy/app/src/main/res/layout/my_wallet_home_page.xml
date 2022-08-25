@@ -27,16 +27,22 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@string/my_wallets"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
+<!--                <ImageView-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@drawable/ic_baseline_info_24"/>-->
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/see_all"
+                    android:gravity="right"
+                    android:layout_weight="1"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -63,14 +69,16 @@
                     android:src="@drawable/wallet" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="myWallet"
+                    android:text="Total Balance"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtWallet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-$ 0.00"

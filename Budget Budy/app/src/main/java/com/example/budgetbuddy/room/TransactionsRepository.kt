@@ -55,6 +55,10 @@ class TransactionsRepository @Inject constructor(
         return transactionsDao.searchFeature(query)
     }
 
+    fun fetchMyWallet(): Flow<List<TransactionsTable>> {
+        return transactionsDao.fetchMyWallet()
+    }
+
     fun fetchReportingByMonthAndYearAndDay(
         month: Int,
         year: Int,

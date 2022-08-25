@@ -2,6 +2,7 @@ package com.example.budgetbuddy.fragments.transaction_detail_fragment
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.activity.result.ActivityResult
@@ -21,6 +22,7 @@ import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.screens.add_new_entry.AddNewEntryTransactionFragment
 import com.example.budgetbuddy.screens.add_new_entry.AddNewTransactionActivity
 import com.example.budgetbuddy.utils.dateToNice
+import com.example.budgetbuddy.utils.getIncomeID
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -107,9 +109,13 @@ class TransactionDetailsFragment : MainFragment() {
             }
 
             binding.imgCategory.setImageResource(it.category!!.imageID)
-
             binding.txtPrice.text = digitsConverter.formatWithCurrencyWithNegative(it.amount)
             binding.txtDate.text = dateToNice(it.date!!)
+
+            if (it.category!!.uniqueID == getIncomeID()) {
+                binding.txtPrice.setTextColor(Color.parseColor(getString(R.string.holo_light_blue)))
+                binding.txtPrice.text = digitsConverter.formatWithCurrency(it.amount)
+            }
         }
     }
 
