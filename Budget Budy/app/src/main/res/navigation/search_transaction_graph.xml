@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_search_transaction" >
         <action
             android:id="@+id/action_newSearchFragment_to_transactionDetailsFragment2"
-            app:destination="@id/transactionDetailsFragment2" />
+            app:destination="@id/transactionDetailsFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/transactionDetailsFragment2"

@@ -18,6 +18,7 @@ data class TransactionsTable(
     @Embedded(prefix = "category_") var category: SimpleListObject?,
     @Embedded(prefix = "time_range_") var time_range: DateRange? = DateRange(0, 0, 0, 0, 0),
     @Embedded(prefix = "text_labels_") var labels: Labels? = Labels("", "", ""),
+    var incomeInflow: Boolean = false,
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

@@ -1,6 +1,7 @@
 package com.example.budgetbuddy.screens.search_screen
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.budgetbuddy.DigitsConverter
@@ -16,6 +17,24 @@ class SearchFragmentViewModel @Inject constructor(
     private val repository: TransactionsRepository,
     private val digitsConverter: DigitsConverter
 ) : ViewModel() {
+    private val dbSearch = MutableLiveData<String>()
+    private val textSearch = MutableLiveData<String>()
+
+    fun setSearch(v: String) {
+        dbSearch.value = v
+    }
+
+    fun getSearch(): MutableLiveData<String> {
+        return dbSearch
+    }
+
+    fun setTextSearch(v: String) {
+        textSearch.value = v
+    }
+
+    fun getTextSearch(): MutableLiveData<String> {
+        return textSearch
+    }
 
     fun searchFeature(query: String): LiveData<List<TransactionsTable>> {
         return repository.searchFeature(query).asLiveData()

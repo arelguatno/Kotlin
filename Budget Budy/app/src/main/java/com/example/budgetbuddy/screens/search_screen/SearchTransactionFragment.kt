@@ -35,36 +35,49 @@ class SearchTransactionFragment : MainFragment() {
         menu()
         search()
         init()
+        initViewModel()
+    }
 
+    private fun initViewModel() {
+        viewModel.getSearch().observe(viewLifecycleOwner) {
+            searchDatabase(it)
+        }
+
+        viewModel.getTextSearch().observe(viewLifecycleOwner) {
+            binding.searchView.setQuery(it, false)
+        }
     }
 
     private fun init() {
         binding.recycler.itemAnimator = null
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+
+        if (binding.searchView.isEmpty()) {
+            searchDatabase(randomString)
+        }
     }
 
     private fun search() {
-        if(binding.searchView.isEmpty()){
 
-        }
         binding.searchView.onActionViewExpanded()
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(searchText: String?): Boolean {
                 if (searchText != null) {
-                    searchDatabase(searchText)
+                    viewModel.setSearch(searchText)
                 }
                 return false
             }
 
             override fun onQueryTextChange(searchText: String?): Boolean {
                 if (searchText != null) {
-                    searchDatabase(searchText)
+                    viewModel.setSearch(searchText)
+                    viewModel.setTextSearch(searchText)
                 }
 
-                if(searchText.isNullOrBlank()){
-                    searchDatabase(randomString) //Random
+                if (searchText.isNullOrEmpty()) {
+                    viewModel.setSearch(randomString)
                 }
                 return false
             }
