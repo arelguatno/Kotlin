@@ -10,6 +10,6 @@
     <color name="bottom_nav_background">#FF6200EE</color>
     <color name="white">#ffffff</color>
     <color name="dark">#808080</color>
-
+    <color name="blue">#7BCEFF</color>
     <string name="holo_light_blue">#ff00ddff</string>
 </resources>
