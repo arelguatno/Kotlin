@@ -28,4 +28,5 @@ abstract class MainFragment : Fragment() {
     fun <A> showLongToastMessage(param: A) {
         Toast.makeText(context, param.toString(), Toast.LENGTH_LONG).show()
     }
+
 }

@@ -19,7 +19,7 @@
         android:id="@+id/transactionFragment"
         android:name="com.example.budgetbuddy.screens.transactions_screen.TransactionFragment"
         android:label="fragment_transaction"
-        tools:layout="@layout/fragment_transaction" >
+        tools:layout="@layout/fragment_transaction">
         <action
             android:id="@+id/action_transactionFragment_to_transactionDetailsFragment"
             app:destination="@id/transactionDetailsFragment"
@@ -30,7 +30,7 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.budgetbuddy.screens.settings_screen.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
+        tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settingsFragment_to_currencyFragment"
             app:destination="@id/currencyFragment"
@@ -41,7 +41,7 @@
         android:id="@+id/transactionDetailsFragment"
         android:name="com.example.budgetbuddy.fragments.transaction_detail_fragment.TransactionDetailsFragment"
         android:label="fragment_transaction_details"
-        tools:layout="@layout/fragment_transaction_details" >
+        tools:layout="@layout/fragment_transaction_details">
         <action
             android:id="@+id/action_transactionDetailsFragment_to_transactionFragment"
             app:destination="@id/transactionFragment" />
@@ -52,13 +52,13 @@
     <fragment
         android:id="@+id/currencyFragment"
         android:name="com.example.budgetbuddy.fragments.currency.CurrencyFragment"
-        android:label="CurrencyFragment" >
+        android:label="CurrencyFragment">
         <action
             android:id="@+id/action_currencyFragment2_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <argument
             android:name="fromSettings"
-            app:argType="boolean"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            app:argType="boolean" />
     </fragment>
 </navigation>

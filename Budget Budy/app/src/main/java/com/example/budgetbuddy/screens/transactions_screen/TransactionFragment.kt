@@ -47,11 +47,15 @@ class TransactionFragment() : MainFragment() {
 
     override fun onStart() {
         super.onStart()
+
         initOnCLick()
         initViewModel()
         initTransactionData()
-    }
 
+        viewModel.getRefreshTransaction().observe(viewLifecycleOwner) {
+            viewModel.setDate(viewModel.getDate().value!!)
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         menu()
@@ -125,12 +129,14 @@ class TransactionFragment() : MainFragment() {
 
     private fun initOnCLick() {
         binding.calendarSelect.leftImage.setOnClickListener {
+            val cal = Calendar.getInstance()
             cal.time = viewModel.getDate().value
             cal.add(Calendar.MONTH, -1)
             viewModel.setDate(cal.time)
         }
 
         binding.calendarSelect.rightImage.setOnClickListener {
+            val cal = Calendar.getInstance()
             cal.time = viewModel.getDate().value
             if (Date() >= cal.time) {
                 cal.add(Calendar.MONTH, +1)
@@ -151,7 +157,7 @@ class TransactionFragment() : MainFragment() {
         year: Int = 0,
         timeRange: TimeRange
     ) {
-        println("Aye $month $year $timeRange")
+        LogStr("Aye $month $year $timeRange ${intMonthShortToString(month)}")
         viewModel.fetchReporting(
             month = month,
             year = year,

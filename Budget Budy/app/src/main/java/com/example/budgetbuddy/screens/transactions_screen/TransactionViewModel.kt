@@ -31,6 +31,7 @@ class TransactionViewModel @Inject constructor(
     private var totalExpensesLabel = MutableLiveData<String>()
     private var totalSumLabel = MutableLiveData("")
     private var totalInflowLabel = MutableLiveData("")
+    private var refreshTransaction = MutableLiveData<Boolean>()
 
     fun setPrevAndCurrentSpending(v: PrevAndCurrent) {
         prevAndCurrentSpending.value = v
@@ -38,6 +39,14 @@ class TransactionViewModel @Inject constructor(
 
     fun getPrevAndCurrentSpending(): MutableLiveData<PrevAndCurrent> {
         return prevAndCurrentSpending
+    }
+
+    fun setRefreshTransaction(v: Boolean) {
+        refreshTransaction.value = v
+    }
+
+    fun getRefreshTransaction(): MutableLiveData<Boolean> {
+        return refreshTransaction
     }
 
     // Fetch Data

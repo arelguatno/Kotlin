@@ -261,8 +261,10 @@ class AddNewEntryTransactionFragment : MainFragment() {
                 data.putExtra(EDIT_EXISTING_ENTRY, updateTransaction)
             }
 
+            //(it as TransactionsTable)
             activity?.setResult(Activity.RESULT_OK, data)
             activity?.finish()
+
 
         } else {
             showShortToastMessage("Please input an Amount and select Category")

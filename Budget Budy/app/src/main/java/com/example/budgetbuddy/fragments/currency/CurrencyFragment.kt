@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,7 @@ import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentCurrencyBinding
 import com.example.budgetbuddy.fragments.CurrencyAdapter
+import com.example.budgetbuddy.fragments.DateFragment
 import com.example.budgetbuddy.fragments.category.SimpleListObject
 import com.example.budgetbuddy.fragments.transaction_detail_fragment.TransactionDetailsFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,6 +74,7 @@ class CurrencyFragment : MainFragment() {
             )!!
         with(sharedPref!!.edit()) {
             if (args.fromSettings) {
+                setFragmentResult("arelguatno", bundleOf("arelguatno" to uniqueID))
                 putInt(getString(R.string.global_currency_id), uniqueID)
             } else {
                 putInt(getString(R.string.currency_id), uniqueID)

@@ -42,7 +42,7 @@ class SettingsFragment : MainFragment() {
 
     private fun initViews() {
         binding.settingsDisplay.selectLanguage.setOnClickListener {
-            showShortToastMessage("Soon to rise")
+            showShortToastMessage("Soon")
         }
 
         binding.settingsDisplay.currency.setOnClickListener {

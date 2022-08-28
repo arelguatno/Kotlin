@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.onboarding.splashscreenviewpager.ViewPagerFragment">
+    tools:context=".fragments.onboarding.viewpager.ViewPagerFragment">
 
     <ImageView
         android:id="@+id/imageView5"
@@ -35,8 +35,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </androidx.viewpager2.widget.ViewPager2>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/currency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="visible"
+        android:orientation="horizontal"
+        android:paddingLeft="50dp"
+        android:paddingRight="40dp"
+        android:paddingBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/tab_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:text="Currency"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:text="-"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+    </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"

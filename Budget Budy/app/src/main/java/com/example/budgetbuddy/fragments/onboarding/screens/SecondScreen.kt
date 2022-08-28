@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentFirstScreenBinding
 import com.example.budgetbuddy.databinding.FragmentSecondScreenBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SecondScreen : Fragment() {
     private lateinit var binding: FragmentSecondScreenBinding
     override fun onCreateView(
