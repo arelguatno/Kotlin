@@ -15,6 +15,7 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentCurrencyBinding
 import com.example.budgetbuddy.fragments.CurrencyAdapter
 import com.example.budgetbuddy.fragments.DateFragment
+import com.example.budgetbuddy.fragments.category.CategoryFragment
 import com.example.budgetbuddy.fragments.category.SimpleListObject
 import com.example.budgetbuddy.fragments.transaction_detail_fragment.TransactionDetailsFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +24,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class CurrencyFragment : MainFragment() {
     private lateinit var binding: FragmentCurrencyBinding
     private val args: CurrencyFragmentArgs by navArgs()
+
+    companion object {
+        const val RESULT_KEY = "com.example.budgetbuddy.fragments.currency.currency_id"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,11 +51,13 @@ class CurrencyFragment : MainFragment() {
     }
 
     private fun loadItems() {
-        var selectedItem = if (args.fromSettings) {
-            digitsConverter.getCurrencySettings()
-        } else {
-            digitsConverter.getCurrencyNewEntry()
-        }
+//        var selectedItem = if (args.fromSettings) {
+//            digitsConverter.getCurrencySettings()
+//        } else {
+//            digitsConverter.getCurrencyNewEntry()
+//        }
+
+        var selectedItem = digitsConverter.getCurrencySettings()
 
         val items = CurrencyAdapter(CurrencyList.geItems(), selectedItem)
         binding.item.layoutManager =
@@ -74,9 +81,9 @@ class CurrencyFragment : MainFragment() {
             )!!
         with(sharedPref!!.edit()) {
             if (args.fromSettings) {
-                setFragmentResult("arelguatno", bundleOf("arelguatno" to uniqueID))
                 putInt(getString(R.string.global_currency_id), uniqueID)
             } else {
+                setFragmentResult(RESULT_KEY, bundleOf(RESULT_KEY to uniqueID))
                 putInt(getString(R.string.currency_id), uniqueID)
             }
 

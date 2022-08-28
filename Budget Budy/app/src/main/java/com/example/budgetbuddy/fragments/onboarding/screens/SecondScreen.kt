@@ -20,7 +20,7 @@ class SecondScreen : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSecondScreenBinding.inflate(layoutInflater)
         return binding.root
     }

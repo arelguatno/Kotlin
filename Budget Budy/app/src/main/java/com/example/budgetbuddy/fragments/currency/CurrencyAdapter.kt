@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.SimplelistCustomRowBinding
 import com.example.budgetbuddy.databinding.TransactionsCustomRowBinding
 import com.example.budgetbuddy.fragments.category.SimpleListObject
@@ -48,7 +49,8 @@ class CurrencyAdapter(private val list: List<Pair<Int, SimpleListObject>>, val c
 
         if(currency == item.first){
             holder.binding.txtCostPrice.setTextColor(Color.WHITE)
-            holder.binding.txtCostPrice.text= "✓"
+            holder.binding.txtCostPrice.text= "Default"
+            holder.binding.txtCostPrice.setTextColor(Color.parseColor("#7BCEFF"))
             holder.binding.txtCostPrice.isVisible = true
         }
 

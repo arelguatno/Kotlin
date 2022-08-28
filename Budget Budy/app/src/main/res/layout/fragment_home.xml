@@ -40,14 +40,7 @@
                 layout="@layout/my_wallet_home_page"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp" />
-
-            <include
-                android:id="@+id/spending_report"
-                layout="@layout/spending_report"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"/>
+                android:layout_marginBottom="5dp" />
 
             <com.google.android.gms.ads.AdView
                 xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -62,6 +55,12 @@
                 ads:adUnitId="@string/google_admob">
             </com.google.android.gms.ads.AdView>
 
+            <include
+                android:id="@+id/spending_report"
+                layout="@layout/spending_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"/>
 
             <include
                 android:id="@+id/recent_transaction"

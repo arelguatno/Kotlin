@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Choose currency"
+        android:text="Default currency"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/white"
@@ -43,58 +43,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
-
-<!--    <LinearLayout-->
-<!--        android:id="@+id/currency"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:paddingLeft="50dp"-->
-<!--        android:paddingRight="40dp"-->
-<!--        android:visibility="gone"-->
-<!--        android:gravity="center"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/description">-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="Currency"-->
-<!--            android:layout_marginRight="20dp"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="16sp" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/txtCurrency_two"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:gravity="right"-->
-<!--            android:text="-"-->
-<!--            android:textColor="@android:color/holo_green_dark"-->
-<!--            android:textSize="17sp" />-->
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />-->
-<!--    </LinearLayout>-->
-
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/next"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginEnd="36dp"-->
-    <!--        android:layout_marginBottom="20dp"-->
-    <!--        android:text="Next"-->
-    <!--        android:textColor="@color/blue"-->
-    <!--        android:textSize="22sp"-->
-    <!--        android:textStyle="bold"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent" />-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

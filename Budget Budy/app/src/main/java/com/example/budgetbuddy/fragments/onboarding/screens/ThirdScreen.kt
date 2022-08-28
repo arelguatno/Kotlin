@@ -28,27 +28,14 @@ import java.util.*
 @AndroidEntryPoint
 class ThirdScreen : MainFragment() {
     private lateinit var binding: FragmentThirdScreenBinding
-    private val viewModel: SettingsFragmentViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentThirdScreenBinding.inflate(layoutInflater)
 
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        initTxt()
-//
-        //viewModel.setCurrency(digitsConverter.getCurrencySettings())
-    }
-
-    private fun initTxt() {
-//
-
     }
 }

@@ -109,7 +109,6 @@ class MainActivity : AppCompatActivity(), Serializable {
     private fun saveNewEntry(data: Intent?) {
         data?.getSerializableExtra(AddNewEntryTransactionFragment.ADD_NEW_ENTRY)?.let {
             viewModel.insertProfileRecord(it as TransactionsTable)
-            Toast.makeText(this, "New Entry Added", Toast.LENGTH_SHORT).show()
             viewModel.setRefreshTransaction(true)
         }
     }

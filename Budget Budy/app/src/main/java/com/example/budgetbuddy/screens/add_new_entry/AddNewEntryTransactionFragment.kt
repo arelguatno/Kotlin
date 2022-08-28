@@ -22,6 +22,7 @@ import com.example.budgetbuddy.fragments.DateFragment
 import com.example.budgetbuddy.fragments.NoteFragment
 import com.example.budgetbuddy.fragments.category.CategoryFragment
 import com.example.budgetbuddy.fragments.category.SimpleListObject
+import com.example.budgetbuddy.fragments.currency.CurrencyFragment
 import com.example.budgetbuddy.room.tables.DateRange
 import com.example.budgetbuddy.room.tables.TransactionsTable
 import com.example.budgetbuddy.utils.*
@@ -146,9 +147,15 @@ class AddNewEntryTransactionFragment : MainFragment() {
                 getString(R.string.global_currency_id),
                 Context.MODE_PRIVATE
             )!!
-        val userSelectsCurrency = sharedPref!!.getInt(getString(R.string.currency_id), 1)
-        //viewModel.setCurrency(numberFormat.getSavedCurrency())
+
+        val userSelectsCurrency = sharedPref!!.getInt(getString(R.string.global_currency_id), 1)
         viewModel.setCurrency(userSelectsCurrency)
+
+        //Currency Override Setting currency
+        setFragmentResultListener(CurrencyFragment.RESULT_KEY) { _, bundle ->
+            val result = bundle.getInt(CurrencyFragment.RESULT_KEY)
+            viewModel.setCurrency(result)
+        }
     }
 
     private fun setUpViewModelsListener() {

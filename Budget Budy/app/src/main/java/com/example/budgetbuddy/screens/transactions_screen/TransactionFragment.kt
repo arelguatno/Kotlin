@@ -22,11 +22,13 @@ import com.example.budgetbuddy.screens.add_new_entry.AddNewTransactionActivity
 import com.example.budgetbuddy.screens.reportingperiod.ReportingPeriodActivity
 import com.example.budgetbuddy.screens.search_screen.SearchActivity
 import com.example.budgetbuddy.utils.intMonthShortToString
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class TransactionFragment() : MainFragment() {
+class TransactionFragment : MainFragment() {
     private lateinit var binding: FragmentTransactionBinding
     private lateinit var startForResult: ActivityResultLauncher<Intent>
 
@@ -40,10 +42,11 @@ class TransactionFragment() : MainFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTransactionBinding.inflate(layoutInflater)
         return binding.root
     }
+
 
     override fun onStart() {
         super.onStart()

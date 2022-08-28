@@ -49,8 +49,11 @@ class HomeFragment : MainFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MobileAds.initialize(requireContext()) {}
+        loadAd()
+    }
 
+    private fun loadAd(){
+        MobileAds.initialize(requireContext()) {}
         val mAdView = binding.adView
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
