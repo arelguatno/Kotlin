@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.budgetbuddy">
 
+    <uses-permission android:name="com.android.vending.BILLING" />
+
     <application
         android:name=".module.MyApplication"
         android:allowBackup="true"

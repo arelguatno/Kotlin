@@ -1,6 +1,7 @@
 package com.example.budgetbuddy
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,6 +17,8 @@ abstract class MainFragment : Fragment() {
         internal lateinit var sharedPref: SharedPreferences
         const val TAG = "MainFragment"
         val cal: Calendar = Calendar.getInstance()
+        const val VERSION_NAME = BuildConfig.VERSION_NAME
+        const val VERSION_CODE = BuildConfig.VERSION_CODE
     }
     fun <B> LogStr(param: B) {
         Log.d(TAG, param.toString())

@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.budgetbuddy.room.AppRoomDatabase
 import com.example.budgetbuddy.room.TransactionsDao
 import com.example.budgetbuddy.DigitsConverter
+import com.example.budgetbuddy.screens.settings_screen.SettingsFragmentViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

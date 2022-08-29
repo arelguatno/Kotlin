@@ -42,4 +42,5 @@
     <string name="google_admob">ca-app-pub-1363370537348771/6516432885</string>
     <string name="on_boarding_shared_pref">on_boarding_shared_pref</string>
     <string name="on_boarding_finised">on_boarding_finised</string>
+    <string name="in_app_product_id">test_one</string>
 </resources>

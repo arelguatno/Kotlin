@@ -75,7 +75,7 @@
         <entry key="app/src/main/res/layout/fragment_third_screen.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_transaction_details.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_view_pager.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_view_pager.xml" value="0.5" />
         <entry key="app/src/main/res/layout/haha.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout.xml" value="0.45" />
         <entry key="app/src/main/res/layout/my_wallet_home_page.xml" value="0.30867892261650276" />
@@ -85,7 +85,7 @@
         <entry key="app/src/main/res/layout/recent_transactions.xml" value="0.33" />
         <entry key="app/src/main/res/layout/search_parent.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/settings_about_us.xml" value="0.30867892261650276" />
-        <entry key="app/src/main/res/layout/settings_app_name.xml" value="0.30867892261650276" />
+        <entry key="app/src/main/res/layout/settings_app_name.xml" value="0.5" />
         <entry key="app/src/main/res/layout/settings_display.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/settings_premium.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/simplelist_custom_row.xml" value="0.5" />
