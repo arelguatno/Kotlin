@@ -35,4 +35,11 @@ class Module {
     fun provideNumberFormatOrigin(@ApplicationContext context: Context): DigitsConverter {
         return DigitsConverter(context)
     }
+
+    @Provides
+    fun provideBilling(@ApplicationContext context: Context): SettingsFragmentViewModel {
+        return SettingsFragmentViewModel(context)
+    }
+
+
 }

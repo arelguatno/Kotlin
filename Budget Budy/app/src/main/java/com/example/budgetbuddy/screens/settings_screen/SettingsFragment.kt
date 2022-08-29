@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingFlowParams.ProductDetailsParams
@@ -16,6 +19,8 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentSettingsBinding
 import com.google.common.collect.ImmutableList
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SettingsFragment : MainFragment() {
@@ -23,12 +28,17 @@ class SettingsFragment : MainFragment() {
     private val viewModel: SettingsFragmentViewModel by activityViewModels()
     private lateinit var billingClient: BillingClient
 
+    companion object {
+        lateinit var txtPremiumLabel: TextView
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSettingsBinding.inflate(layoutInflater)
+        checkIfPremium()
         initBilling()
         return binding.root
     }
@@ -44,6 +54,7 @@ class SettingsFragment : MainFragment() {
         binding.settingsPremium.removeAds.setOnClickListener {
             connectToGooglePlayBilling()
         }
+
     }
 
     override fun onResume() {
@@ -58,6 +69,24 @@ class SettingsFragment : MainFragment() {
                     }
                 }
             }
+        }
+
+        viewModel.viewModelScope.launch {
+            delay(1500)
+            checkIfPremium()
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        txtPremiumLabel = requireActivity().findViewById(R.id.txtPremium)
+    }
+
+    private fun checkIfPremium() {
+        if (viewModel.getPremiumUser()) {
+            viewModel.setUserTypeString("Premium")
+        } else {
+            viewModel.setUserTypeString("Get Premium")
         }
     }
 
@@ -116,6 +145,12 @@ class SettingsFragment : MainFragment() {
                             verifyPurchase(purchase)
                         }
                     }
+                } else if (billingResult.responseCode == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
+                    if (!viewModel.ifRestored()) {
+                        viewModel.setRestoredYes()
+                        viewModel.setUserPurchasedPremiumTrue()
+                        showShortToastMessage("Premium has been restored. Thank you.")
+                    }
                 }
             }.build()
     }
@@ -129,7 +164,9 @@ class SettingsFragment : MainFragment() {
             acknowledgePurchaseParams
         ) { billingResult ->
             if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                showShortToastMessage("Thank you")
+                LogStr("Purchase Complete. Thank you!")
+                viewModel.setRestoredYes()
+                viewModel.setUserPurchasedPremiumTrue()
             }
         }
     }
@@ -138,11 +175,18 @@ class SettingsFragment : MainFragment() {
         viewModel.getCurrency().observe(viewLifecycleOwner) {
             binding.settingsDisplay.txtCurrency.text = it.textIcon.substring(0, 3)
         }
+
+        viewModel.getUserTypeString().observe(viewLifecycleOwner) {
+            txtPremiumLabel.text = it
+        }
     }
 
     private fun initViews() {
         binding.settingsDisplay.selectLanguage.setOnClickListener {
             showShortToastMessage("Soon")
+//            viewModel.setRestoredFalse()
+//            viewModel.setUserPurchasedPremiumFalse()
+//            checkIfPremium()
         }
 
         binding.settingsDisplay.currency.setOnClickListener {

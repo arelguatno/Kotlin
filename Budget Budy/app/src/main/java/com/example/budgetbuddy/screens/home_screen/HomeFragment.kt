@@ -14,6 +14,7 @@ import com.example.budgetbuddy.databinding.FragmentHomeBinding
 import com.example.budgetbuddy.screens.transactions_screen.PrevAndCurrent
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
 import com.example.budgetbuddy.DigitsConverter
+import com.example.budgetbuddy.screens.settings_screen.SettingsFragmentViewModel
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -33,6 +34,7 @@ class HomeFragment : MainFragment() {
     private lateinit var binding: FragmentHomeBinding
 
     private val viewModel: TransactionViewModel by activityViewModels()
+    private val settingsViewModel: SettingsFragmentViewModel by activityViewModels()
     private val recentAdapter: RecentTransactionAdapter by lazy { RecentTransactionAdapter() }
     private val topSpending: RecentTransactionAdapter by lazy { RecentTransactionAdapter() }
 
@@ -52,7 +54,7 @@ class HomeFragment : MainFragment() {
         loadAd()
     }
 
-    private fun loadAd(){
+    private fun loadAd() {
         MobileAds.initialize(requireContext()) {}
         val mAdView = binding.adView
         val adRequest = AdRequest.Builder().build()
@@ -65,14 +67,18 @@ class HomeFragment : MainFragment() {
         initRecentData()
         initTotalSpentThisMonth()
         initWallet()
+
+        //Check if user premium
+        binding.adView.isVisible = !settingsViewModel.getPremiumUser()
     }
 
     private fun initWallet() {
-        viewModel.fetchMyWallet.observe(viewLifecycleOwner){
-            if(it.isNotEmpty()){
+        viewModel.fetchMyWallet.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
                 val totalExpenses = it[0].catAmount
                 val totalInflow = it[0].percentage
-                binding.myWallet.txtWallet.text = digitsConverter.formatCurrencyPositiveOrNegative(totalInflow,totalExpenses)
+                binding.myWallet.txtWallet.text =
+                    digitsConverter.formatCurrencyPositiveOrNegative(totalInflow, totalExpenses)
             }
         }
     }
@@ -83,7 +89,8 @@ class HomeFragment : MainFragment() {
         prev.time = cal.time
         prev.add(Calendar.MONTH, -1)
 
-        viewModel.fetchTopSpentThisMonthAndPreviousMonth(prev.get(Calendar.MONTH), prev.get(Calendar.YEAR)
+        viewModel.fetchTopSpentThisMonthAndPreviousMonth(
+            prev.get(Calendar.MONTH), prev.get(Calendar.YEAR)
         )
             .observe(viewLifecycleOwner) {
                 if (it.isNotEmpty()) {
@@ -98,7 +105,8 @@ class HomeFragment : MainFragment() {
 
         viewModel.getPrevAndCurrentSpending().observe(viewLifecycleOwner) {
             if (it != null) {
-                binding.spendingReport.txtTotalSpent.text = digitsConverter.formatWithCurrency(it.current)
+                binding.spendingReport.txtTotalSpent.text =
+                    digitsConverter.formatWithCurrency(it.current)
                 var barEntries = ArrayList<BarEntry>()
 
                 barEntries.add(BarEntry(0f, it.prev.toFloat())) // last month

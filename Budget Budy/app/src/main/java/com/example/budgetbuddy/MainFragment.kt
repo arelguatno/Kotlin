@@ -1,10 +1,13 @@
 package com.example.budgetbuddy
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.example.budgetbuddy.screens.settings_screen.SettingsFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -31,5 +34,4 @@ abstract class MainFragment : Fragment() {
     fun <A> showLongToastMessage(param: A) {
         Toast.makeText(context, param.toString(), Toast.LENGTH_LONG).show()
     }
-
 }
