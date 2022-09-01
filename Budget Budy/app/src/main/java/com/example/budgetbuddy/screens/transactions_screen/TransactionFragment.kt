@@ -160,7 +160,7 @@ class TransactionFragment : MainFragment() {
         year: Int = 0,
         timeRange: TimeRange
     ) {
-        LogStr("Aye $month $year $timeRange ${intMonthShortToString(month)}")
+        //LogStr("Aye $month $year $timeRange ${intMonthShortToString(month)}")
         viewModel.fetchReporting(
             month = month,
             year = year,

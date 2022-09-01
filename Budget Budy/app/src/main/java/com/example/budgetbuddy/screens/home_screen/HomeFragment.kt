@@ -1,20 +1,26 @@
 package com.example.budgetbuddy.screens.home_screen
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.budgetbuddy.DigitsConverter
+import com.example.budgetbuddy.MainActivity
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
+import com.example.budgetbuddy.screens.reportingperiod.ReportingPeriodActivity
+import com.example.budgetbuddy.screens.settings_screen.SettingsFragmentViewModel
 import com.example.budgetbuddy.screens.transactions_screen.PrevAndCurrent
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
-import com.example.budgetbuddy.DigitsConverter
-import com.example.budgetbuddy.screens.settings_screen.SettingsFragmentViewModel
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -25,6 +31,8 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -70,6 +78,19 @@ class HomeFragment : MainFragment() {
 
         //Check if user premium
         binding.adView.isVisible = !settingsViewModel.getPremiumUser()
+
+        binding.recentTransaction.txtRecentReports.setOnClickListener {
+            val navView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            navView?.menu?.findItem(R.id.transactionFragment)!!.isChecked = true
+            navView?.menu?.performIdentifierAction(R.id.transactionFragment, 0)
+        }
+
+        binding.spendingReport.txtSeeReports.setOnClickListener {
+            val intent = Intent(requireContext(), ReportingPeriodActivity::class.java).apply {
+                putExtra(ReportingPeriodActivity.DATE_DATA, Date())
+            }
+            startActivity(intent)
+        }
     }
 
     private fun initWallet() {

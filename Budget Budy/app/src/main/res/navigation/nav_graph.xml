@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.budgetbuddy.screens.home_screen.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_transactionFragment"
+            app:destination="@id/transactionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.budgetbuddy.screens.profile_screen.ProfileFragment"

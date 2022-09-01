@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.budgetbuddy.databinding.ActivityMainBinding
 import com.example.budgetbuddy.fragments.category.CategoryList
@@ -30,7 +31,7 @@ import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), Serializable {
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val viewModel: TransactionViewModel by viewModels()
 
@@ -83,24 +84,28 @@ class MainActivity : AppCompatActivity(), Serializable {
 
 //        binding.bottomNavigationView.setOnItemSelectedListener {
 //            val navController = findNavController(R.id.nav_host_fragment)
+//
+//           // NavigationUI.onNavDestinationSelected(it,navController)
 //            when (it.itemId) {
 //
-//                R.id.menu_transactionFragment -> {
-//                    navController.navigate(R.id.nav_transactionFragment)
+////                R.id.transactionFragment -> {
+////                    navController.navigate(R.id.transactionFragment)
+////                  //  NavigationUI.onNavDestinationSelected(it,navController)
+////                    return@setOnItemSelectedListener true
+////                }
+//                R.id.homeFragment -> {
+//
+//                    navController.navigate(R.id.homeFragment)
 //                    return@setOnItemSelectedListener true
 //                }
-//                R.id.menu_homeFragment -> {
-//                    navController.navigate(R.id.nav_homeFragment)
-//                    return@setOnItemSelectedListener true
-//                }
-//                R.id.menu_profileFragment -> {
-//                    navController.navigate(R.id.nav_profileFragment)
-//                    return@setOnItemSelectedListener true
-//                }
-//                R.id.menu_settingsFragment -> {
-//                    navController.navigate(R.id.nav_settingsFragment)
-//                    return@setOnItemSelectedListener true
-//                }
+////                R.id.profileFragment -> {
+////                    navController.navigate(R.id.profileFragment)
+////                    return@setOnItemSelectedListener true
+////                }
+////                R.id.settingsFragment -> {
+////                    navController.navigate(R.id.settingsFragment)
+////                    return@setOnItemSelectedListener true
+////                }
 //            }
 //            false
 //        }

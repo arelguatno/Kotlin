@@ -176,6 +176,7 @@ class SettingsFragment : MainFragment() {
             binding.settingsDisplay.txtCurrency.text = it.textIcon.substring(0, 3)
         }
 
+        //TODO error
         viewModel.getUserTypeString().observe(viewLifecycleOwner) {
             txtPremiumLabel.text = it
         }
