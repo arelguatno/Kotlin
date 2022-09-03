@@ -2,7 +2,9 @@ package com.example.budgetbuddy.screens.wallets
 
 import android.content.Context
 import androidx.lifecycle.*
+import com.example.budgetbuddy.DigitsConverter
 import com.example.budgetbuddy.R
+import com.example.budgetbuddy.room.transactions_table.TransactionsTable
 import com.example.budgetbuddy.room.wallet_table.WalletRepository
 import com.example.budgetbuddy.room.wallet_table.Wallets
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WalletViewModel @Inject constructor(
-    private val walletDao: WalletRepository
+    private val walletDao: WalletRepository,
+    private val digitsConverter: DigitsConverter
 ) : ViewModel() {
 
     val fetchWallet = walletDao.fetchWallet().asLiveData()
@@ -22,7 +25,6 @@ class WalletViewModel @Inject constructor(
     fun fetchWalletID(id: Int): LiveData<List<Wallets>> {
         return walletDao.fetchWalletID(id).asLiveData()
     }
-
 
 
     fun insertWallet(wallets: Wallets) {
@@ -41,6 +43,17 @@ class WalletViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             walletDao.deleteWalletID(id)
         }
+    }
+
+    fun processTransactionAmount(param: List<Wallets>): List<Wallets> {
+        for (i in param) {
+            var income = 0.0
+            if (i.income != null) income = i.income!!
+            var expenses = 0.0
+            if (i.expenses != null) income = i.expenses!!
+            i.totalBalanceLabel = digitsConverter.formatCurrencyPositiveOrNegative(income, expenses)
+        }
+        return param
     }
 
 }

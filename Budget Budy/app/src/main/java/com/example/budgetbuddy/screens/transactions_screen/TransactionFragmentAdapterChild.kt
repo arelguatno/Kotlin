@@ -70,6 +70,5 @@ class TransactionFragmentAdapterChild(
 
         holder.binding.imageView.setImageResource(CategoryList.getImageID(item.category!!.uniqueID)!!)
         //holder.binding.imageView.setImageResource(item.category.imageID)
-
     }
 }

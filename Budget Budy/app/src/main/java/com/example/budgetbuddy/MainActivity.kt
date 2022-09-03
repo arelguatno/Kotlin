@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity(), Serializable {
     private fun createDefaultWallet(){
         walletViewModel.fetchPrimaryWallet.observe(this, Observer {
             if (it.isEmpty()) {
-                val wallet = Wallets(name = "Personal", primary = true)
+                val wallet = Wallets(name = "Personal", primary_wallet = true)
                 walletViewModel.insertWallet(wallet)
             }
         })

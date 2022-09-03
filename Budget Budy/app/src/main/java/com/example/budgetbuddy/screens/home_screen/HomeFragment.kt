@@ -128,7 +128,7 @@ class HomeFragment : MainFragment() {
     }
 
     private fun initWallet() {
-        viewModel.fetchMyWalletBallance().observe(viewLifecycleOwner) {
+        viewModel.fetchMyWalletBalance().observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 val totalExpenses = it[0].catAmount
                 val totalInflow = it[0].percentage

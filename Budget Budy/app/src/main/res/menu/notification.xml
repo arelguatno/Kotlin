@@ -7,6 +7,5 @@
         android:iconTint="@color/white"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_notifications_24"
-        app:showAsAction="ifRoom|withText"
-        android:title="Notif" />
+        app:showAsAction="ifRoom|withText" />
 </menu>

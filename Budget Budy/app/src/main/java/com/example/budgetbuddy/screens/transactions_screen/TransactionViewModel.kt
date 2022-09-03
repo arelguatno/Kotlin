@@ -76,7 +76,7 @@ class TransactionViewModel @Inject constructor(
         return repository.fetchRecentTransaction().asLiveData()
     }
 
-    fun fetchMyWalletBallance(): LiveData<List<TransactionsTable>> {
+    fun fetchMyWalletBalance(): LiveData<List<TransactionsTable>> {
         return repository.fetchMyWallet().asLiveData()
     }
 

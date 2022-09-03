@@ -51,7 +51,8 @@ class WalletFragment : MainFragment() {
         myAdapterHeader.setDefaultID(digitsConverter.getSharedPrefWalletID())
 
         viewModel.fetchWallet.observe(viewLifecycleOwner) {
-            myAdapterHeader.submitList(it)
+            val gg = viewModel.processTransactionAmount(it)
+            myAdapterHeader.submitList(gg)
         }
 
         myAdapterHeader.setItemOnClickListener(object : WalletFragmentAdapter.onItemClickListener {

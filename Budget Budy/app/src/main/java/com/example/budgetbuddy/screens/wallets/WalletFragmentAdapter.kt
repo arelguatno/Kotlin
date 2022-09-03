@@ -77,9 +77,8 @@ class WalletFragmentAdapter :
         holder.binding.imageView.setImageResource(R.drawable.wallet)
         holder.binding.txtCategory.text = item.name
         holder.binding.txtCostPrice.isVisible = false
-        holder.binding.txtNote.isVisible = false
+        holder.binding.txtNote.text = item.totalBalanceLabel
 
-        println(defaultWalletId)
         if(defaultWalletId == item.id) {
             holder.binding.txtCostPrice.text = "Selected"
             holder.binding.txtCostPrice.isVisible = true
