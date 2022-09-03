@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.budgetbuddy.DigitsConverter
-import com.example.budgetbuddy.room.TransactionsRepository
-import com.example.budgetbuddy.room.tables.TransactionList
-import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.room.transactions_table.TransactionsRepository
+import com.example.budgetbuddy.room.model.TransactionList
+import com.example.budgetbuddy.room.transactions_table.TransactionsTable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject

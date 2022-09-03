@@ -51,7 +51,7 @@
             app:destination="@id/transactionFragment" />
         <argument
             android:name="transaction"
-            app:argType="com.example.budgetbuddy.room.tables.TransactionsTable" />
+            app:argType="com.example.budgetbuddy.room.transactions_table.TransactionsTable" />
     </fragment>
     <fragment
         android:id="@+id/currencyFragment"

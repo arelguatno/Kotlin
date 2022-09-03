@@ -1,5 +1,6 @@
 package com.example.budgetbuddy.screens.home_screen
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -7,6 +8,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.activityViewModels
@@ -17,10 +20,14 @@ import com.example.budgetbuddy.MainActivity
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.FragmentHomeBinding
+import com.example.budgetbuddy.screens.add_new_entry.AddNewEntryTransactionFragment
+import com.example.budgetbuddy.screens.add_new_entry.AddNewTransactionActivity
 import com.example.budgetbuddy.screens.reportingperiod.ReportingPeriodActivity
 import com.example.budgetbuddy.screens.settings_screen.SettingsFragmentViewModel
 import com.example.budgetbuddy.screens.transactions_screen.PrevAndCurrent
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
+import com.example.budgetbuddy.screens.wallets.WalletActivity
+import com.example.budgetbuddy.screens.wallets.WalletViewModel
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -42,6 +49,7 @@ class HomeFragment : MainFragment() {
     private lateinit var binding: FragmentHomeBinding
 
     private val viewModel: TransactionViewModel by activityViewModels()
+    private val walletViewModel: WalletViewModel by activityViewModels()
     private val settingsViewModel: SettingsFragmentViewModel by activityViewModels()
     private val recentAdapter: RecentTransactionAdapter by lazy { RecentTransactionAdapter() }
     private val topSpending: RecentTransactionAdapter by lazy { RecentTransactionAdapter() }
@@ -53,8 +61,29 @@ class HomeFragment : MainFragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater)
-
+        seeMyWallet()
         return binding.root
+    }
+
+    private fun seeMyWallet() {
+        val startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+
+                if (result.resultCode == Activity.RESULT_OK) {
+                    if (result.data?.getSerializableExtra(AddNewEntryTransactionFragment.ADD_NEW_ENTRY) != null) readSelectedWallet(
+                        result.data
+                    )
+                }
+            }
+
+        binding.myWallet.txtSeeAllWallet.setOnClickListener {
+            val intent = Intent(requireContext(), WalletActivity::class.java)
+            startForResult.launch(intent)
+        }
+    }
+
+    private fun readSelectedWallet(data: Intent?) {
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,30 +100,35 @@ class HomeFragment : MainFragment() {
 
     override fun onStart() {
         super.onStart()
+
         initSpendingReports()
         initRecentData()
         initTotalSpentThisMonth()
         initWallet()
+        initButtons()
+    }
 
+    private fun initButtons() {
         //Check if user premium
         binding.adView.isVisible = !settingsViewModel.getPremiumUser()
 
         binding.recentTransaction.txtRecentReports.setOnClickListener {
-            val navView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            val navView =
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             navView?.menu?.findItem(R.id.transactionFragment)!!.isChecked = true
             navView?.menu?.performIdentifierAction(R.id.transactionFragment, 0)
         }
 
         binding.spendingReport.txtSeeReports.setOnClickListener {
             val intent = Intent(requireContext(), ReportingPeriodActivity::class.java).apply {
-                putExtra(ReportingPeriodActivity.DATE_DATA, Date())
+                putExtra(ReportingPeriodActivity.DATE_DATA, Date()) // Current Month
             }
             startActivity(intent)
         }
     }
 
     private fun initWallet() {
-        viewModel.fetchMyWallet.observe(viewLifecycleOwner) {
+        viewModel.fetchMyWalletBallance().observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 val totalExpenses = it[0].catAmount
                 val totalInflow = it[0].percentage
@@ -102,6 +136,15 @@ class HomeFragment : MainFragment() {
                     digitsConverter.formatCurrencyPositiveOrNegative(totalInflow, totalExpenses)
             }
         }
+
+        walletViewModel.fetchWalletID(digitsConverter.getSharedPrefWalletID())
+            .observe(viewLifecycleOwner) {
+                if (it.isEmpty()) {
+
+                } else {
+                    binding.myWallet.txtMyWallet.text = it[0].name
+                }
+            }
     }
 
     private fun initTotalSpentThisMonth() {
@@ -143,7 +186,7 @@ class HomeFragment : MainFragment() {
         binding.spendingReport.spendingReportRecycler.layoutManager =
             LinearLayoutManager(requireContext())
 
-        viewModel.fetchTopSpendingCurrentMonth.observe(viewLifecycleOwner) {
+        viewModel.fetchTopSpendingCurrentMonth().observe(viewLifecycleOwner) {
             val transform = viewModel.processCategoryAmount(it)
             topSpending.submitList(transform)
 
@@ -160,7 +203,7 @@ class HomeFragment : MainFragment() {
         binding.recentTransaction.recentTransactionRecycler.layoutManager =
             LinearLayoutManager(requireContext())
 
-        viewModel.fetchRecentData.observe(viewLifecycleOwner) {
+        viewModel.fetchRecentTransaction().observe(viewLifecycleOwner) {
             val transform = viewModel.processTransactionAmount(it)
             recentAdapter.submitList(transform)
             binding.recentTransaction.txtNoData.isVisible = false

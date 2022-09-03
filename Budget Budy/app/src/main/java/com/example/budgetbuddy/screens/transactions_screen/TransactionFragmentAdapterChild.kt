@@ -1,16 +1,13 @@
 package com.example.budgetbuddy.screens.transactions_screen
 
 import android.graphics.Color
-import android.provider.CalendarContract
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbuddy.databinding.TransactionsCustomRowBinding
 import com.example.budgetbuddy.fragments.category.CategoryList
-import com.example.budgetbuddy.fragments.transaction_detail_fragment.TransactionDetailsFragmentArgs
-import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.room.transactions_table.TransactionsTable
 import com.example.budgetbuddy.screens.search_screen.SearchTransactionFragmentDirections
 import com.example.budgetbuddy.utils.getIncomeID
 

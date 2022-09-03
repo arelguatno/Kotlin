@@ -16,7 +16,7 @@ import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.DateRangeBottomSheetDialogBinding
 import com.example.budgetbuddy.databinding.FragmentReportinPeriodBinding
 import com.example.budgetbuddy.enums.TimeRange
-import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.room.transactions_table.TransactionsTable
 import com.example.budgetbuddy.screens.transactions_screen.DateAndTimeRange
 import com.example.budgetbuddy.screens.transactions_screen.TransactionFragmentAdapterChild
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel

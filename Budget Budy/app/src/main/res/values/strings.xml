@@ -45,4 +45,6 @@
     <string name="in_app_product_id">laksjdoi1u2o</string>
     <string name="purchase_restored">purchase_stored_aye_shared_pref</string>
     <string name="user_purchased_premium">user_purchased_premium_shared_pref</string>
+    <string name="cancel">Cancel</string>
+    <string name="global_wallet_id">global_wallet_id</string>
 </resources>

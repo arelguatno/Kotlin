@@ -1,9 +1,8 @@
-package com.example.budgetbuddy.room.tables
+package com.example.budgetbuddy.room.transactions_table
 
 import androidx.room.*
 import com.example.budgetbuddy.fragments.category.SimpleListObject
 import java.io.Serializable
-import java.time.temporal.TemporalAmount
 import java.util.*
 
 @Entity(tableName = "transactions_table")
@@ -19,9 +18,11 @@ data class TransactionsTable(
     @Embedded(prefix = "time_range_") var time_range: DateRange? = DateRange(0, 0, 0, 0, 0),
     @Embedded(prefix = "text_labels_") var labels: Labels? = Labels("", "", ""),
     var incomeInflow: Boolean = false,
+    var walletID: Int ? = 0
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+
 }
 
 data class DateRange(

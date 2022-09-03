@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbuddy.databinding.TransactionsCustomRowBinding
 import com.example.budgetbuddy.fragments.category.CategoryList
-import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.room.transactions_table.TransactionsTable
 import com.example.budgetbuddy.utils.*
-import java.util.*
-import javax.inject.Inject
 
 class RecentTransactionAdapter :
     ListAdapter<TransactionsTable, RecentTransactionAdapter.MyViewHolder>(WORDS_COMPARATOR) {

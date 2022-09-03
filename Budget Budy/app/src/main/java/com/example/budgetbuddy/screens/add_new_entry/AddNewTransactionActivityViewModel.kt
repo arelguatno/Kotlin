@@ -3,11 +3,9 @@ package com.example.budgetbuddy.screens.add_new_entry
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.budgetbuddy.fragments.category.CategoryList
 import com.example.budgetbuddy.fragments.category.SimpleListObject
 import com.example.budgetbuddy.fragments.currency.CurrencyList
-import com.example.budgetbuddy.room.tables.TransactionsTable
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.budgetbuddy.room.transactions_table.TransactionsTable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject

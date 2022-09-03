@@ -48,12 +48,14 @@
         <entry key="app/src/main/res/layout/activity_reporting_period.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.30867892261650276" />
+        <entry key="app/src/main/res/layout/activity_wallet.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/blank_layout.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/checkroom-48px.xml" value="0.35784523300555793" />
         <entry key="app/src/main/res/layout/content_splash.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/date_bottom_sheet_dialog.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/date_range_bottom_sheet_dialog.xml" value="0.37025641025641026" />
         <entry key="app/src/main/res/layout/date_selector.xml" value="0.37025641025641026" />
+        <entry key="app/src/main/res/layout/dialog_new_category.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry2.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry_transaction.xml" value="0.23875432525951557" />
@@ -76,6 +78,7 @@
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_transaction_details.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_view_pager.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_wallet.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/haha.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout.xml" value="0.45" />
         <entry key="app/src/main/res/layout/my_wallet_home_page.xml" value="0.30867892261650276" />
@@ -99,6 +102,7 @@
         <entry key="app/src/main/res/menu/edit_transaction.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/menu/home_transactions_menu.xml" value="0.4625908507909363" />
         <entry key="app/src/main/res/menu/notification.xml" value="0.30867892261650276" />
+        <entry key="app/src/main/res/menu/plus_menu.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/menu/reporting_menu.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/search.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/menu/search_new.xml" value="0.30867892261650276" />

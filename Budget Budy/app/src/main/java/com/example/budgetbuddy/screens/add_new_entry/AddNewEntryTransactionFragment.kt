@@ -5,11 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
@@ -23,13 +21,12 @@ import com.example.budgetbuddy.fragments.NoteFragment
 import com.example.budgetbuddy.fragments.category.CategoryFragment
 import com.example.budgetbuddy.fragments.category.SimpleListObject
 import com.example.budgetbuddy.fragments.currency.CurrencyFragment
-import com.example.budgetbuddy.room.tables.DateRange
-import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.room.transactions_table.DateRange
+import com.example.budgetbuddy.room.transactions_table.TransactionsTable
 import com.example.budgetbuddy.utils.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddNewEntryTransactionFragment : MainFragment() {
@@ -250,7 +247,8 @@ class AddNewEntryTransactionFragment : MainFragment() {
                     date = Date(ddMMdyYYY),
                     timeStamp = timestamp,
                     time_range = timeRange,
-                    incomeInflow = incomeFlow
+                    incomeInflow = incomeFlow,
+                    walletID = digitsConverter.getSharedPrefWalletID()
                 )
                 data.putExtra(ADD_NEW_ENTRY, transaction)
             } else {

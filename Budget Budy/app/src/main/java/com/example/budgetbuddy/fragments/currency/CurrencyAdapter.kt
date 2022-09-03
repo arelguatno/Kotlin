@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.budgetbuddy.R
-import com.example.budgetbuddy.databinding.SimplelistCustomRowBinding
 import com.example.budgetbuddy.databinding.TransactionsCustomRowBinding
 import com.example.budgetbuddy.fragments.category.SimpleListObject
-import com.example.budgetbuddy.room.tables.TransactionList
 
 
 class CurrencyAdapter(private val list: List<Pair<Int, SimpleListObject>>, val currency: Int) :

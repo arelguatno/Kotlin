@@ -2,12 +2,10 @@ package com.example.budgetbuddy.screens.transactions_screen
 
 import androidx.lifecycle.*
 import com.example.budgetbuddy.enums.TimeRange
-import com.example.budgetbuddy.room.TransactionsRepository
-import com.example.budgetbuddy.room.tables.TransactionList
-import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.room.transactions_table.TransactionsRepository
+import com.example.budgetbuddy.room.model.TransactionList
+import com.example.budgetbuddy.room.transactions_table.TransactionsTable
 import com.example.budgetbuddy.DigitsConverter
-import com.example.budgetbuddy.utils.getCurrentMonth
-import com.example.budgetbuddy.utils.getCurrentYear
 import com.example.budgetbuddy.utils.getDateQuarter
 import com.example.budgetbuddy.utils.intMonthLongToString
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
-import kotlin.math.abs
 
 @HiltViewModel
 class TransactionViewModel @Inject constructor(
@@ -75,13 +72,17 @@ class TransactionViewModel @Inject constructor(
         }
     }
 
-    val fetchRecentData = repository.fetchRecentTransaction().asLiveData()
-    val fetchMyWallet = repository.fetchMyWallet().asLiveData()
+    fun fetchRecentTransaction(): LiveData<List<TransactionsTable>> {
+        return repository.fetchRecentTransaction().asLiveData()
+    }
 
+    fun fetchMyWalletBallance(): LiveData<List<TransactionsTable>> {
+        return repository.fetchMyWallet().asLiveData()
+    }
 
-    val fetchTopSpendingCurrentMonth =
-        repository.fetchTopSpending().asLiveData()
-
+    fun fetchTopSpendingCurrentMonth(): LiveData<List<TransactionsTable>> {
+        return repository.fetchTopSpending().asLiveData()
+    }
     fun fetchTopSpentThisMonthAndPreviousMonth(
         prevMonth: Int,
         prevYear: Int

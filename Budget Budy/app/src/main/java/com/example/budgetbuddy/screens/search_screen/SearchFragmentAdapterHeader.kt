@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbuddy.databinding.SearchParentBinding
-import com.example.budgetbuddy.room.tables.TransactionList
+import com.example.budgetbuddy.room.model.TransactionList
 import com.example.budgetbuddy.screens.transactions_screen.TransactionFragmentAdapterChild
 import com.example.budgetbuddy.utils.dateToNice
 

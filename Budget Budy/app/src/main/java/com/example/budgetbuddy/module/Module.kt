@@ -3,8 +3,9 @@ package com.example.budgetbuddy.module
 import android.content.Context
 import androidx.room.Room
 import com.example.budgetbuddy.room.AppRoomDatabase
-import com.example.budgetbuddy.room.TransactionsDao
+import com.example.budgetbuddy.room.transactions_table.TransactionsDao
 import com.example.budgetbuddy.DigitsConverter
+import com.example.budgetbuddy.room.wallet_table.WalletsDao
 import com.example.budgetbuddy.screens.settings_screen.SettingsFragmentViewModel
 import dagger.Module
 import dagger.Provides
@@ -22,12 +23,17 @@ class Module {
     fun provideDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
         context,
         AppRoomDatabase::class.java,
-        "com.example.room_aye.db"
+        "com.example.budgetbuddy.aye_db"
     ).build()
 
     @Provides
     fun provideChannelDao(appDatabase: AppRoomDatabase): TransactionsDao {
         return appDatabase.profileDao()
+    }
+
+    @Provides
+    fun provideWalletDao(appDatabase: AppRoomDatabase): WalletsDao {
+        return appDatabase.walletDao()
     }
 
     @Singleton

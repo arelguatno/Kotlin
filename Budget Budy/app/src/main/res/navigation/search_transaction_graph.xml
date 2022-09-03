@@ -23,6 +23,6 @@
         tools:layout="@layout/fragment_transaction_details" >
         <argument
             android:name="transaction"
-            app:argType="com.example.budgetbuddy.room.tables.TransactionsTable" />
+            app:argType="com.example.budgetbuddy.room.transactions_table.TransactionsTable" />
     </fragment>
 </navigation>

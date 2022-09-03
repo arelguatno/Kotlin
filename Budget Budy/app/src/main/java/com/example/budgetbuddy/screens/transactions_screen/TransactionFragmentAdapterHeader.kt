@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetbuddy.databinding.TransactionsParentBinding
-import com.example.budgetbuddy.room.tables.TransactionList
+import com.example.budgetbuddy.room.model.TransactionList
 import com.example.budgetbuddy.utils.intDayToString
 import com.example.budgetbuddy.utils.intMonthLongToString
 import com.example.budgetbuddy.utils.transformSingleDigitToTwoDigit

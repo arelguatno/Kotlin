@@ -5,11 +5,6 @@ import com.example.budgetbuddy.fragments.currency.CurrencyList
 import kotlin.math.abs
 
 class DigitsConverter(val context: Context) : com.example.budgetbuddy.utils.DecimalFormat() {
-    private val sharedPref = context.getSharedPreferences(
-        context.getString(R.string.global_currency_id),
-        Context.MODE_PRIVATE
-    )!!
-
     // Application Digits Converter
     fun <b> formatWithCurrency(value: b): String {
         return "${currencySign()} ${decimalFormat(value)} "
@@ -27,6 +22,7 @@ class DigitsConverter(val context: Context) : com.example.budgetbuddy.utils.Deci
             "-${currencySign()} ${decimalFormat(abs(total))} "
         }
     }
+
     private fun <c> decimalFormat(value: c): String {
         return numberFormat.format(value)
     }
@@ -40,7 +36,17 @@ class DigitsConverter(val context: Context) : com.example.budgetbuddy.utils.Deci
         return sharedPref!!.getInt(context.getString(R.string.global_currency_id), 1)
     }
 
-    fun getCurrencyNewEntry(): Int {
-        return sharedPref!!.getInt(context.getString(R.string.currency_id), 1)
+    fun getSharedPrefWalletID(): Int {
+        return sharedPrefWalletID!!.getInt(context.getString(R.string.global_wallet_id), 1)
     }
+
+    private val sharedPref = context.getSharedPreferences(
+        context.getString(R.string.global_currency_id),
+        Context.MODE_PRIVATE
+    )!!
+
+    private val sharedPrefWalletID = context.getSharedPreferences(
+        context.getString(R.string.global_wallet_id),
+        Context.MODE_PRIVATE
+    )!!
 }

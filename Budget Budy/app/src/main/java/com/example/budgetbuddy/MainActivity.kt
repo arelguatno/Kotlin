@@ -4,36 +4,34 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.budgetbuddy.databinding.ActivityMainBinding
 import com.example.budgetbuddy.fragments.category.CategoryList
 import com.example.budgetbuddy.fragments.currency.CurrencyList
 import com.example.budgetbuddy.fragments.onboarding.viewpager.ViewPagerActivity
-import com.example.budgetbuddy.room.tables.TransactionsTable
+import com.example.budgetbuddy.room.transactions_table.TransactionsTable
+import com.example.budgetbuddy.room.wallet_table.Wallets
 import com.example.budgetbuddy.screens.add_new_entry.AddNewEntryTransactionFragment
 import com.example.budgetbuddy.screens.add_new_entry.AddNewTransactionActivity
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
+import com.example.budgetbuddy.screens.wallets.WalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
-import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), Serializable {
     lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val viewModel: TransactionViewModel by viewModels()
+    private val walletViewModel: WalletViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +41,22 @@ class MainActivity : AppCompatActivity(), Serializable {
         setupBottomNav()
         onFloatingAction()
         loadCategoryCurrency()
-
+        createDefaultWallet()
     }
 
     private fun loadCategoryCurrency() {
         //Load Category and Currency
         CategoryList.geItems()
         CurrencyList.geItems()
+    }
+
+    private fun createDefaultWallet(){
+        walletViewModel.fetchPrimaryWallet.observe(this, Observer {
+            if (it.isEmpty()) {
+                val wallet = Wallets(name = "Personal", primary = true)
+                walletViewModel.insertWallet(wallet)
+            }
+        })
     }
 
     private fun onFloatingAction() {
