@@ -24,6 +24,8 @@ import com.example.budgetbuddy.fragments.currency.CurrencyFragment
 import com.example.budgetbuddy.room.transactions_table.DateRange
 import com.example.budgetbuddy.room.transactions_table.TransactionsTable
 import com.example.budgetbuddy.utils.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -48,6 +50,18 @@ class AddNewEntryTransactionFragment : MainFragment() {
         binding = NewtransactionfragmentBinding.inflate(layoutInflater)
         bottomSheetDialog = BottomSheetDialog(requireContext())
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadAd()
+    }
+
+    private fun loadAd() {
+        MobileAds.initialize(requireContext()) {}
+        val mAdView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
     }
 
     override fun onAttach(context: Context) {

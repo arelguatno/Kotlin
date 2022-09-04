@@ -49,6 +49,13 @@ class TransactionFragment : MainFragment() {
         return binding.root
     }
 
+    private fun loadAd() {
+        MobileAds.initialize(requireContext()) {}
+        val mAdView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+    }
+
 
     override fun onStart() {
         super.onStart()
@@ -78,6 +85,7 @@ class TransactionFragment : MainFragment() {
         super.onViewCreated(view, savedInstanceState)
         menu()
         startForResult()
+        loadAd()
     }
 
     private fun menu() {

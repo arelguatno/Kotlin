@@ -39,7 +39,10 @@
     <string name="select_category">Select Category</string>
     <string name="amount">Amount</string>
     <string name="today">Today</string>
-    <string name="google_admob">ca-app-pub-1363370537348771/6516432885</string>
+<!--   prod ca-app-pub-1363370537348771/6516432885-->
+<!--   free ca-app-pub-3940256099942544/6300978111-->
+    <string name="google_admob">ca-app-pub-3940256099942544/6300978111</string>
+
     <string name="on_boarding_shared_pref">on_boarding_shared_pref</string>
     <string name="on_boarding_finised">on_boarding_finised</string>
     <string name="in_app_product_id">laksjdoi1u2o</string>

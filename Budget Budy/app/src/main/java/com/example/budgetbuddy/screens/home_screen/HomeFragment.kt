@@ -71,9 +71,6 @@ class HomeFragment : MainFragment() {
 
                 if (result.resultCode == Activity.RESULT_OK) {
                     readSelectedWallet()
-//                    if (result.data?.getSerializableExtra(AddNewEntryTransactionFragment.ADD_NEW_ENTRY) != null) readSelectedWallet(
-//                        result.data
-//                    )
                 }
             }
 
