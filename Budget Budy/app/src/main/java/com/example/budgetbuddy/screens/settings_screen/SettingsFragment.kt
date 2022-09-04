@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingFlowParams.ProductDetailsParams
@@ -184,7 +185,7 @@ class SettingsFragment : MainFragment() {
 
     private fun initViews() {
         binding.settingsDisplay.selectLanguage.setOnClickListener {
-            showShortToastMessage("Soon")
+            showShortToastMessage("More languages soon")
 //            viewModel.setRestoredFalse()
 //            viewModel.setUserPurchasedPremiumFalse()
 //            checkIfPremium()
@@ -193,6 +194,14 @@ class SettingsFragment : MainFragment() {
         binding.settingsDisplay.currency.setOnClickListener {
             val action = SettingsFragmentDirections.actionSettingsFragmentToCurrencyFragment()
             findNavController().navigate(action)
+        }
+
+        binding.settingsAbout.about.setOnClickListener {
+            it.findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
+        }
+
+        binding.settingsAbout.feedback.setOnClickListener {
+            it.findNavController().navigate(R.id.action_settingsFragment_to_feedbackFragment)
         }
     }
 }

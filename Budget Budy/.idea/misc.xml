@@ -58,6 +58,7 @@
         <entry key="app/src/main/res/layout/date_range_bottom_sheet_dialog.xml" value="0.37025641025641026" />
         <entry key="app/src/main/res/layout/date_selector.xml" value="0.37025641025641026" />
         <entry key="app/src/main/res/layout/dialog_new_category.xml" value="0.30867892261650276" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry2.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_add_new_entry_transaction.xml" value="0.23875432525951557" />
@@ -65,6 +66,7 @@
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.3047699451245251" />
         <entry key="app/src/main/res/layout/fragment_currency.xml" value="0.4008547008547009" />
         <entry key="app/src/main/res/layout/fragment_date.xml" value="0.30854700854700856" />
+        <entry key="app/src/main/res/layout/fragment_feedback.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_first_screen.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3047699451245251" />
         <entry key="app/src/main/res/layout/fragment_new_search.xml" value="0.30867892261650276" />

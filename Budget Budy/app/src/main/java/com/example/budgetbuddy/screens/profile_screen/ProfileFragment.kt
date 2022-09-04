@@ -57,6 +57,10 @@ class ProfileFragment : MainFragment() {
             }
             startActivity(intent)
         }
+
+        binding.walletDisplay.profileMyAccount.setOnClickListener {
+
+        }
     }
 
     private fun seeMyWallet() {
