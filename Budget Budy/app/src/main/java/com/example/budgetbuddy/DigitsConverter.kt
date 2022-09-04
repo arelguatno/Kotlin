@@ -16,6 +16,7 @@ class DigitsConverter(val context: Context) : com.example.budgetbuddy.utils.Deci
 
     fun <b, c> formatCurrencyPositiveOrNegative(totalInflow: b, totalExpenses: c): String {
         val total = totalInflow as Double - totalExpenses as Double
+
         return if ((total >= 0.0)) {
             return "${currencySign()} ${decimalFormat(abs(total))} "
         } else {

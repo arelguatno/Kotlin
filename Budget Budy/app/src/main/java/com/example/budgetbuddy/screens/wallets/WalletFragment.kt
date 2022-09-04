@@ -76,7 +76,12 @@ class WalletFragment : MainFragment() {
             builder.apply {
                 setPositiveButton(R.string.delete,
                     DialogInterface.OnClickListener { _, _ ->
-                        viewModel.deleteWallet(wallet)
+                        if (wallet.primary_wallet == true && wallet.id == 1) {
+                            showShortToastMessage("Personal wallet, cannot be deleted")
+                        } else {
+                            viewModel.deleteWallet(wallet)
+                        }
+
                     })
                 setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, _ ->

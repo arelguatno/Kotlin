@@ -2,6 +2,7 @@ package com.example.budgetbuddy.room.wallet_table
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
+import java.util.*
 
 @Dao
 interface WalletsDao {
@@ -21,15 +22,12 @@ interface WalletsDao {
     @Update
     suspend fun updateWallet(wallet: Wallets)
 
-    @Query("DELETE FROM wallets_table WHERE id =:id")
-    suspend fun deleteWalletID(id: Int)
-
     @Query("select \n" +
             "wallets_table.id,\n" +
             "name,\n" +
             "primary_wallet,\n" +
-            "(select sum(amount) from transactions_table where walletID == wallets_table.id AND incomeInflow = 1) as income ,\n" +
-            " (select sum(amount) from transactions_table where walletID == wallets_table.id AND incomeInflow = 0) as expenses\n" +
-            " from wallets_table  left join  transactions_table ON transactions_table.walletID == wallets_table.id")
-    fun fetchWallets(): Flow<List<Wallets>>
+            "(select sum(amount) from transactions_table where walletID == wallets_table.id AND incomeInflow = 1 AND date<=:date) as income ,\n" +
+            " (select sum(amount) from transactions_table where walletID == wallets_table.id AND incomeInflow = 0 AND date<=:date) as expenses\n" +
+            " from wallets_table  left join  transactions_table ON transactions_table.walletID == wallets_table.id GROUP by wallets_table.id")
+    fun fetchWallets(date: Date = Date()): Flow<List<Wallets>>
 }

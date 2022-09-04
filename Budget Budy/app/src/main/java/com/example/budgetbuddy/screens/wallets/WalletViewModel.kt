@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.abs
 
 @HiltViewModel
 class WalletViewModel @Inject constructor(
@@ -39,18 +40,14 @@ class WalletViewModel @Inject constructor(
         }
     }
 
-    fun deleteWalletID(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            walletDao.deleteWalletID(id)
-        }
-    }
-
     fun processTransactionAmount(param: List<Wallets>): List<Wallets> {
         for (i in param) {
             var income = 0.0
-            if (i.income != null) income = i.income!!
             var expenses = 0.0
-            if (i.expenses != null) income = i.expenses!!
+
+            if (i.income != null) income = i.income!!
+            if (i.expenses != null) expenses = i.expenses!!
+
             i.totalBalanceLabel = digitsConverter.formatCurrencyPositiveOrNegative(income, expenses)
         }
         return param

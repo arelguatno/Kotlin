@@ -25,8 +25,4 @@ class WalletRepository @Inject constructor(
     fun fetchPrimaryWallet(): Flow<List<Wallets>> {
         return walletsDao.fetchPrimaryWallet()
     }
-
-    suspend fun deleteWalletID(id: Int) {
-        walletsDao.deleteWalletID(id)
-    }
 }
