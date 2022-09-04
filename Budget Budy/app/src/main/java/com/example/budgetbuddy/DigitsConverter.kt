@@ -4,8 +4,9 @@ import android.content.Context
 import com.example.budgetbuddy.fragments.currency.CurrencyList
 import kotlin.math.abs
 
+// Application Digits Converter
 class DigitsConverter(val context: Context) : com.example.budgetbuddy.utils.DecimalFormat() {
-    // Application Digits Converter
+
     fun <b> formatWithCurrency(value: b): String {
         return "${currencySign()} ${decimalFormat(value)} "
     }
@@ -16,7 +17,6 @@ class DigitsConverter(val context: Context) : com.example.budgetbuddy.utils.Deci
 
     fun <b, c> formatCurrencyPositiveOrNegative(totalInflow: b, totalExpenses: c): String {
         val total = totalInflow as Double - totalExpenses as Double
-
         return if ((total >= 0.0)) {
             return "${currencySign()} ${decimalFormat(abs(total))} "
         } else {

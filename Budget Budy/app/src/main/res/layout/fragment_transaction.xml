@@ -27,16 +27,26 @@
     <include
         android:id="@+id/calendar_select"
         layout="@layout/date_selector"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:id="@+id/txtNoRecordsFound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No records found"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedView"
-        android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -139,17 +149,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+<!--            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--                android:id="@+id/swiperefresh"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
-    <TextView
-        android:id="@+id/txtNoRecordsFound"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="No records found"
-        android:textSize="20sp"
-        android:visibility="gone" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

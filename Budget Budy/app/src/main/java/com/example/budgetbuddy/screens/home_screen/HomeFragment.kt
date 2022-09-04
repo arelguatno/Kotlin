@@ -70,9 +70,10 @@ class HomeFragment : MainFragment() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
 
                 if (result.resultCode == Activity.RESULT_OK) {
-                    if (result.data?.getSerializableExtra(AddNewEntryTransactionFragment.ADD_NEW_ENTRY) != null) readSelectedWallet(
-                        result.data
-                    )
+                    readSelectedWallet()
+//                    if (result.data?.getSerializableExtra(AddNewEntryTransactionFragment.ADD_NEW_ENTRY) != null) readSelectedWallet(
+//                        result.data
+//                    )
                 }
             }
 
@@ -82,8 +83,8 @@ class HomeFragment : MainFragment() {
         }
     }
 
-    private fun readSelectedWallet(data: Intent?) {
-
+    private fun readSelectedWallet() {
+        showShortToastMessage("Wallet Loaded Successfully")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

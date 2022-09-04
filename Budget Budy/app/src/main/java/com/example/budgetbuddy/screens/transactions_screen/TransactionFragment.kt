@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.R
@@ -25,6 +26,7 @@ import com.example.budgetbuddy.utils.intMonthShortToString
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.*
 
 @AndroidEntryPoint
@@ -54,11 +56,24 @@ class TransactionFragment : MainFragment() {
         initOnCLick()
         initViewModel()
         initTransactionData()
+        initRefreshToPull()
 
-        viewModel.getRefreshTransaction().observe(viewLifecycleOwner) {
-            viewModel.setDate(viewModel.getDate().value!!)
+
+        viewModel.viewModelScope.launch {
+            viewModel.getRefreshTransaction().observe(viewLifecycleOwner) {
+                viewModel.setDate(viewModel.getDate().value!!)
+            }
         }
+
     }
+
+    private fun initRefreshToPull() {
+//        binding.swiperefresh.setOnRefreshListener {
+//            onStart()
+//            binding.swiperefresh.isRefreshing = false
+//        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         menu()

@@ -1,5 +1,6 @@
 package com.example.budgetbuddy.screens.wallets
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
@@ -58,6 +59,7 @@ class WalletFragment : MainFragment() {
         myAdapterHeader.setItemOnClickListener(object : WalletFragmentAdapter.onItemClickListener {
             override fun onItemClick(wallet: Wallets) {
                 setGlobalWalletId(wallet.id)
+                activity?.setResult(Activity.RESULT_OK)
                 activity?.finish()
             }
 
@@ -77,11 +79,14 @@ class WalletFragment : MainFragment() {
                 setPositiveButton(R.string.delete,
                     DialogInterface.OnClickListener { _, _ ->
                         if (wallet.primary_wallet == true && wallet.id == 1) {
-                            showShortToastMessage("Personal wallet, cannot be deleted")
+                            showShortToastMessage("Personal wallet cannot be deleted")
                         } else {
+                            if(wallet.id == digitsConverter.getSharedPrefWalletID()){
+                                setGlobalWalletId(1) // set to default
+                                initViews()
+                            }
                             viewModel.deleteWallet(wallet)
                         }
-
                     })
                 setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, _ ->
