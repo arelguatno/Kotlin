@@ -24,7 +24,7 @@ class ThemesFragment : MainFragment() {
     private lateinit var binding: FragmentThemesBinding
 
     companion object {
-         fun setTheme(uniqueID: Int) {
+        fun setTheme(uniqueID: Int) {
             when (uniqueID) {
                 1 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Light

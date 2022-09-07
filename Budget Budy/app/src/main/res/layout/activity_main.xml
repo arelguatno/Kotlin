@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -49,7 +48,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_nav_menu" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

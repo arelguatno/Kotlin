@@ -44,9 +44,9 @@ class ThemesAdapter(private val list: List<Pair<Int, SimpleListObject>>, val the
         holder.binding.txtCategory.text = item.second.rowValue
         holder.binding.txtCostPrice.isVisible = false
 
-        if(themesID == item.first){
+        if (themesID == item.first) {
             holder.binding.txtCostPrice.setTextColor(Color.WHITE)
-            holder.binding.txtCostPrice.text= "Selected"
+            holder.binding.txtCostPrice.text = "Selected"
             holder.binding.txtCostPrice.setTextColor(Color.parseColor("#7BCEFF"))
             holder.binding.txtCostPrice.isVisible = true
         }

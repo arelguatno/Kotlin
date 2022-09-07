@@ -26,4 +26,9 @@
     <color name="image_tint">#000000</color>
     <color name="bar_chart_text_color">#ff000000</color>
     <color name="wallet_bg_color">#686464</color>
+
+    <color name="primaryColor">#fafafa</color>
+    <color name="primaryLightColor">#ffffff</color>
+    <color name="primaryDarkColor">#c7c7c7</color>
+    <color name="primaryTextColor">#000000</color>
 </resources>
