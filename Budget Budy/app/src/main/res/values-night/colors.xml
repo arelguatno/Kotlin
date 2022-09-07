@@ -8,4 +8,5 @@
     <color name="image_tint">#FFFFFF</color>
     <color name="bar_chart_text_color">#FFFFFF</color>
     <color name="wallet_bg_color">#070707</color>
+    <color name ="line_separator">#808080</color>
 </resources>

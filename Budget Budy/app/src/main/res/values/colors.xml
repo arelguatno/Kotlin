@@ -2,17 +2,22 @@
 <resources>
     <color name="purple_200">#121212</color>
     <color name="dark_grey">#121212</color>
+
     <color name="purple_500">#FF6200EE</color>
+
     <color name="surface">#1C1C1E</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#50C878</color>
     <color name="black">#0e1111</color>
+
     <color name="bottom_nav_background">#FF6200EE</color>
+
     <color name="white">#ffffff</color>
     <color name="dark">#808080</color>
     <color name="blue">#7BCEFF</color>
     <string name="holo_light_blue">#ff00ddff</string>
 
+    <color name ="line_separator">#d3d3d3</color>
     <color name="appbar_bg_color">#FFFFFF</color>
     <color name="text_color_white_black">#000000</color>
     <color name="fragment_bg_color">#FFFFFF</color>

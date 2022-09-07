@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:background="@color/dark_grey"
+    android:background="@color/fragment_bg_color"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black">
+        android:background="@color/appbar_bg_color">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/app_bar"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:text="@string/budget_buddy"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color_white_black"
             android:textSize="40sp" />
 
         <LinearLayout
@@ -52,14 +52,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Version"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color_white_black"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" "
-                android:textColor="@color/white"
+                android:textColor="@color/text_color_white_black"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1.0.0"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color_white_black"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:text="Powered by Aye"
             android:layout_marginTop="5dp"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color_white_black"
             android:textSize="14sp" />
 
     </LinearLayout>

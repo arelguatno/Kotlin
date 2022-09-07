@@ -29,14 +29,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_marginTop="5dp"
-        android:focusable="true"
         android:background="@drawable/search_view_bg"
-        app:queryHint="Category, price, note, etc."/>
+        android:focusable="true"
+        app:queryHint="Category, price, note, etc." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

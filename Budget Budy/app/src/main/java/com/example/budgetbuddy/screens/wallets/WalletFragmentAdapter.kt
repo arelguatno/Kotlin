@@ -82,7 +82,8 @@ class WalletFragmentAdapter :
         if(defaultWalletId == item.id) {
             holder.binding.txtCostPrice.text = "Selected"
             holder.binding.txtCostPrice.isVisible = true
-            holder.binding.txtCostPrice.setTextColor(Color.WHITE)
+            holder.binding.txtCostPrice.setTextColor(Color.parseColor("#7BCEFF"))
+
         }
 
         val height = holder.binding.imageView.layoutParams.height
