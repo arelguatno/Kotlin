@@ -34,8 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         card_view:cardBackgroundColor="@color/card_view_bg_color"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="10dp">
+        card_view:cardCornerRadius="@dimen/card_corner_radius"
+        card_view:cardElevation="@dimen/card_elevation">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,10 +89,10 @@
                 android:id="@+id/txtNoData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="30dp"
-                android:visibility="gone"
                 android:gravity="center"
-                android:text="@string/click_to_add_spending_this_month"/>
+                android:padding="30dp"
+                android:text="@string/click_to_add_spending_this_month"
+                android:visibility="gone" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

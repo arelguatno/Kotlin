@@ -9,7 +9,7 @@
     android:layout_marginTop="15dp"
     android:layout_marginBottom="15dp"
     card_view:cardBackgroundColor="@color/card_view_bg_color"
-    card_view:cardElevation="10dp">
+    card_view:cardElevation="@dimen/card_elevation">
 
 
     <RelativeLayout
@@ -17,8 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:paddingBottom="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"

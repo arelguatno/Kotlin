@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fragment_bg_color"
     tools:context=".fragments.onboarding.viewpager.ViewPagerFragment">
 
     <ImageView
@@ -22,7 +23,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Budget Buddy"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color_white_black"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="parent" />

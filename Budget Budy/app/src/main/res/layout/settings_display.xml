@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         card_view:cardBackgroundColor="@color/card_view_bg_color"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="10dp">
+        card_view:cardCornerRadius="@dimen/card_corner_radius"
+        card_view:cardElevation="@dimen/card_elevation">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,8 +45,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Select Language"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_color_white_black" />
+                    android:textColor="@color/text_color_white_black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -54,8 +54,8 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="English"
-                    android:textSize="17sp"
-                    android:textColor="@android:color/holo_green_dark" />
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="17sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -74,8 +74,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Currency"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_color_white_black" />
+                    android:textColor="@color/text_color_white_black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/txtCurrency"
@@ -84,8 +84,8 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="GBP"
-                    android:textSize="17sp"
-                    android:textColor="@android:color/holo_green_dark" />
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="17sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -103,9 +103,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="App Theme"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_color_white_black" />
+                    android:text="Theme"
+                    android:textColor="@color/text_color_white_black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/txtTheme"
@@ -114,8 +114,8 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="Light"
-                    android:textSize="17sp"
-                    android:textColor="@android:color/holo_green_dark" />
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="17sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"

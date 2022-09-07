@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="30dp"
+    android:background="@color/fragment_bg_color"
     android:orientation="vertical">
 
     <TextView
@@ -20,7 +21,8 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@color/surface"
+        android:layout_margin="10dp"
+        card_view:cardBackgroundColor="@color/card_view_bg_color"
         card_view:cardElevation="10dp">
 
         <androidx.recyclerview.widget.RecyclerView
