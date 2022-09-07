@@ -2,8 +2,10 @@ package com.example.budgetbuddy
 
 import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -17,17 +19,23 @@ import com.example.budgetbuddy.databinding.ActivityMainBinding
 import com.example.budgetbuddy.fragments.category.CategoryList
 import com.example.budgetbuddy.fragments.currency.CurrencyList
 import com.example.budgetbuddy.fragments.onboarding.viewpager.ViewPagerActivity
+import com.example.budgetbuddy.fragments.themes.ThemesAdapter
+import com.example.budgetbuddy.fragments.themes.ThemesFragment
+import com.example.budgetbuddy.fragments.themes.ThemesList
 import com.example.budgetbuddy.room.transactions_table.TransactionsTable
 import com.example.budgetbuddy.room.wallet_table.Wallets
 import com.example.budgetbuddy.screens.add_new_entry.AddNewEntryTransactionFragment
 import com.example.budgetbuddy.screens.add_new_entry.AddNewTransactionActivity
 import com.example.budgetbuddy.screens.transactions_screen.TransactionViewModel
 import com.example.budgetbuddy.screens.wallets.WalletViewModel
+import com.example.budgetbuddy.utils.ContextUtils
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), Serializable {
+class MainActivity : BaseActivity(), Serializable {
+    @Inject lateinit var digitsConverter: DigitsConverter
     lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val viewModel: TransactionViewModel by viewModels()
@@ -42,12 +50,18 @@ class MainActivity : AppCompatActivity(), Serializable {
         onFloatingAction()
         loadCategoryCurrency()
         createDefaultWallet()
+        loadTheme()
+    }
+
+    private fun loadTheme() {
+        ThemesFragment.setTheme(digitsConverter.getThemesID())
     }
 
     private fun loadCategoryCurrency() {
-        //Load Category and Currency
+        //Load Category,Currency, Theme
         CategoryList.geItems()
         CurrencyList.geItems()
+        ThemesList.geItems()
     }
 
     private fun createDefaultWallet(){

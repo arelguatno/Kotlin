@@ -8,12 +8,14 @@ import com.android.billingclient.api.*
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.fragments.category.SimpleListObject
 import com.example.budgetbuddy.fragments.currency.CurrencyList
+import com.example.budgetbuddy.fragments.themes.ThemesList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsFragmentViewModel @Inject constructor(val context: Context) : ViewModel() {
     private val currency = MutableLiveData<SimpleListObject>()
+    private val themes = MutableLiveData<SimpleListObject>()
     private val purchased = MutableLiveData(false)
     private val userTypeString = MutableLiveData<String>()
     private lateinit var billingClient: BillingClient
@@ -39,6 +41,21 @@ class SettingsFragmentViewModel @Inject constructor(val context: Context) : View
             currency.value = currentC!!
         }
         return currency
+    }
+
+    fun getThemes(): LiveData<SimpleListObject> {
+        return themes
+    }
+
+    fun setThemes(v: Int): LiveData<SimpleListObject> {
+        val currentC = ThemesList.getCurrencyObj(v)
+        if (currentC == null) {
+            ThemesList.geItems()
+            themes.value = ThemesList.getCurrencyObj(v)
+        } else {
+            themes.value = currentC!!
+        }
+        return themes
     }
 
     fun ifRestored(): Boolean {

@@ -3,13 +3,14 @@ package com.example.budgetbuddy.screens.add_new_entry
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import com.example.budgetbuddy.BaseActivity
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.ActivityAddNewTransactionBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
 
 @AndroidEntryPoint
-class AddNewTransactionActivity : AppCompatActivity(), Serializable {
+class AddNewTransactionActivity : BaseActivity(), Serializable {
     private lateinit var binding: ActivityAddNewTransactionBinding
     val fragment = AddNewEntryTransactionFragment()
 

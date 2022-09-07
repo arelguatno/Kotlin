@@ -21,6 +21,7 @@ class WalletViewModel @Inject constructor(
 ) : ViewModel() {
 
     val fetchWallet = walletDao.fetchWallet().asLiveData()
+
     val fetchPrimaryWallet = walletDao.fetchPrimaryWallet().asLiveData()
 
     fun fetchWalletID(id: Int): LiveData<List<Wallets>> {

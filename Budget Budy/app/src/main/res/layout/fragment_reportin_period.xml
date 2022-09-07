@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/fragment_bg_color"
     android:orientation="vertical"
     tools:context=".screens.reportingperiod.ReportingPeriodActivity">
 
@@ -12,7 +12,7 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black">
+        android:background="@color/appbar_bg_color">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/app_bar"
@@ -29,6 +29,7 @@
         layout="@layout/date_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp" />
 
     <androidx.core.widget.NestedScrollView
@@ -45,7 +46,7 @@
                 android:id="@+id/expense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/surface"
+                android:background="@color/fragment_bg_color"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingTop="15dp"
@@ -73,7 +74,7 @@
                 android:id="@+id/pieChart"
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
-                android:background="@color/surface" />
+                android:background="@color/fragment_bg_color" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"

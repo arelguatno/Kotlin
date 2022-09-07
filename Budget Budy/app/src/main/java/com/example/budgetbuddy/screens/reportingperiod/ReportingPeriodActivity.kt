@@ -3,12 +3,13 @@ package com.example.budgetbuddy.screens.reportingperiod
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
+import com.example.budgetbuddy.BaseActivity
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.databinding.ActivityReportingPeriodBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReportingPeriodActivity : AppCompatActivity() {
+class ReportingPeriodActivity : BaseActivity() {
     private lateinit var binding: ActivityReportingPeriodBinding
 
     companion object{

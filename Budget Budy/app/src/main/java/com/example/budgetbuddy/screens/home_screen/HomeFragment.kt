@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.activityViewModels
@@ -228,8 +229,8 @@ class HomeFragment : MainFragment() {
         xAxis.isGranularityEnabled = true
         barChart.minOffset = 0f
         barChart.isDragEnabled = true
-        barChart.xAxis.textColor = Color.WHITE
-        barChart.axisLeft.textColor = Color.WHITE
+        barChart.xAxis.textColor = ContextCompat.getColor(requireContext(),R.color.bar_chart_text_color)
+        barChart.axisLeft.textColor = ContextCompat.getColor(requireContext(),R.color.bar_chart_text_color)
         barChart.setVisibleXRangeMaximum(3f)
         data.barWidth = 0.40f
         barChart.animate()
@@ -241,7 +242,7 @@ class HomeFragment : MainFragment() {
         barChart.axisLeft.setDrawGridLines(false);
         barChart.xAxis.setDrawGridLines(false);
         barChart.axisLeft.setStartAtZero(true);
-        barChart.barData.setValueTextColor(Color.WHITE)
+        barChart.barData.setValueTextColor(ContextCompat.getColor(requireContext(),R.color.bar_chart_text_color))
         barChart.barData.setValueFormatter(BarChartDataFormatter(digitsConverter))
         barChart.barData.setValueTextSize(8f)
         barChart.setExtraOffsets(0f, 0f, 0f, 0.5f)  // bottom padding

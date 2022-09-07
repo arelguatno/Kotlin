@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
@@ -172,8 +173,8 @@ class AddNewEntryTransactionFragment : MainFragment() {
     private fun setUpViewModelsListener() {
         viewModel.getNote().observe(viewLifecycleOwner) {
             binding.txtNote.text = it
-            binding.txtNote.setTextColor(Color.WHITE)
-            binding.imgNote.setColorFilter(Color.WHITE)
+            binding.txtNote.setTextColor(ContextCompat.getColor(requireContext(),R.color.text_color_white_black))
+            binding.imgNote.setColorFilter(ContextCompat.getColor(requireContext(),R.color.text_color_white_black))
             binding.test.isFocusable = false
         }
 
@@ -181,8 +182,8 @@ class AddNewEntryTransactionFragment : MainFragment() {
             binding.txtCategory.text = it.rowValue
             binding.imgCategory.setImageResource(it.imageID)
 
-            binding.txtCategory.setTextColor(Color.WHITE)
-            binding.imgCategory.setColorFilter(Color.WHITE)
+            binding.txtCategory.setTextColor(ContextCompat.getColor(requireContext(),R.color.text_color_white_black))
+            binding.imgCategory.setColorFilter(ContextCompat.getColor(requireContext(),R.color.image_tint))
         }
 
         viewModel.getCurrency().observe(viewLifecycleOwner) {

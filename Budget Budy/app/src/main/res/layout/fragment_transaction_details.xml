@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/dark_grey"
+    android:background="@color/fragment_bg_color"
     tools:context=".fragments.transaction_detail_fragment.TransactionDetailsFragment">
 
 
@@ -14,7 +14,7 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black">
+        android:background="@color/appbar_bg_color">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/app_bar"
@@ -32,7 +32,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
-        card_view:cardBackgroundColor="@color/surface"
+        card_view:cardBackgroundColor="@color/card_view_bg_color"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="10dp">
 
@@ -78,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Transportation"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color_white_black"
                     android:textSize="25sp" />
 
                 <TextView
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Some notes"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color_white_black"
                     android:textSize="18sp" />
 
                 <TextView
@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="Date"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color_white_black"
                     android:textSize="16sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -121,7 +121,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
-        card_view:cardBackgroundColor="@color/surface"
+        card_view:cardBackgroundColor="@color/card_view_bg_color"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="10dp">
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black"
+    android:background="@color/fragment_bg_color"
     android:orientation="vertical"
     android:gravity="top|center"
     tools:context=".DateFragment">
@@ -13,7 +13,7 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black">
+        android:background="@color/appbar_bg_color">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/app_bar"

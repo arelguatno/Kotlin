@@ -12,4 +12,13 @@
     <color name="dark">#808080</color>
     <color name="blue">#7BCEFF</color>
     <string name="holo_light_blue">#ff00ddff</string>
+
+    <color name="appbar_bg_color">#FFFFFF</color>
+    <color name="text_color_white_black">#000000</color>
+    <color name="fragment_bg_color">#FFFFFF</color>
+    <color name="card_view_bg_color">#FFFFFF</color>
+    <color name="recycler_view_bg_color">#FFFFFF</color>
+    <color name="image_tint">#000000</color>
+    <color name="bar_chart_text_color">#ff000000</color>
+    <color name="wallet_bg_color">#686464</color>
 </resources>

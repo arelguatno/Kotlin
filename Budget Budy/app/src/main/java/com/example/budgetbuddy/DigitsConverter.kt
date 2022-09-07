@@ -41,6 +41,15 @@ class DigitsConverter(val context: Context) : com.example.budgetbuddy.utils.Deci
         return sharedPrefWalletID!!.getInt(context.getString(R.string.global_wallet_id), 1)
     }
 
+    fun getThemesID(): Int {
+        return sharedPrefThemesID!!.getInt(context.getString(R.string.global_themes_id), 3)
+    }
+
+    private val sharedPrefThemesID = context.getSharedPreferences(
+        context.getString(R.string.global_themes_id),
+        Context.MODE_PRIVATE
+    )!!
+
     private val sharedPref = context.getSharedPreferences(
         context.getString(R.string.global_currency_id),
         Context.MODE_PRIVATE

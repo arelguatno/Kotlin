@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#070707"
+    android:background="@color/wallet_bg_color"
     android:padding="10dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        card_view:cardBackgroundColor="@color/surface"
+        card_view:cardBackgroundColor="@color/card_view_bg_color"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="10dp">
 
@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add Wallet"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color_white_black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

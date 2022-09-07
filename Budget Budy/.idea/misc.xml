@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-night/bottom_nav_colors.xml" value="0.3265" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.387" />
         <entry key="app/src/main/res/drawable-v24/next_view_bg.xml" value="0.324" />
         <entry key="app/src/main/res/drawable/app_logo.xml" value="0.3115" />
@@ -15,23 +16,38 @@
         <entry key="app/src/main/res/drawable/ic_baseline_account_balance_24.xml" value="0.154" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.3475" />
         <entry key="app/src/main/res/drawable/ic_baseline_align_vertical_center_24.xml" value="0.245" />
+        <entry key="app/src/main/res/drawable/ic_baseline_app_settings_alt_24.xml" value="0.35" />
         <entry key="app/src/main/res/drawable/ic_baseline_apps_24.xml" value="0.3425" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.3115" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.245" />
         <entry key="app/src/main/res/drawable/ic_baseline_calendar_month_24.xml" value="0.3475" />
+        <entry key="app/src/main/res/drawable/ic_baseline_card_giftcard_24.xml" value="0.277" />
         <entry key="app/src/main/res/drawable/ic_baseline_circle_24.xml" value="0.3425" />
+        <entry key="app/src/main/res/drawable/ic_baseline_dark_mode_24.xml" value="0.3145" />
         <entry key="app/src/main/res/drawable/ic_baseline_directions_bus_24.xml" value="0.3425" />
+        <entry key="app/src/main/res/drawable/ic_baseline_directions_car_24.xml" value="0.277" />
+        <entry key="app/src/main/res/drawable/ic_baseline_fitness_center_24.xml" value="0.277" />
         <entry key="app/src/main/res/drawable/ic_baseline_food.xml" value="0.3425" />
+        <entry key="app/src/main/res/drawable/ic_baseline_girl_24.xml" value="0.277" />
         <entry key="app/src/main/res/drawable/ic_baseline_handyman_24.xml" value="0.3425" />
+        <entry key="app/src/main/res/drawable/ic_baseline_highlight_24.xml" value="0.3145" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.3425" />
+        <entry key="app/src/main/res/drawable/ic_baseline_import_export_24.xml" value="0.277" />
         <entry key="app/src/main/res/drawable/ic_baseline_income_24.xml" value="0.3665" />
         <entry key="app/src/main/res/drawable/ic_baseline_keyboard_arrow_left_24.xml" value="0.312" />
         <entry key="app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.387" />
         <entry key="app/src/main/res/drawable/ic_baseline_medication_24.xml" value="0.3425" />
         <entry key="app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.3115" />
+        <entry key="app/src/main/res/drawable/ic_baseline_pets_24.xml" value="0.277" />
         <entry key="app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.2885" />
+        <entry key="app/src/main/res/drawable/ic_baseline_school_24.xml" value="0.277" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2745" />
+        <entry key="app/src/main/res/drawable/ic_baseline_sell_24.xml" value="0.277" />
+        <entry key="app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.277" />
+        <entry key="app/src/main/res/drawable/ic_baseline_show_investment_24.xml" value="0.277" />
+        <entry key="app/src/main/res/drawable/ic_baseline_soap_24.xml" value="0.277" />
         <entry key="app/src/main/res/drawable/ic_baseline_sports_esports_24.xml" value="0.3425" />
+        <entry key="app/src/main/res/drawable/ic_baseline_storefront_24.xml" value="0.277" />
         <entry key="app/src/main/res/drawable/ic_baseline_subscriptions_24.xml" value="0.3425" />
         <entry key="app/src/main/res/drawable/ic_baseline_wallet_24.xml" value="0.245" />
         <entry key="app/src/main/res/drawable/ic_category_food.xml" value="0.2265" />
@@ -42,6 +58,7 @@
         <entry key="app/src/main/res/drawable/selected_dot.xml" value="0.374" />
         <entry key="app/src/main/res/drawable/shape_drop_down_normal.xml" value="0.387" />
         <entry key="app/src/main/res/drawable/tab_selector.xml" value="0.374" />
+        <entry key="app/src/main/res/layout-af-rNA/layout_naibia.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/account_free_account.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/account_free_profile.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/activity_add_new_transaction.xml" value="0.22" />
@@ -78,6 +95,7 @@
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_settings_currency.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.30867892261650276" />
+        <entry key="app/src/main/res/layout/fragment_themes.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_third_screen.xml" value="0.30867892261650276" />
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_transaction_details.xml" value="0.335" />

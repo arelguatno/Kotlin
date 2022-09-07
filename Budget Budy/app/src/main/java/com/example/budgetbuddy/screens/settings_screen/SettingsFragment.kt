@@ -49,6 +49,7 @@ class SettingsFragment : MainFragment() {
         initViews()
         initViewModelObserver()
         viewModel.setCurrency(digitsConverter.getCurrencySettings())
+        viewModel.setThemes(digitsConverter.getThemesID())
 
         binding.settingsAppName.versionNumber.text = VERSION_NAME
 
@@ -177,6 +178,10 @@ class SettingsFragment : MainFragment() {
             binding.settingsDisplay.txtCurrency.text = it.textIcon.substring(0, 3)
         }
 
+        viewModel.getThemes().observe(viewLifecycleOwner){
+            binding.settingsDisplay.txtTheme.text = it.currencySign
+        }
+
         //TODO error
         viewModel.getUserTypeString().observe(viewLifecycleOwner) {
             txtPremiumLabel.text = it
@@ -202,6 +207,10 @@ class SettingsFragment : MainFragment() {
 
         binding.settingsAbout.feedback.setOnClickListener {
             it.findNavController().navigate(R.id.action_settingsFragment_to_feedbackFragment)
+        }
+
+        binding.settingsDisplay.themes.setOnClickListener {
+            it.findNavController().navigate(R.id.action_settingsFragment_to_themesFragment)
         }
     }
 }

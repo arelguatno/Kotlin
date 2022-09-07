@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        card_view:cardBackgroundColor="@color/surface"
+        card_view:cardBackgroundColor="@color/card_view_bg_color"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="10dp">
 
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/budget_buddy"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color_white_black"
                 android:layout_marginBottom="5dp"
                 android:textSize="25sp" />
 

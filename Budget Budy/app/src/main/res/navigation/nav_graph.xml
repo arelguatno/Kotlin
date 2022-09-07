@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_feedbackFragment"
             app:destination="@id/feedbackFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_themesFragment"
+            app:destination="@id/themesFragment" />
     </fragment>
     <fragment
         android:id="@+id/transactionDetailsFragment"
@@ -87,6 +90,14 @@
         tools:layout="@layout/fragment_feedback" >
         <action
             android:id="@+id/action_feedbackFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/themesFragment"
+        android:name="com.example.budgetbuddy.fragments.themes.ThemesFragment"
+        android:label="ThemesFragment" >
+        <action
+            android:id="@+id/action_themesFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
 </navigation>

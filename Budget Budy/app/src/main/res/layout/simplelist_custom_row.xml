@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/itemRow"
+    android:background="@color/fragment_bg_color"
     android:layout_margin="10dp">
 
     <ImageView
@@ -25,7 +26,7 @@
         android:layout_height="20dp"
         tools:text="Rental"
         android:layout_marginLeft="5dp"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color_white_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

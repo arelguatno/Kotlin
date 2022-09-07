@@ -19,7 +19,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
-            app:tint="@color/white" />
+            app:tint="@color/image_tint" />
 
         <TextView
             android:id="@+id/txtDate"
@@ -28,7 +28,7 @@
             android:layout_weight="6"
             android:gravity="center"
             android:text="@string/date"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color_white_black"
             android:textStyle="bold" />
         <ImageView
             android:id="@+id/rightImage"
@@ -36,7 +36,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-            app:tint="@color/white" />
+            app:tint="@color/image_tint" />
 
     </LinearLayout>
 
