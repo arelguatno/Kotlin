@@ -72,6 +72,8 @@ class TransactionFragment : MainFragment() {
             }
         }
 
+        binding.adView.isVisible = showAds()
+
     }
 
     private fun initRefreshToPull() {

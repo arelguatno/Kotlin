@@ -24,7 +24,7 @@ class SettingsFragmentViewModel @Inject constructor(val context: Context) : View
         userTypeString.value = v
     }
 
-    fun getUserTypeString(): MutableLiveData<String> {
+    fun getUserTypeString(): LiveData<String> {
         return userTypeString
     }
 
@@ -96,26 +96,25 @@ class SettingsFragmentViewModel @Inject constructor(val context: Context) : View
         }
     }
 
-//    fun setUserPurchasedPremiumFalse() {
-//        val sharedPref = context.getSharedPreferences(
-//            context.getString(R.string.user_purchased_premium),
-//            Context.MODE_PRIVATE
-//        )
-//        with(sharedPref.edit()){
-//            putBoolean(context.getString(R.string.user_purchased_premium), false)
-//            apply()
-//        }
-//    }
-//
-//    fun setRestoredFalse() {
-//        val sharedPref = context.getSharedPreferences(
-//            context.getString(R.string.purchase_restored),
-//            Context.MODE_PRIVATE
-//        )
-//        val editor = sharedPref.edit()
-//        editor.putBoolean(context.getString(R.string.purchase_restored), false)
-//        editor.apply()
-//    }
+    fun setUserPurchasedPremiumFalse() {
+        val sharedPref = context.getSharedPreferences(
+            context.getString(R.string.user_purchased_premium),
+            Context.MODE_PRIVATE
+        )
+        with(sharedPref.edit()){
+            putBoolean(context.getString(R.string.user_purchased_premium), false)
+            apply()
+        }
+    }
 
+    fun setRestoredFalse() {
+        val sharedPref = context.getSharedPreferences(
+            context.getString(R.string.purchase_restored),
+            Context.MODE_PRIVATE
+        )
+        val editor = sharedPref.edit()
+        editor.putBoolean(context.getString(R.string.purchase_restored), false)
+        editor.apply()
+    }
 
 }

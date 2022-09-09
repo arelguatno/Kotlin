@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -39,7 +41,6 @@ class SettingsFragment : MainFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSettingsBinding.inflate(layoutInflater)
-        checkIfPremium()
         initBilling()
         return binding.root
     }
@@ -47,6 +48,7 @@ class SettingsFragment : MainFragment() {
     override fun onStart() {
         super.onStart()
         initViews()
+        checkIfPremium()
         initViewModelObserver()
         viewModel.setCurrency(digitsConverter.getCurrencySettings())
         viewModel.setThemes(digitsConverter.getThemesID())
@@ -178,21 +180,24 @@ class SettingsFragment : MainFragment() {
             binding.settingsDisplay.txtCurrency.text = it.textIcon.substring(0, 3)
         }
 
-        viewModel.getThemes().observe(viewLifecycleOwner){
+        viewModel.getThemes().observe(viewLifecycleOwner) {
             binding.settingsDisplay.txtTheme.text = it.currencySign
         }
 
         //TODO error
-        viewModel.getUserTypeString().observe(viewLifecycleOwner) {
+        val owner = activity as LifecycleOwner
+        viewModel.getUserTypeString().observe(owner, Observer {
             txtPremiumLabel.text = it
-        }
+        })
     }
 
     private fun initViews() {
         binding.settingsDisplay.selectLanguage.setOnClickListener {
             showShortToastMessage("More languages soon")
+//            setUserPurchasedPremiumTrue
 //            viewModel.setRestoredFalse()
 //            viewModel.setUserPurchasedPremiumFalse()
+//            viewModel.setUserPurchasedPremiumTrue()
 //            checkIfPremium()
         }
 

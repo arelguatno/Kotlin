@@ -14,9 +14,5 @@ class MyApplication: Application() {
     override fun onCreate() {
         super.onCreate()
        // AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-
-//        val context: Context = LocaleHelper.setLocale(this, "en");
-//        val resources: Resources = context.resources;
-//        messageView.setText(resources.getString(R.string.language));
     }
 }

@@ -39,4 +39,5 @@ ext {
     nav_version = '2.5.0'
     mpandroidchart = '3.1.0'
     billing_version = "5.0.0"
+    fragment_version = "1.2.5"
 }

@@ -51,7 +51,7 @@ class HomeFragment : MainFragment() {
 
     private val viewModel: TransactionViewModel by activityViewModels()
     private val walletViewModel: WalletViewModel by activityViewModels()
-    private val settingsViewModel: SettingsFragmentViewModel by activityViewModels()
+
     private val recentAdapter: RecentTransactionAdapter by lazy { RecentTransactionAdapter() }
     private val topSpending: RecentTransactionAdapter by lazy { RecentTransactionAdapter() }
 
@@ -109,7 +109,7 @@ class HomeFragment : MainFragment() {
 
     private fun initButtons() {
         //Check if user premium
-        binding.adView.isVisible = !settingsViewModel.getPremiumUser()
+        binding.adView.isVisible = showAds()
 
         binding.recentTransaction.txtRecentReports.setOnClickListener {
             val navView =

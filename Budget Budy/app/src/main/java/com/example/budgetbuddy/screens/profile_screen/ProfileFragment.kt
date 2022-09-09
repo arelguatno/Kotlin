@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.databinding.FragmentProfileBinding
 import com.example.budgetbuddy.screens.reportingperiod.ReportingPeriodActivity
@@ -36,6 +37,7 @@ class ProfileFragment : MainFragment() {
         super.onStart()
 
         initViews()
+        binding.adView.isVisible = showAds()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

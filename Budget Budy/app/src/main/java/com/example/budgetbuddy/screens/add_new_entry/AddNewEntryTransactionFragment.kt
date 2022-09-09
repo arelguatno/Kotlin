@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
@@ -75,6 +76,8 @@ class AddNewEntryTransactionFragment : MainFragment() {
         super.onStart()
         setUpScreen()
         inflateMenu()
+
+        binding.adView.isVisible = showAds()
     }
 
     private fun inflateMenu() {

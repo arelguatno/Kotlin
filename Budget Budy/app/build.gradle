@@ -14,8 +14,8 @@ android {
         applicationId "com.budget.budgetbuddy.aye"
         minSdk 21
         targetSdk 32
-        versionCode 27
-        versionName "1.0.16"
+        versionCode 28
+        versionName "1.0.17"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "${applicationId}-v${versionName}(${versionCode})")
@@ -23,8 +23,8 @@ android {
 
     buildTypes {
         release {
-            debuggable false    // google play wont let you upload if true
-            minifyEnabled false  // throws error if true. caused by navigation
+            debuggable true    // google play wont let you upload if true
+            minifyEnabled true  // throws error if true. caused by navigation
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -95,7 +95,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.android.gms:play-services-ads:21.1.0'
-    implementation "androidx.fragment:fragment-ktx:1.5.2"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
     //Play Billing
     implementation "com.android.billingclient:billing:$billing_version"
