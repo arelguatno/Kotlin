@@ -13,15 +13,19 @@ import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.example.budgetbuddy.MainFragment
 import com.example.budgetbuddy.databinding.FragmentDateBinding
+import com.example.budgetbuddy.screens.add_new_entry.AddNewTransactionActivityViewModel
+import java.time.DayOfWeek
 import java.util.*
 
 
 class DateFragment : MainFragment() {
     private lateinit var binding: FragmentDateBinding
+    private val viewModel: AddNewTransactionActivityViewModel by activityViewModels()
 
     companion object {
         const val RESULT_KEY = "com.example.budgetbuddy.fragments.DATE_ID"
@@ -47,6 +51,10 @@ class DateFragment : MainFragment() {
     @RequiresApi(Build.VERSION_CODES.O) //TODO check this
     override fun onStart() {
         super.onStart()
+
+        val calendar = Calendar.getInstance()
+        calendar.time = viewModel.getDate().value
+        binding.datePickerActions.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
 
         menu()
         binding.datePickerActions.setOnDateChangedListener(OnDateChangedListener { _, year, monthOfYear, dayOfMonth ->

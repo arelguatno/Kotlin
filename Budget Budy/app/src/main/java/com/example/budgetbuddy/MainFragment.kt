@@ -18,7 +18,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 abstract class MainFragment : Fragment() {
     @Inject lateinit var digitsConverter: DigitsConverter
-    private val settingsViewModel: SettingsFragmentViewModel by viewModels()
+     internal val settingsViewModel: SettingsFragmentViewModel by viewModels()
 
     companion object {
         internal lateinit var sharedPref: SharedPreferences

@@ -10,6 +10,7 @@ import com.example.budgetbuddy.fragments.category.SimpleListObject
 import com.example.budgetbuddy.fragments.currency.CurrencyList
 import com.example.budgetbuddy.fragments.themes.ThemesList
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,6 +20,15 @@ class SettingsFragmentViewModel @Inject constructor(val context: Context) : View
     private val purchased = MutableLiveData(false)
     private val userTypeString = MutableLiveData<String>()
     private lateinit var billingClient: BillingClient
+    private val dateLong = MutableLiveData(Date())
+
+    fun setDateLong(v: Date){
+        dateLong.value = v
+    }
+
+    fun getDateLong(): LiveData<Date> {
+        return dateLong
+    }
 
     fun setUserTypeString(v: String) {
         userTypeString.value = v

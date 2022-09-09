@@ -19,6 +19,15 @@ class AddNewTransactionActivityViewModel @Inject constructor() : ViewModel() {
     private val date = MutableLiveData<Date>()
     private val price = MutableLiveData<String>()
     private val table = MutableLiveData<TransactionsTable>()
+    private val dateLong = MutableLiveData(Date().time)
+
+    fun setDateLong(v: Long){
+        dateLong.value = v
+    }
+
+    fun getDateLong(): LiveData<Long> {
+        return dateLong
+    }
 
     fun setNote(v: String) {
         note.value = v

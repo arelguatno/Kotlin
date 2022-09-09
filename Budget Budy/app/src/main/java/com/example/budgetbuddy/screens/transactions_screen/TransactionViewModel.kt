@@ -29,6 +29,8 @@ class TransactionViewModel @Inject constructor(
     private var totalSumLabel = MutableLiveData("")
     private var totalInflowLabel = MutableLiveData("")
     private var refreshTransaction = MutableLiveData<Boolean>()
+    private val userDate = MutableLiveData(Date())
+
 
     fun setPrevAndCurrentSpending(v: PrevAndCurrent) {
         prevAndCurrentSpending.value = v
@@ -109,6 +111,14 @@ class TransactionViewModel @Inject constructor(
 
     fun getDate(): MutableLiveData<Date> {
         return date
+    }
+
+    fun setUserDate(d: Date) {
+        userDate.value = d
+    }
+
+    fun getUserDate(): MutableLiveData<Date> {
+        return userDate
     }
 
     fun setDateAndTimeRange(v: DateAndTimeRange = DateAndTimeRange(Date(), TimeRange.MONTH)) {

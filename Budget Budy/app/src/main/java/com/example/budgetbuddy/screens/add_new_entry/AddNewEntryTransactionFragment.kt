@@ -61,6 +61,11 @@ class AddNewEntryTransactionFragment : MainFragment() {
         return binding.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        settingsViewModel.setDateLong(viewModel.getDate().value!!)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadAd()
@@ -90,7 +95,9 @@ class AddNewEntryTransactionFragment : MainFragment() {
     override fun onStop() {
         super.onStop()
         if (binding.txtAmount.text.toString().isNotEmpty()) {
-            transaction.amount = binding.txtAmount.text.toString().toDouble()
+            if (::transaction.isInitialized && transaction != null) {
+                transaction.amount = binding.txtAmount.text.toString().toDouble()
+            }
         }
     }
 
@@ -109,10 +116,16 @@ class AddNewEntryTransactionFragment : MainFragment() {
     private fun setUpScreen() {
         val editTransaction =
             activityMain.intent.getSerializableExtra(AddNewTransactionActivity.EDIT_INTENT)
+        val addNewTransaction =
+            activityMain.intent.getSerializableExtra(ADD_NEW_ENTRY)
         if (editTransaction == null) { // user wants to input new transaction
             userClickedEditButton = false
+
             if (viewModel.getDate().value == null) {
-                viewModel.setDate(Calendar.getInstance().time) //set current date
+//                viewModel.setDate(Calendar.getInstance().time) //set current date
+                viewModel.setDate(addNewTransaction as Date)
+            }else{
+                viewModel.setDate(viewModel.getDate().value!!)
             }
 
         } else { // user wants to edit transaction

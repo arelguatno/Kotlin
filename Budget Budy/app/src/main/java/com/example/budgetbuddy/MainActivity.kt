@@ -85,7 +85,9 @@ class MainActivity : BaseActivity(), Serializable {
             }
 
         binding.floatingActionButton.setOnClickListener {
-            startForResult.launch(Intent(this, AddNewTransactionActivity::class.java))
+            startForResult.launch(Intent(this, AddNewTransactionActivity::class.java).apply {
+                putExtra(AddNewEntryTransactionFragment.ADD_NEW_ENTRY, viewModel.getUserDate().value)
+            })
         }
     }
 
@@ -134,6 +136,7 @@ class MainActivity : BaseActivity(), Serializable {
 
     private fun saveNewEntry(data: Intent?) {
         data?.getSerializableExtra(AddNewEntryTransactionFragment.ADD_NEW_ENTRY)?.let {
+            viewModel.setUserDate((it as TransactionsTable).date!!)
             viewModel.insertProfileRecord(it as TransactionsTable)
             viewModel.setRefreshTransaction(true)
         }
