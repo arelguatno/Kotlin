@@ -50,6 +50,7 @@
     <string name="purchase_restored">purchase_stored_aye_shared_pref</string>
     <string name="user_purchased_premium">user_purchased_premium_shared_pref</string>
     <string name="cancel">Cancel</string>
-    <string name="global_wallet_id">global_wallet_id</string>
+     <!--  In-app Product ID  -->
+    <string name="global_wallet_id">remove_ad_123</string>
     <string name="about">About</string>
 </resources>

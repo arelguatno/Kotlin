@@ -4,12 +4,16 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
@@ -30,7 +34,9 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 import java.util.*
+import kotlin.isInitialized as isInitialized
 
 @AndroidEntryPoint
 class AddNewEntryTransactionFragment : MainFragment() {
@@ -38,6 +44,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
     private val viewModel: AddNewTransactionActivityViewModel by activityViewModels()
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var activityMain: AddNewTransactionActivity
+    private lateinit var transaction: TransactionsTable
 
     companion object {
         const val ADD_NEW_ENTRY = "com.example.room_aye.screens.add_new_entry"
@@ -80,6 +87,13 @@ class AddNewEntryTransactionFragment : MainFragment() {
         binding.adView.isVisible = showAds()
     }
 
+    override fun onStop() {
+        super.onStop()
+        if (binding.txtAmount.text.toString().isNotEmpty()) {
+            transaction.amount = binding.txtAmount.text.toString().toDouble()
+        }
+    }
+
     private fun inflateMenu() {
         binding.appBar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -102,13 +116,13 @@ class AddNewEntryTransactionFragment : MainFragment() {
             }
 
         } else { // user wants to edit transaction
-            val transaction = editTransaction as TransactionsTable
+            transaction = editTransaction as TransactionsTable
             userClickedEditButton = true
             viewModel.setNote(transaction.note!!)
             viewModel.setDate(transaction.date!!)
             viewModel.setCurrency(transaction.currency!!.uniqueID)
             viewModel.setCategory(transaction.category!!)
-            viewModel.setPrice(transaction.amount.toString())
+            viewModel.setPrice(digitsConverter.plainFormat.format(transaction.amount))
         }
 
         setOnClickListener()
@@ -143,18 +157,31 @@ class AddNewEntryTransactionFragment : MainFragment() {
         setFragmentResultListener(CategoryFragment.RESULT_KEY) { _, bundle ->
             val result = bundle.getSerializable(CategoryFragment.RESULT_KEY)
             viewModel.setCategory(result as SimpleListObject)
+
+            if (::transaction.isInitialized && transaction != null) {
+                transaction.category = result
+            }
         }
 
         // Note
         setFragmentResultListener(NoteFragment.RESULT_KEY) { _, bundle ->
             val result = bundle.getString(NoteFragment.RESULT_KEY)
-            result?.let { viewModel.setNote(it) }
+            result?.let {
+                viewModel.setNote(it)
+                if (::transaction.isInitialized && transaction != null) {
+                    transaction.note = it
+                }
+            }
         }
 
         // Date
         setFragmentResultListener(DateFragment.RESULT_KEY) { _, bundle ->
             val result = bundle.getSerializable(DateFragment.RESULT_KEY)
             viewModel.setDate(result as Date)
+
+            if (::transaction.isInitialized && transaction != null) {
+                transaction.date = result
+            }
         }
 
         sharedPref =
@@ -176,8 +203,18 @@ class AddNewEntryTransactionFragment : MainFragment() {
     private fun setUpViewModelsListener() {
         viewModel.getNote().observe(viewLifecycleOwner) {
             binding.txtNote.text = it
-            binding.txtNote.setTextColor(ContextCompat.getColor(requireContext(),R.color.text_color_white_black))
-            binding.imgNote.setColorFilter(ContextCompat.getColor(requireContext(),R.color.text_color_white_black))
+            binding.txtNote.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.text_color_white_black
+                )
+            )
+            binding.imgNote.setColorFilter(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.text_color_white_black
+                )
+            )
             binding.test.isFocusable = false
         }
 
@@ -185,8 +222,18 @@ class AddNewEntryTransactionFragment : MainFragment() {
             binding.txtCategory.text = it.rowValue
             binding.imgCategory.setImageResource(it.imageID)
 
-            binding.txtCategory.setTextColor(ContextCompat.getColor(requireContext(),R.color.text_color_white_black))
-            binding.imgCategory.setColorFilter(ContextCompat.getColor(requireContext(),R.color.image_tint))
+            binding.txtCategory.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.text_color_white_black
+                )
+            )
+            binding.imgCategory.setColorFilter(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.image_tint
+                )
+            )
         }
 
         viewModel.getCurrency().observe(viewLifecycleOwner) {
@@ -209,6 +256,9 @@ class AddNewEntryTransactionFragment : MainFragment() {
         b.btnToday.setOnClickListener {
             val calendar = Calendar.getInstance()
             viewModel.setDate(calendar.time)
+            if (::transaction.isInitialized && transaction != null) {
+                transaction.date = calendar.time
+            }
             bottomSheetDialog.dismiss()
         }
 
@@ -216,6 +266,9 @@ class AddNewEntryTransactionFragment : MainFragment() {
             val calendar = Calendar.getInstance()
             calendar.add(Calendar.DATE, -1)
             viewModel.setDate(calendar.time)
+            if (::transaction.isInitialized && transaction != null) {
+                transaction.date = calendar.time
+            }
             bottomSheetDialog.dismiss()
         }
 
