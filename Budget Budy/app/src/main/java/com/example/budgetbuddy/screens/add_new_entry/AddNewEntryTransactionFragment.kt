@@ -96,6 +96,7 @@ class AddNewEntryTransactionFragment : MainFragment() {
         super.onStop()
         if (binding.txtAmount.text.toString().isNotEmpty()) {
             if (::transaction.isInitialized && transaction != null) {
+                //TODO
                 transaction.amount = binding.txtAmount.text.toString().toDouble()
             }
         }

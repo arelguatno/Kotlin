@@ -107,7 +107,7 @@ class TransactionDetailsFragment : MainFragment() {
             }
 
             binding.imgCategory.setImageResource(it.category!!.imageID)
-            binding.txtPrice.text = digitsConverter.formatWithCurrencyWithNegative(it.amount)
+            binding.txtPrice.text = digitsConverter.formatWithCurrency(it.amount)
             binding.txtDate.text = dateToNice(it.date!!)
 
             if (it.category!!.uniqueID == getIncomeID()) {
