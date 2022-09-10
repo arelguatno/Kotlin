@@ -52,4 +52,5 @@
     <string name="cancel">Cancel</string>
     <string name="global_wallet_id">global_wallet_id</string>
     <string name="about">About</string>
+    <string name="view_on_google_play">https://play.google.com/store/apps/details?id=com.budget.budgetbuddy.aye</string>
 </resources>
