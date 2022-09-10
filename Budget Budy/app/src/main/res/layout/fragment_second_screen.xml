@@ -1,47 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     android:layout_height="match_parent">
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/imageView5"-->
-    <!--        android:layout_width="30dp"-->
-    <!--        android:layout_height="30dp"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:src="@drawable/wallet"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--    <TextView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="8dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:text="Budget Buddy"-->
-    <!--        android:textColor="@color/white"-->
-    <!--        android:textStyle="bold"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/imageView5"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="150dp"
-        android:src="@drawable/graph"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/graph" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:text="Analyze Your Expenses"
+        android:gravity="center"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/text_color_white_black"
@@ -51,17 +29,13 @@
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="See your finances in the big picture with stylish graphs!"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        android:layout_marginBottom="40dp"/>
 
 
     <!--    <TextView-->
@@ -78,4 +52,4 @@
     <!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

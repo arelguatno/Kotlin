@@ -13,7 +13,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/wallet"
+        android:src="@drawable/company_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +49,7 @@
         android:orientation="horizontal"
         android:paddingLeft="50dp"
         android:paddingRight="40dp"
-        android:paddingBottom="40dp"
+        android:paddingBottom="25dp"
         app:layout_constraintBottom_toTopOf="@+id/tab_layout">
 
         <TextView

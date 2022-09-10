@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Budget Buddy</string>
+    <string name="budget_buddy">Budget Buddy</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="currency_id">com.example.budgetbuddy.preference_currency_transaction</string>
     <string name="global_currency_id">com.example.budgetbuddy.preference_currency_global</string>
     <string name="global_themes_id">com.example.budgetbuddy.preference_themes_global</string>
     <string name="selected_tab">selected_tab_transaction</string>
     <string name="future">Future</string>
-    <string name="budget_buddy">Budget Buddy</string>
     <string name="recent_transactions">Recent Transactions</string>
     <string name="see_reports">See reports</string>
     <string name="spending_reports">Spending Reports</string>
@@ -42,15 +42,14 @@
     <string name="today">Today</string>
     <!--   prod ca-app-pub-1363370537348771/6516432885-->
     <!--   free ca-app-pub-3940256099942544/6300978111-->
-    <string name="google_admob">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="in_app_product_id">remove_ad_prod</string>
+    <string name="google_admob">ca-app-pub-1363370537348771/6516432885</string>
+    <string name="in_app_product_id">remove_ad_prod_one</string>
 
     <string name="on_boarding_shared_pref">on_boarding_shared_pref</string>
     <string name="on_boarding_finised">on_boarding_finised</string>
     <string name="purchase_restored">purchase_stored_aye_shared_pref</string>
     <string name="user_purchased_premium">user_purchased_premium_shared_pref</string>
     <string name="cancel">Cancel</string>
-     <!--  In-app Product ID  -->
-    <string name="global_wallet_id">remove_ad_123</string>
+    <string name="global_wallet_id">global_wallet_id</string>
     <string name="about">About</string>
 </resources>

@@ -8,10 +8,10 @@
         app:showAsAction="ifRoom"
         android:title="Search" />
 
-    <item android:id="@+id/group_by_date"
-        android:iconTint="@color/white"
-        android:title="View by Date" />
-    <item android:id="@+id/group_by_cat"
-        android:iconTint="@color/white"
-        android:title="View by Category" />
+<!--    <item android:id="@+id/group_by_date"-->
+<!--        android:iconTint="@color/white"-->
+<!--        android:title="View by Date" />-->
+<!--    <item android:id="@+id/group_by_cat"-->
+<!--        android:iconTint="@color/white"-->
+<!--        android:title="View by Category" />-->
 </menu>

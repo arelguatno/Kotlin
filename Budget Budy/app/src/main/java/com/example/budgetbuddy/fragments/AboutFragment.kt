@@ -15,7 +15,7 @@ class AboutFragment : MainFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentAboutBinding.inflate(layoutInflater)
         return binding.root

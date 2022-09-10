@@ -184,7 +184,6 @@ class SettingsFragment : MainFragment() {
             binding.settingsDisplay.txtTheme.text = it.currencySign
         }
 
-        //TODO error
         val owner = activity as LifecycleOwner
         viewModel.getUserTypeString().observe(owner, Observer {
             txtPremiumLabel.text = it

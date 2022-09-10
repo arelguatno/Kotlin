@@ -14,8 +14,8 @@ android {
         applicationId "com.budget.budgetbuddy.aye"
         minSdk 21
         targetSdk 32
-        versionCode 28
-        versionName "1.0.17"
+        versionCode 30
+        versionName "1.0.19"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "${applicationId}-v${versionName}(${versionCode})")
@@ -23,8 +23,8 @@ android {
 
     buildTypes {
         release {
-            debuggable true    // google play wont let you upload if true
-            minifyEnabled true  // throws error if true. caused by navigation
+            debuggable false    // google play wont let you upload if true
+            minifyEnabled false  // throws error if true. caused by navigation
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
