@@ -3,6 +3,7 @@ package com.example.budgetbuddy.fragments
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.DatePicker.OnDateChangedListener
 import android.widget.Toast
 import android.widget.Toolbar
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -44,25 +46,55 @@ class DateFragment : MainFragment() {
 
     private fun menu() {
         binding.appBar.setNavigationOnClickListener {
+            asdasd()
             findNavController().navigateUp()
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O) //TODO check this
+    override fun onResume() {
+        super.onResume()
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                asdasd()
+                findNavController().navigateUp()
+            }
+        })
+    }
+
+    private fun asdasd(){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            val calendar = Calendar.getInstance()
+            calendar.set(
+                binding.datePickerActions.year,
+                binding.datePickerActions.month,
+                binding.datePickerActions.dayOfMonth
+            )
+            setFragmentResult(RESULT_KEY, bundleOf(RESULT_KEY to calendar.time))
+        }
+    }
+
+
+    // @RequiresApi(Build.VERSION_CODES.O) //TODO check this
     override fun onStart() {
         super.onStart()
 
         val calendar = Calendar.getInstance()
         calendar.time = viewModel.getDate().value
-        binding.datePickerActions.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+        binding.datePickerActions.updateDate(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
 
         menu()
-        binding.datePickerActions.setOnDateChangedListener(OnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
-            val calendar = Calendar.getInstance()
-            calendar.set(year, monthOfYear, dayOfMonth)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            binding.datePickerActions.setOnDateChangedListener(OnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
+                val calendar = Calendar.getInstance()
+                calendar.set(year, monthOfYear, dayOfMonth)
 
-            setFragmentResult(RESULT_KEY, bundleOf(RESULT_KEY to calendar.time))
-            findNavController().navigateUp()
-        })
+                setFragmentResult(RESULT_KEY, bundleOf(RESULT_KEY to calendar.time))
+                findNavController().navigateUp()
+            })
+        }
     }
 }

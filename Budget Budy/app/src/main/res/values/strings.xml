@@ -42,7 +42,7 @@
     <string name="today">Today</string>
     <!--   prod ca-app-pub-1363370537348771/6516432885-->
     <!--   free ca-app-pub-3940256099942544/6300978111-->
-    <string name="google_admob">ca-app-pub-1363370537348771/6516432885</string>
+    <string name="google_admob">ca-app-pub-3940256099942544/6300978111</string>
     <string name="in_app_product_id">remove_ad_prod_one</string>
 
     <string name="on_boarding_shared_pref">on_boarding_shared_pref</string>

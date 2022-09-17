@@ -54,10 +54,6 @@ class TransactionFragmentAdapterHeader :
         val cal = Calendar.getInstance()
         cal.time = item.header
 
-        if (position != 0) {
-            //holder.binding.haha.isVisible = false
-        }
-
         holder.binding.dayOfMonth.text =
             transformSingleDigitToTwoDigit(cal.get(Calendar.DAY_OF_MONTH))
         holder.binding.dayOfWeek.text = intDayToString(cal.get(Calendar.DAY_OF_WEEK))
