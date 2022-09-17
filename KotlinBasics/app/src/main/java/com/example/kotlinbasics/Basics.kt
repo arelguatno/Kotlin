@@ -4,10 +4,40 @@ import java.math.BigInteger
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.random.Random
 
 
 fun main() {
-    //Reverse Counting
+
+    //EvenOrOdd(param = 123)
+    //EvenOrOdd(param1 = 2)
+    println(random())
+    test()
+}
+
+private fun test(){
+    println("1")
+    println("2")
+    println("3")
+    println("4")
+    println("5")
+    return
+    println("6")
+}
+
+private fun random(): Int{
+    return Random.nextInt(1,100)
+}
+
+private fun EvenOrOdd(param1: Int, param2: Int = 0) {
+    val value = param1 as Int
+    if ((value % 2) == 0) {
+        println("Even")
+    } else {
+        println("Odd")
+    }
+}
+//Reverse Counting
 //    var arrg = arrayOf(4,7,6,5,4,3,2,1)
 //    reverseArray(arrg) //12345
 //    findArray(arrg) // index@2
@@ -21,7 +51,7 @@ fun main() {
 //    //println(array.contains(9))
 //    println(yes(array, sequence))
 
-    //print(isPalindrome(121))
+//print(isPalindrome(121))
 //    print(isValid("([{}])"))
 //
 //    "([)]"
@@ -39,7 +69,6 @@ fun main() {
 //
 //
 //    println("This me test".capitalize())
-
 
 
 fun plusOne(digits: IntArray): IntArray {
