@@ -1,6 +1,5 @@
 package com.example.timer
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -17,7 +16,6 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
-import java.util.Date.from
 
 class MainActivity : AppCompatActivity() {
     private val CHANNEL_ID = "1"
@@ -70,8 +68,24 @@ class MainActivity : AppCompatActivity() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        val builder = NotificationCompat.Builder(this@MainActivity, CHANNEL_ID)
+        // Show Toast
+        val actionIntent = Intent(applicationContext, Receiver::class.java).apply {
+            putExtra("toast", "This is a notification message")
+        }
+        val actionPending = PendingIntent.getBroadcast(
+            applicationContext, 1, actionIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
 
+        // Dismiss
+        val dismissIntent = Intent(applicationContext, ReceiverDismiss::class.java)
+        val dismissPending = PendingIntent.getBroadcast(
+            applicationContext, 2, dismissIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+
+        val builder = NotificationCompat.Builder(this@MainActivity, CHANNEL_ID)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             val channel =
@@ -85,16 +99,21 @@ class MainActivity : AppCompatActivity() {
                 .setContentText("Notification Text >=O")
                 .setContentIntent(pendingIntent) // when you clicked the notification
                 .setAutoCancel(true)
+                .addAction(R.drawable.ic_launcher_background, "Toast Message", actionPending)
+                .addAction(R.drawable.ic_launcher_background, "Dismiss", dismissPending)
+
         } else {
             builder.setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle("Title")
                 .setContentText("Notification for <=O")
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
+                .addAction(R.drawable.ic_launcher_background, "Toast Message", actionPending)
+                .addAction(R.drawable.ic_launcher_background, "Dismiss", dismissPending)
                 .priority = NotificationCompat.PRIORITY_DEFAULT
         }
 
-        with(NotificationManagerCompat.from(this)) {
+        NotificationManagerCompat.from(this).apply {
             notify(1, builder.build())
         }
 
