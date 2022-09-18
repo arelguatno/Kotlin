@@ -115,7 +115,7 @@ class HomeFragment : MainFragment() {
             val navView =
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             navView?.menu?.findItem(R.id.transactionFragment)!!.isChecked = true
-            navView?.menu?.performIdentifierAction(R.id.transactionFragment, 0)
+            navView.menu.performIdentifierAction(R.id.transactionFragment, 0)
         }
 
         binding.spendingReport.txtSeeReports.setOnClickListener {

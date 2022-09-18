@@ -34,9 +34,6 @@ class TransactionFragment : MainFragment() {
     private lateinit var binding: FragmentTransactionBinding
     private lateinit var startForResult: ActivityResultLauncher<Intent>
 
-    companion object {
-
-    }
 
     private val viewModel: TransactionViewModel by activityViewModels()
     private val myAdapterHeader: TransactionFragmentAdapterHeader by lazy { TransactionFragmentAdapterHeader() }

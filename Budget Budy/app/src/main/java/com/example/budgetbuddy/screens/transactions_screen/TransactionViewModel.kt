@@ -85,6 +85,7 @@ class TransactionViewModel @Inject constructor(
     fun fetchTopSpendingCurrentMonth(): LiveData<List<TransactionsTable>> {
         return repository.fetchTopSpending().asLiveData()
     }
+
     fun fetchTopSpentThisMonthAndPreviousMonth(
         prevMonth: Int,
         prevYear: Int
@@ -158,7 +159,7 @@ class TransactionViewModel @Inject constructor(
         param: List<TransactionsTable>
     ): List<TransactionList> {
         var tempDate = Calendar.getInstance().time
-        var newFormattedList = mutableListOf<TransactionList>()
+        val newFormattedList = mutableListOf<TransactionList>()
         totalExpenses.value = 0.00
         totalInflow.value = 0.00
         for (i in param) { // Loop through all data
