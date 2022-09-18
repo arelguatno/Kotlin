@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Timer</string>
+    <string name="big_text">Giuseppe Cafiero sets out to trace, in this book and through a penetrating imagination,
+        a psychological construction of Edgar Allan Poe through the different characters in his works by creating 16 short stories and a prologue that recount Poe life
+        Each of the tales is constructed through surreal events and the presence of particular characters,
+        so that each story can outline from life a particular year in the life of Edgar Allan Poe. A memory necessary to
+        fully understand what it was about Poes life, marked by abuse and strangeness, that enabled this incredible writer to sketch a will conquered by
+        the inescapable pleasure of writing</string>
 </resources>

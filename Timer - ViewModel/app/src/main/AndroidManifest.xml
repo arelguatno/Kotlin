@@ -26,8 +26,8 @@
                 android:value="" />
         </activity>
 
-        <receiver android:name=".Receiver"/>
-        <receiver android:name=".ReceiverDismiss"/>
+        <receiver android:name=".broadcastreceiver.Receiver"/>
+        <receiver android:name=".broadcastreceiver.ReceiverDismiss"/>
     </application>
 
 </manifest>
