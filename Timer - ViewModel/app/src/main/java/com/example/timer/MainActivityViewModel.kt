@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel
 open class MainActivityViewModel : ViewModel() {
     private lateinit var timer: CountDownTimer
 
-    private val tenSeconds: Long = 11000
-    private val interval: Long = 1000
+    private val lengthTimer: Long = 11 * 1000 // 16 secs
+    private val interval: Long = 1 * 1000  // 1 sec
 
     private var perSecond = MutableLiveData<Int>()
     private var timerIsDone = MutableLiveData<Boolean>()
@@ -17,7 +17,7 @@ open class MainActivityViewModel : ViewModel() {
 
     fun startTimer() {
         if (!isRunning) {
-            timer = object : CountDownTimer(tenSeconds, interval) {
+            timer = object : CountDownTimer(lengthTimer, interval) {
                 override fun onTick(value: Long) {
                     val timeLeft = value / 1000
                     perSecond.value = timeLeft.toInt()
@@ -27,6 +27,7 @@ open class MainActivityViewModel : ViewModel() {
                 override fun onFinish() {
                     isRunning = false
                     timerIsDone.value = true
+                    timerIsDone.value = false
                 }
             }.start()
         }
@@ -38,5 +39,9 @@ open class MainActivityViewModel : ViewModel() {
 
     fun getTime(): LiveData<Int> {
         return perSecond
+    }
+
+    fun getSnackBackTimer(): Int{
+        return (((lengthTimer / interval) / 1.4).toInt())
     }
 }
