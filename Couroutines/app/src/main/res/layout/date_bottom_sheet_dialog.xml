@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/fragment_bg_color"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/btnToday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        style="?android:listSeparatorTextViewStyle"
+        android:text="Today" />
+
+    <TextView
+        android:id="@+id/btnYesterday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        style="?android:listSeparatorTextViewStyle"
+        android:text="Yesterday" />
+
+    <TextView
+        android:id="@+id/btnCustom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        style="?android:listSeparatorTextViewStyle"
+        android:text="Custom" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/btnCancel"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="25sp"-->
+<!--        android:paddingBottom="10dp"-->
+<!--        android:paddingTop="10dp"-->
+<!--        style="?android:listSeparatorTextViewStyle"-->
+<!--        android:text="Cancel" />-->
+
+</LinearLayout>
