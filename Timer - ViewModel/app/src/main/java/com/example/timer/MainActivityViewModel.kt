@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 open class MainActivityViewModel : ViewModel() {
     private lateinit var timer: CountDownTimer
 
-    private val lengthTimer: Long = 16 * 1000 // 16 secs
+    private val lengthTimer: Long = 6 * 1000 // 16 secs
     private val interval: Long = 1 * 1000  // 1 sec
 
     private var perSecond = MutableLiveData<Int>()
