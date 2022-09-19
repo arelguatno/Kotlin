@@ -11,8 +11,17 @@ fun main() {
 
     //EvenOrOdd(param = 123)
     //EvenOrOdd(param1 = 2)
-    println(random())
-    test()
+//    println(random())
+//    test()
+    val test = 1
+
+    if(test is String){
+        println("Yes this is a string")
+    }else{
+        println("Nope $test is a ${test.toString()}")
+    }
+
+    println(test)
 }
 
 private fun test(){
