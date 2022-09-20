@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pangalan ng app</string>
+    <string name="title">Titolo</string>
+    <string name="message">Mensahe</string>
+    <string name="schedule_notification">Schedule Notification</string>
+</resources>
