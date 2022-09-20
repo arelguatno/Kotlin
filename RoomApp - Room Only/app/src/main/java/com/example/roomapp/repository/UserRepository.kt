@@ -1,6 +1,7 @@
 package com.example.roomapp.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagingSource
 import com.example.roomapp.data.UserDao
 import com.example.roomapp.model.User
 import kotlinx.coroutines.flow.Flow
@@ -8,6 +9,8 @@ import kotlinx.coroutines.flow.Flow
 class UserRepository (private val userDao: UserDao) {
 
     val readAllData: LiveData<List<User>> = userDao.readAllData()
+
+    val getAllPaged: PagingSource<Int, User> = userDao.getAllPaged()
 
     suspend fun addUser(user: User){
         userDao.addUser(user)
