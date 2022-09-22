@@ -18,7 +18,7 @@ class MyWorker(context: Context, workerParameters: WorkerParameters) :
     Worker(context, workerParameters) {
 
     companion object {
-        private val CHANNEL_ID = "1"
+        const val CHANNEL_ID = "1"
         const val NOTIFICATION_ID = 1
     }
 

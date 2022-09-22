@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             btnOneTime.setOnClickListener {
-                 myONTimeWork()
-               // Toast.makeText(applicationContext, "hehe", Toast.LENGTH_SHORT).show()
+                myONTimeWork()
+                // Toast.makeText(applicationContext, "hehe", Toast.LENGTH_SHORT).show()
 
             }
 
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             .setRequiresCharging(true)
             .build()
 
-        val myWorkRequest: WorkRequest = OneTimeWorkRequest.Builder(MyWorker::class.java)
+        val myWorkRequest: WorkRequest = OneTimeWorkRequestBuilder<MyWorker>()
             .setConstraints(constraints)
             .build()
 
