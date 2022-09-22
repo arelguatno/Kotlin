@@ -1,13 +1,11 @@
 package com.example.noteapp.workmanager
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.constraintlayout.widget.Constraints
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
-import androidx.work.WorkRequest
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.work.*
 import com.example.noteapp.workmanager.databinding.ActivityMainBinding
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -17,14 +15,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         binding.apply {
             btnOneTime.setOnClickListener {
-                myONTimeWork()
+                 myONTimeWork()
+               // Toast.makeText(applicationContext, "hehe", Toast.LENGTH_SHORT).show()
+
             }
 
             btnPeriodic.setOnClickListener {
-
+                myPeriodicWork()
             }
+
         }
     }
 
@@ -42,6 +44,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun myPeriodicWork() {
+        val constraints = androidx.work.Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+            .build()
+        val myWorkRequest = PeriodicWorkRequest.Builder(
+            MyWorker::class.java,
+            15,
+            TimeUnit.MINUTES
+        ).setConstraints(constraints)
+            .addTag("my_id")
+            .build()
 
+        WorkManager.getInstance(this)
+            .enqueueUniquePeriodicWork("my_id", ExistingPeriodicWorkPolicy.KEEP, myWorkRequest)
     }
 }
