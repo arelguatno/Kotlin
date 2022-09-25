@@ -19,47 +19,45 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initNavHost()
+        initMenuDrawer()
+    }
+
+    private fun initMenuDrawer() {
+        toggle = ActionBarDrawerToggle(
+            this@MainActivity,
+            binding.drawerLayout,
+            R.string.open,
+            R.string.close
+        )
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.homeItem -> {
+                    navigateToFragment("Home Fragment", R.id.homeFragment)
+                }
+                R.id.firstItem -> {
+                    navigateToFragment("Message", R.id.firstFragment)
+                }
+                R.id.secondItem -> {
+                    navigateToFragment("Sync", R.id.secondFragment)
+                }
+                R.id.thirdItem -> {
+                    navigateToFragment("Settings", R.id.thirdFragment)
+                }
+                else -> {}
+            }
+            true
+        }
+    }
+
+    private fun initNavHost() {
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         navigateToFragment("Home Fragment", R.id.homeFragment) // Default
-
-        binding.apply {
-            toggle = ActionBarDrawerToggle(
-                this@MainActivity,
-                drawerLayout,
-                R.string.open,
-                R.string.close
-            )
-            drawerLayout.addDrawerListener(toggle)
-            toggle.syncState()
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            navView.setNavigationItemSelectedListener {
-                when (it.itemId) {
-                    R.id.homeItem -> {
-                        navigateToFragment("Home Fragment", R.id.homeFragment)
-                    }
-                    R.id.firstItem -> {
-                        navigateToFragment("Message", R.id.firstFragment)
-                    }
-                    R.id.secondItem -> {
-                        navigateToFragment("Sync", R.id.secondFragment)
-                    }
-                    R.id.thirdItem -> {
-                        navigateToFragment("Settings", R.id.thirdFragment)
-                    }
-                    else -> {}
-                }
-                true
-            }
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun navigateToFragment(title: String, fragmentID: Int) {
@@ -67,5 +65,12 @@ class MainActivity : AppCompatActivity() {
         navController.navigate(fragmentID)
         binding.drawerLayout.closeDrawers()
         this@MainActivity.title = title
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
