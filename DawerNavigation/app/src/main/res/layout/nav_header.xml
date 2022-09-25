@@ -9,13 +9,15 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="479dp"
-        android:layout_height="46dp"
+        android:layout_width="256dp"
+        android:layout_height="38dp"
         android:text="Quick brown fox"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.99"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.964" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

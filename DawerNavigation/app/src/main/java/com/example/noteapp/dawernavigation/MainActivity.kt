@@ -40,13 +40,13 @@ class MainActivity : AppCompatActivity() {
                         navigateToFragment("Home Fragment", R.id.homeFragment)
                     }
                     R.id.firstItem -> {
-                        navigateToFragment("First Fragment", R.id.firstFragment)
+                        navigateToFragment("Message", R.id.firstFragment)
                     }
                     R.id.secondItem -> {
-                        navigateToFragment("Second Fragment", R.id.secondFragment)
+                        navigateToFragment("Sync", R.id.secondFragment)
                     }
                     R.id.thirdItem -> {
-                        navigateToFragment("Third Fragment", R.id.thirdFragment)
+                        navigateToFragment("Settings", R.id.thirdFragment)
                     }
                     else -> {}
                 }
