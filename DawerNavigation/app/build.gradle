@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.noteapp.dawernavigation'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.noteapp.dawernavigation"
         minSdk 25
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
