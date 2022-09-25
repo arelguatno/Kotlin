@@ -35,22 +35,26 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.navView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.homeItem -> {
-                    navigateToFragment("Home Fragment", R.id.homeFragment)
-                }
-                R.id.firstItem -> {
-                    navigateToFragment("Message", R.id.firstFragment)
-                }
-                R.id.secondItem -> {
-                    navigateToFragment("Sync", R.id.secondFragment)
-                }
-                R.id.thirdItem -> {
-                    navigateToFragment("Settings", R.id.thirdFragment)
-                }
-                else -> {}
-            }
+            handleMenuClick(it)
             true
+        }
+    }
+
+    private fun handleMenuClick(it: MenuItem) {
+        when (it.itemId) {
+            R.id.homeItem -> {
+                navigateToFragment(getString(R.string.home_item), R.id.homeFragment)
+            }
+            R.id.firstItem -> {
+                navigateToFragment(getString(R.string.message), R.id.firstFragment)
+            }
+            R.id.secondItem -> {
+                navigateToFragment(getString(R.string.snyc), R.id.secondFragment)
+            }
+            R.id.thirdItem -> {
+                navigateToFragment(getString(R.string.settings), R.id.thirdFragment)
+            }
+            else -> {}
         }
     }
 
@@ -58,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-        navigateToFragment("Home Fragment", R.id.homeFragment) // Default
+        navigateToFragment(getString(R.string.home_item), R.id.homeFragment) // Default
     }
 
     private fun navigateToFragment(title: String, fragmentID: Int) {
