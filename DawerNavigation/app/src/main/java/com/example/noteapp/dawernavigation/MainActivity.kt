@@ -2,6 +2,7 @@ package com.example.noteapp.dawernavigation
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -21,6 +22,21 @@ class MainActivity : AppCompatActivity() {
 
         initNavHost()
         initMenuDrawer()
+        initOnBackPressed()
+    }
+
+    private fun initOnBackPressed() {
+        onBackPressedDispatcher.addCallback(
+            this@MainActivity,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (binding.drawerLayout.isOpen) {
+                        binding.drawerLayout.close()
+                    } else {
+                        finish()
+                    }
+                }
+            })
     }
 
     private fun initMenuDrawer() {
