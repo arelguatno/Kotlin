@@ -25,20 +25,6 @@ class MainActivity : AppCompatActivity() {
         initOnBackPressed()
     }
 
-    private fun initOnBackPressed() {
-        onBackPressedDispatcher.addCallback(
-            this@MainActivity,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (binding.drawerLayout.isOpen) {
-                        binding.drawerLayout.close()
-                    } else {
-                        finish()
-                    }
-                }
-            })
-    }
-
     private fun initMenuDrawer() {
         toggle = ActionBarDrawerToggle(
             this@MainActivity,
@@ -93,5 +79,19 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initOnBackPressed() {
+        onBackPressedDispatcher.addCallback(
+            this@MainActivity,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (binding.drawerLayout.isOpen) {
+                        binding.drawerLayout.close()
+                    } else {
+                        finish()
+                    }
+                }
+            })
     }
 }
