@@ -13,15 +13,8 @@ fun main() {
     //EvenOrOdd(param1 = 2)
 //    println(random())
 //    test()
-    val test = 1
-
-    if(test is String){
-        println("Yes this is a string")
-    }else{
-        println("Nope $test is a ${test.toString()}")
-    }
-
-    println(test)
+    val listOfusers = listOf("asd","abb")
+    println("${listOfusers.contains("asdb")}")
 }
 
 private fun test(){
